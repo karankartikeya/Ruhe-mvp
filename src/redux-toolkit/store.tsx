@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { setupListeners } from "@reduxjs/toolkit/dist/query";
+import { setupListeners } from "@reduxjs/toolkit/query";
 import storiesModalSlice from "./reducers/StoriesModalSlice";
 import favouritePageSlice from "./reducers/FavouritePageSlice";
 import LayoutSlice from "./reducers/LayoutSlice";
