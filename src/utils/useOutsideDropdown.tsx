@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 
 export default function useOutsideDropdown(initialIsVisible: boolean): {
-  ref: React.RefObject<HTMLDivElement>;
+  ref: React.RefObject<HTMLDivElement | null>;
   isComponentVisible: boolean;
   setIsComponentVisible: React.Dispatch<React.SetStateAction<boolean>>;
 } {
