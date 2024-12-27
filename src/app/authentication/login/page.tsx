@@ -3,10 +3,22 @@ import DynamicFeatherIcon from "@/Common/DynamicFeatherIcon";
 import AuthenticationMainSection from "@/components/auth/login/AuthenticationMainSection";
 import LoginHeaderSection from "@/components/auth/login/LoginHeaderSection";
 import LoadingLoader from "@/layout/LoadingLoader";
+import { getLoggedInUser } from "@/lib/server/appwrite";
+import { redirect } from "next/navigation";
 import { Media } from "reactstrap";
 
-const Login = () => {
-  
+const Login =  () => {
+  const checkUser = async () => {
+    const user = await getLoggedInUser();
+    if (user) {
+      console.log("user....", user);
+    }
+    else{
+      console.log("user not found....");
+    }
+  }
+  checkUser();
+
   return (
     <>
     <LoadingLoader/>

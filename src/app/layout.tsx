@@ -4,7 +4,7 @@ import "../../public/assets/scss/style.scss";
 import { Providers } from "@/redux-toolkit/provider";
 import { ToastContainer } from "react-toastify";
 import { getServerSession } from "next-auth";
-import { authoption } from "./api/auth/[...nextauth]/authOption";
+// import { authoption } from "./api/auth/[...nextauth]/authOption";
 import SessionWrapper from "@/Common/SessionWrapper";
 
 export const metadata: Metadata = {
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const session = await getServerSession(authoption);
+  
   return (
     <html lang='en'>
       <head>
@@ -23,10 +23,10 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
       </head>
       <body>
-        <SessionWrapper session={session}>
+        {/* <SessionWrapper session={session}> */}
           <Providers>{children}</Providers>
           <ToastContainer />
-        </SessionWrapper>
+        {/* </SessionWrapper> */}
       </body>
     </html>
   );

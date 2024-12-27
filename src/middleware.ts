@@ -57,15 +57,24 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { SESSION_COOKIE } from "@/lib/server/const"; // Your session cookie name
+import { createSessionClient, getLoggedInUser } from "./lib/server/appwrite";
 
 export async function middleware(request: NextRequest) {
-  const session = request.cookies.get(SESSION_COOKIE);
-
-  if (!session) {
-    // Redirect to login if no session
-    const url = new URL("/auth/login", request.url);
-    return NextResponse.redirect(url);
-  }
+//   const session = request.cookies.get(SESSION_COOKIE);
+// console.log("session",session);
+//   if (!session) {
+//     // Redirect to login if no session
+//     const url = new URL("/authentication/login", request.url);
+//     return NextResponse.redirect(url);
+//   }
+const user = await getLoggedInUser();
+const {account} = await createSessionClient();
+if (!user) {
+  request.cookies.delete(SESSION_COOKIE);
+  account.deleteSession("current");
+  const response = NextResponse.redirect(new URL("/authentication/login", request.url));
+  return response;
+}
 
   // Allow request to proceed if session exists
   return NextResponse.next();
@@ -74,7 +83,6 @@ export async function middleware(request: NextRequest) {
 // Apply to specific routes
 export const config = {
   matcher: [
-    "/dashboard/:path*",  // Protect dashboard routes
-    "/profile/:path*",    // Protect profile routes
+    "/",   // Protect newsfeed routes
   ],
 };
