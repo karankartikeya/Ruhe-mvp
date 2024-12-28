@@ -1,12 +1,26 @@
-"use client";
+'use client';
 import DynamicFeatherIcon from "@/Common/DynamicFeatherIcon";
 import AuthenticationMainSection from "@/components/auth/login/AuthenticationMainSection";
 import LoginHeaderSection from "@/components/auth/login/LoginHeaderSection";
 import LoadingLoader from "@/layout/LoadingLoader";
+import { getLoggedInUser } from "@/lib/server/appwrite";
+import { redirect } from "next/navigation";
+import { useEffect } from "react";
 import { Media } from "reactstrap";
 
-const Login = () => {
+export default async function Login() {
   
+  useEffect(() => {
+    const checkUser = async () => {
+      const user = await getLoggedInUser();
+      if (user) {
+        redirect("/newsfeed/style2");
+      }
+    };
+    checkUser();
+  }
+  , []);
+
   return (
     <>
     <LoadingLoader/>
@@ -27,4 +41,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+

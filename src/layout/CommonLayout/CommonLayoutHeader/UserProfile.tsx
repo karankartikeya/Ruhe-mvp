@@ -5,22 +5,21 @@ import { Media } from "reactstrap";
 import UserProfileMenu from "./UserProfileMenu";
 import CustomImage from '@/Common/CustomImage';
 import useOutsideDropdown from "@/utils/useOutsideDropdown";
-import { useSession } from "next-auth/react";
 
 const UserProfile: FC = () => {
   const { isComponentVisible, ref, setIsComponentVisible } =useOutsideDropdown(false);
-  const { data: session } = useSession();
+
   return (
     <li className="header-btn custom-dropdown profile-btn btn-group">
       <a className={`main-link ${isComponentVisible ? "show" : ""}`} href={Href} onClick={() => setIsComponentVisible(!isComponentVisible)}>
         <DynamicFeatherIcon iconName="User" className="icon-light stroke-width-3 d-sm-none d-block iw-16 ih-16"/>
         <Media className="d-none d-sm-flex">
           <div className="user-img bg-size blur-up lazyloaded ">
-            <CustomImage src={session?.user?.image || `${ImagePath}/user-sm/1.jpg`} className="img-fluid blur-up lazyload bg-img" alt="user"  />
+            <CustomImage src={ `${ImagePath}/user-sm/1.jpg`} className="img-fluid blur-up lazyload bg-img" alt="user"  />
             <span className="available-stats online" />
           </div>
           <Media body className="d-none d-md-block">
-            <h4>{session?.user?.name || 'Josephin water'}</h4>
+            <h4>{ 'Josephin water'}</h4>
             <span>{ActiveNow}</span>
           </Media>
         </Media>
