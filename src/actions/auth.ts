@@ -4,6 +4,7 @@
 import { createAdminClient, createSessionClient } from "@/lib/server/appwrite";
 import { cookies } from "next/headers";
 import { SESSION_COOKIE } from "@/lib/server/const";
+import { ID } from "node-appwrite";
 
 import { redirect } from "next/navigation";
 
@@ -36,15 +37,19 @@ export const logout = async () => {
 
 //signup function
 
-// export const signup = async (email: string, password: string) => {
-//   const { account } = await createAdminClient();
-//   const result = await account.create(email, password);
-//   if (result) {
-//     toast.success("successfully Signed up Rediract......");
-//     const router = useRouter();
-//     router.push("/newsfeed/style2");
-//   } else {
-//     toast.error("Invalid Credentaial...");
-//   }
-//   console.log("result data....", result);
-// };
+export const signup = async (email: string, password: string, name: string) => {
+  const { account } = await createAdminClient();
+  await account.create(ID.unique(), email, password, name);
+  const result = await account.createEmailPasswordSession(email, password);
+  (await cookies()).set(SESSION_COOKIE, result.secret, {
+    path: "/",
+    httpOnly: true,
+    sameSite: "strict",
+    secure: true,
+  });
+  if (result) {
+    redirect("/newsfeed/style2");
+  } else {
+    console.log("err result data....", result);
+  }
+};

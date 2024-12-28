@@ -4,9 +4,22 @@ import RegisterMainPage from "@/components/auth/Register/RegisterMainPage";
 import LoginHeaderSection from "@/components/auth/login/LoginHeaderSection";
 import ThemeCustomizer from "@/layout/CommonLayout/ThemeCustomizer";
 import LoadingLoader from "@/layout/LoadingLoader";
+import { getLoggedInUser } from "@/lib/server/appwrite";
+import { redirect } from "next/navigation";
+import { useEffect } from "react";
 import { Media } from "reactstrap";
 
 const RegisterPage = () => {
+  useEffect(() => {
+    const checkUser = async () => {
+      const user = await getLoggedInUser();
+      if (user) {
+        redirect("/newsfeed/style2");
+      }
+    };
+    checkUser();
+  }
+  , []);
   return (
     <>
       <LoadingLoader />
