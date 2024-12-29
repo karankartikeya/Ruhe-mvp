@@ -11,7 +11,7 @@ export default async function AuthLayout({ children }: AuthLayoutProps) {
 
   // Redirect to login if no user session
   if (!user) {
-    redirect("/login");
+    redirect("/authentication/login");
   }
 
   // Render the protected content if authenticated

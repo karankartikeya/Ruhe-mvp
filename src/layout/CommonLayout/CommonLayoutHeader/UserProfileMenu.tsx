@@ -1,14 +1,14 @@
 import DynamicFeatherIcon from "@/Common/DynamicFeatherIcon";
 import { userMenuData } from "@/Data/Layout";
-import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { FC } from "react";
 import { Media } from "reactstrap";
 import { LogOut } from "../../../utils/constant";
+import { logout } from "@/actions/auth";
 const UserProfileMenu: FC = () => {
 
   const handleLogOut = () => {
-    signOut();
+    logout();
   };
   return (
     <ul className='friend-list'>
