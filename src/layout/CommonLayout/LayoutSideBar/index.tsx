@@ -18,8 +18,8 @@ const LayoutSideBar: FC<CommonLayoutSideBarInterFace> = ({sideBarClassName}) => 
       </div>
       <ul className="sidebar-icon">
         <SideBarItems />
-        <BirthdayList />
-        <GamesList />
+        {/* <BirthdayList /> */}
+        {/* <GamesList /> */}
       </ul>
       <LogoutIcon />
     </div>

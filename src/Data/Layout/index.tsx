@@ -82,11 +82,11 @@ export const userMenuData: UserMenuDataInterFace[] = [
 
 
 export const sideBarData: sideBarDataType[] = [
-  { path: "/newsfeed/style1", icon: "File", tooltipTittle: "newsfeed" },
-  { path: "/favourite/home", icon: "Star", tooltipTittle: "Favourite" },
-  { path: Href, icon: "User", tooltipTittle: "Groups" },
-  { path: "/music", icon: "Headphones", tooltipTittle: "Music" },
-  { path: "/weather", icon: "Cloud", tooltipTittle: "Weather" },
+  { path: "/newsfeed/style2", icon: "File", tooltipTittle: "newsfeed" },
+  // { path: "/favourite/home", icon: "Star", tooltipTittle: "Favourite" },
+  // { path: Href, icon: "User", tooltipTittle: "Groups" },
+  // { path: "/music", icon: "Headphones", tooltipTittle: "Music" },
+  // { path: "/weather", icon: "Cloud", tooltipTittle: "Weather" },
   { path: "/event", icon: "Calendar", tooltipTittle: "Event" },
 ];
 
@@ -216,10 +216,10 @@ interface dataInterFace {
 }
 export const profileMenuData: dataInterFace[] = [
   { navigate: "/profile/timeline", name: "timeline", icon: "Clock" },
-  { navigate: "/profile/about", name: "about", icon: "Info" },
-  { navigate: "/profile/friends", name: "friends", icon: "Users" },
-  { navigate: "/profile/gallery", name: "photos", icon: "Image" },
-  { navigate: "/profile/acitivityfeed", name: "acitivity feed", icon: "List" },
+  // { navigate: "/profile/about", name: "about", icon: "Info" },
+  // { navigate: "/profile/friends", name: "friends", icon: "Users" },
+  // { navigate: "/profile/gallery", name: "photos", icon: "Image" },
+  { navigate: "/profile/moodfeed", name: "mood feed", icon: "List" },
 ];
 
 export const layoutFooterData = [

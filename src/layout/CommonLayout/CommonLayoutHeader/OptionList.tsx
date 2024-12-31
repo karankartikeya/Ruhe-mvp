@@ -7,9 +7,9 @@ import UserProfile from "./UserProfile";
 const OptionList: FC = () => {
   return (
     <ul className="option-list">
-      <HeaderMessage />
+      {/* <HeaderMessage /> */}
       <DarkLight />
-      <Notification />
+      {/* <Notification /> */}
       <UserProfile />
     </ul>
   );

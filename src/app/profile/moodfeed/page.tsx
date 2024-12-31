@@ -1,4 +1,8 @@
 "use client";
+import Calender from "@/components/Event/Calender";
+import CalenderBottom from "@/components/Event/CalenderBottom";
+import EventCategory from "@/components/Event/EventCategory";
+import EventSlider from "@/components/Event/EventSlider";
 import SufiyaElizaFirstPost from "@/components/NewsFeed/Style1/ContentCenter/SufiyaElizaFirstPost";
 import ActivityFeed from "@/components/profile/ActivityFeed";
 import ProfileLayout from "@/layout/ProfileLayout";
@@ -8,15 +12,15 @@ const ProfileTimeLine = () => {
   return (
     <ProfileLayout title="acitivity feed" loaderName="activityFeedProfile">
       <Container fluid className="section-t-space px-0">
-        <Row>
-          <Col lg="5" className="content-left">
-            <ActivityFeed />
+      <Row className="event-body">
+          <Col xl="6">
+            <EventSlider />
+            <EventCategory/>
           </Col>
-          <Col lg="7" className="content-center">
-            <div className="post-panel">
-              <div className="post-wrapper">
-                <SufiyaElizaFirstPost mainImage={1} userImage={1} />
-              </div>
+          <Col xl="6">
+            <div className="calender-section custom-calender section-t-space  section-b-space">
+              <Calender />
+              <CalenderBottom />
             </div>
           </Col>
         </Row>

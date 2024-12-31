@@ -5,7 +5,7 @@ import PostStats from "./PostStats"
 const RightHeader:FC = () => {
   return (
     <div className="header-right">
-        <PostStats />
+        {/* <PostStats /> */}
         <OptionList/>
     </div>
   )
