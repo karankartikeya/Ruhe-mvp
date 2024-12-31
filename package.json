@@ -21,6 +21,7 @@
     "@types/react-dom": "^19.0.2",
     "apexcharts": "^4.3.0",
     "appwrite": "^16.1.0",
+    "appwrite-cli": "^6.1.0",
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
     "emoji-picker-react": "^4.12.0",

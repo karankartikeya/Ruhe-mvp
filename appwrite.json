@@ -1,0 +1,393 @@
+{
+    "projectId": "676bdc7700370019de43",
+    "projectName": "Ruhe-app ",
+    "settings": {
+        "services": {
+            "account": true,
+            "avatars": true,
+            "databases": true,
+            "locale": true,
+            "health": true,
+            "storage": true,
+            "teams": true,
+            "users": true,
+            "functions": true,
+            "graphql": true,
+            "messaging": true
+        },
+        "auth": {
+            "methods": {
+                "jwt": true,
+                "phone": true,
+                "invites": true,
+                "anonymous": true,
+                "email-otp": true,
+                "magic-url": true,
+                "email-password": true
+            },
+            "security": {
+                "duration": 31536000,
+                "limit": 0,
+                "sessionsLimit": 10,
+                "passwordHistory": 0,
+                "passwordDictionary": false,
+                "personalDataCheck": false,
+                "sessionAlerts": false,
+                "mockNumbers": []
+            }
+        }
+    },
+    "databases": [
+        {
+            "$id": "676bddfd003548ae5cd8",
+            "name": "dev_db",
+            "enabled": true
+        },
+        {
+            "$id": "676bde3300279e3b53b4",
+            "name": "prod_db",
+            "enabled": true
+        }
+    ],
+    "collections": [
+        {
+            "$id": "676bde140030242594e9",
+            "$permissions": [],
+            "databaseId": "676bddfd003548ae5cd8",
+            "name": "users",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "name",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 50,
+                    "default": null
+                },
+                {
+                    "key": "username",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 50,
+                    "default": null
+                },
+                {
+                    "key": "phone",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 15,
+                    "default": null
+                },
+                {
+                    "key": "bio",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 200,
+                    "default": ""
+                },
+                {
+                    "key": "age",
+                    "type": "integer",
+                    "required": true,
+                    "array": false,
+                    "min": -9223372036854775808,
+                    "max": 9223372036854775807,
+                    "default": null
+                },
+                {
+                    "key": "email",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "format": "email",
+                    "default": null
+                },
+                {
+                    "key": "Avatar",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "format": "url",
+                    "default": null
+                },
+                {
+                    "key": "role",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 15,
+                    "default": "user"
+                }
+            ],
+            "indexes": []
+        },
+        {
+            "$id": "67705315001c1c420e0a",
+            "$permissions": [],
+            "databaseId": "676bddfd003548ae5cd8",
+            "name": "follows",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "followerId",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 100,
+                    "default": null
+                },
+                {
+                    "key": "followingId",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 100,
+                    "default": null
+                }
+            ],
+            "indexes": []
+        },
+        {
+            "$id": "6771c5260038fdd0e6d3",
+            "$permissions": [],
+            "databaseId": "676bddfd003548ae5cd8",
+            "name": "posts",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "userId",
+                    "type": "relationship",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "676bde140030242594e9",
+                    "relationType": "manyToOne",
+                    "twoWay": false,
+                    "twoWayKey": "6773180b0034d9638257",
+                    "onDelete": "cascade",
+                    "side": "parent"
+                },
+                {
+                    "key": "content",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 1000,
+                    "default": null
+                },
+                {
+                    "key": "ImageUrl",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "format": "url",
+                    "default": null
+                },
+                {
+                    "key": "tags",
+                    "type": "string",
+                    "required": false,
+                    "array": true,
+                    "size": 200,
+                    "default": null
+                }
+            ],
+            "indexes": []
+        },
+        {
+            "$id": "677318e6000d87abf7f7",
+            "$permissions": [],
+            "databaseId": "676bddfd003548ae5cd8",
+            "name": "comments",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "postId",
+                    "type": "relationship",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "6771c5260038fdd0e6d3",
+                    "relationType": "manyToOne",
+                    "twoWay": false,
+                    "twoWayKey": "67731998001474b0a3d3",
+                    "onDelete": "cascade",
+                    "side": "parent"
+                },
+                {
+                    "key": "userId",
+                    "type": "relationship",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "676bde140030242594e9",
+                    "relationType": "manyToOne",
+                    "twoWay": false,
+                    "twoWayKey": "677319dc00290bca1864",
+                    "onDelete": "cascade",
+                    "side": "parent"
+                },
+                {
+                    "key": "comment",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 300,
+                    "default": null
+                }
+            ],
+            "indexes": []
+        },
+        {
+            "$id": "67731a06000b65adf625",
+            "$permissions": [],
+            "databaseId": "676bddfd003548ae5cd8",
+            "name": "likes",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "postId",
+                    "type": "relationship",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "6771c5260038fdd0e6d3",
+                    "relationType": "manyToOne",
+                    "twoWay": false,
+                    "twoWayKey": "67731a1b002a2515815d",
+                    "onDelete": "cascade",
+                    "side": "parent"
+                },
+                {
+                    "key": "userId",
+                    "type": "relationship",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "676bde140030242594e9",
+                    "relationType": "manyToOne",
+                    "twoWay": false,
+                    "twoWayKey": "67731a2b00185476ca01",
+                    "onDelete": "cascade",
+                    "side": "parent"
+                }
+            ],
+            "indexes": []
+        },
+        {
+            "$id": "67731b090007a471bcc7",
+            "$permissions": [],
+            "databaseId": "676bddfd003548ae5cd8",
+            "name": "moods",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "userId",
+                    "type": "relationship",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "676bde140030242594e9",
+                    "relationType": "manyToOne",
+                    "twoWay": false,
+                    "twoWayKey": "67731b45002d1b84be25",
+                    "onDelete": "cascade",
+                    "side": "parent"
+                },
+                {
+                    "key": "moodType",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "elements": [
+                        "Sad",
+                        "Happy",
+                        "Excited",
+                        "Grateful",
+                        "Hopeful",
+                        "Proud",
+                        "Confident",
+                        "Relaxed",
+                        "Loving",
+                        "Calm",
+                        "Bored",
+                        "Focused",
+                        "Lonely",
+                        "Confused",
+                        "Fearful",
+                        "Irritable",
+                        "Nostalgic",
+                        "Motivated",
+                        "Energetic",
+                        "Playful",
+                        "Angry",
+                        "Guilty",
+                        "Inspired"
+                    ],
+                    "format": "enum",
+                    "default": null
+                },
+                {
+                    "key": "note",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 200,
+                    "default": null
+                }
+            ],
+            "indexes": []
+        },
+        {
+            "$id": "67731cb8003cbb3e3bb6",
+            "$permissions": [],
+            "databaseId": "676bddfd003548ae5cd8",
+            "name": "dailyQuests",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "question",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 200,
+                    "default": null
+                },
+                {
+                    "key": "response",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 200,
+                    "default": null
+                },
+                {
+                    "key": "points",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 50,
+                    "default": null
+                },
+                {
+                    "key": "userId",
+                    "type": "relationship",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "676bde140030242594e9",
+                    "relationType": "manyToOne",
+                    "twoWay": false,
+                    "twoWayKey": "677328b500134103768e",
+                    "onDelete": "cascade",
+                    "side": "parent"
+                }
+            ],
+            "indexes": []
+        }
+    ]
+}
