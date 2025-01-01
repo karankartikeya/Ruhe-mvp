@@ -8,6 +8,7 @@ import ThemeCustomizer from "./ThemeCustomizer";
 import FullSideBar from "./FullSideBar";
 import { useEffect, useState } from "react";
 import { skeltonLoaderList } from "@/Data/Layout";
+import SearchLayoutFooter from "../SearchLayout/SearchLayoutFooter";
 
 const CommonLayout: React.FC<CommonLayoutProps> = ({
   differentLogo,
@@ -48,6 +49,7 @@ const CommonLayout: React.FC<CommonLayoutProps> = ({
         )} */}
       </Container>
       {/* <ThemeCustomizer /> */}
+      <SearchLayoutFooter />
     </>
   );
 };
