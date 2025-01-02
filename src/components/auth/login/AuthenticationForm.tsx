@@ -13,7 +13,7 @@ import {
   RememberMe,
   SignUp,
 } from "../../../utils/constant";
-import { login } from "@/actions/auth";
+import { login } from "@/lib/server/appwrite";
 
 const AuthenticationForm: React.FC = () => {
   const [show, setShow] = useState(false);

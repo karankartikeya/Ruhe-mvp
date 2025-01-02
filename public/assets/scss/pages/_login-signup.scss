@@ -41,6 +41,15 @@
             width: 100%;
         }
 
+        .username-warning{
+            color:red !important;
+            font-weight: 600;
+        }
+        .username-success{
+            color:green !important;
+            font-weight: 600;
+        }
+
         .login-title {
             h2 {
                 font-size: calc(28px + (40 - 28) * ((100vw - 320px) / (1920 - 320)));

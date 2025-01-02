@@ -4,7 +4,7 @@ import Link from "next/link";
 import { FC } from "react";
 import { Media } from "reactstrap";
 import { LogOut } from "../../../utils/constant";
-import { logout } from "@/actions/auth";
+import { logout } from "@/lib/server/appwrite";
 const UserProfileMenu: FC = () => {
 
   const handleLogOut = () => {
