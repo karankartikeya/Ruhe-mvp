@@ -1,8 +1,9 @@
 import { Col, Container, Row } from "reactstrap";
 import SocialLinks from "../login/SocialLinks";
-import { ImagePath, Register, WelcomeFriend } from "../../../utils/constant";
+import { ImagePath, Login, Register, SignUp, WelcomeFriend } from "../../../utils/constant";
 import RegisterForm from "./RegisterForm";
 import CustomImage from "@/Common/CustomImage";
+import Link from "next/link";
 
 const RegisterMainPage: React.FC = () => {
   return (
@@ -23,9 +24,9 @@ const RegisterMainPage: React.FC = () => {
                 <h2>{Register}</h2>
               </div>
               <div className="login-discription">
-                <h3>Hello Everyone</h3>
+                {/* <h3>Hello Everyone</h3> */}
                 <h4>
-                  Welcome to Friendbook, create your account below to start usinf friendbook.
+                  Welcome to Friendbook, create your account below to start using friendbook.
                 </h4>
               </div>
               <div className="form-sec">
@@ -35,7 +36,14 @@ const RegisterMainPage: React.FC = () => {
                     <h6>
                       <span>OR Connect With</span>
                     </h6>
-                    <SocialLinks />
+                    <div className="btn-section">
+                      <Link
+                        href="/authentication/login"
+                        className="btn btn-solid btn-lg auth"
+                      >
+                        {Login}
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -13,6 +13,7 @@ const page = () => {
     const checkUser = async () => {
       const user = await getLoggedInUser();
       if (user) {
+        
         router.push("/newsfeed/style2");
       }
       else{

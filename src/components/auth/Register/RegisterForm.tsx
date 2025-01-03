@@ -3,9 +3,17 @@ import { FullName, Password, SignUp } from "../../../utils/constant";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
-import { checkUsername, signup } from "@/lib/server/appwrite";
+import {
+  checkPhone,
+  checkUsername,
+  getLoggedInUser,
+  login,
+  signup,
+} from "@/lib/server/appwrite";
 import { toast } from "react-toastify";
-import { isValidPhoneNumber } from "@/utils/validators";
+import { isValidEmail, isValidPhoneNumber } from "@/utils/validators";
+import { redirect } from "next/navigation";
+import { set } from "lodash";
 
 const RegisterForm: React.FC = () => {
   const [show, setShow] = useState(false);
@@ -18,8 +26,10 @@ const RegisterForm: React.FC = () => {
   const [customGender, setCustomGender] = useState("");
   const [username, setUsername] = useState("");
   const [isChecking, setIsChecking] = useState(false);
+  const [isCheckingPhone, setIsCheckingPhone] = useState(false);
   const timer = useRef<NodeJS.Timeout | null>(null);
   const [usernameValid, setUsernameValid] = useState(false);
+  const [phoneValid, setPhoneValid] = useState(false);
 
   const checkUsernameValidorNot = async (username: string) => {
     // console.log("checkUsernameValidorNot", username);
@@ -45,6 +55,14 @@ const RegisterForm: React.FC = () => {
     // );
   };
 
+  const checkPhoneValidorNot = async (phone: string) => {
+    setIsCheckingPhone(true);
+    const phoneValid = await checkPhone(phone);
+    setPhoneValid(phoneValid);
+    setIsCheckingPhone(false);
+    console.log("phoneValid", phoneValid);
+  };
+
   const handleUserNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
 
@@ -56,10 +74,19 @@ const RegisterForm: React.FC = () => {
     }, 2000); //2 second debounce
   };
 
+  const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPhone(event.target.value);
+    if (timer.current) {
+      clearTimeout(timer.current);
+    }
+    timer.current = setTimeout(() => {
+      checkPhoneValidorNot(event.target.value);
+    }, 2000); //2 second debounce
+  };
+
   const formSubmitHandle = async (event: React.FormEvent<HTMLFormElement>) => {
     // console.log("formSubmitHandle");
     event.preventDefault();
-    const isPhoneValid = isValidPhoneNumber(phone);
     //perform all checks for input fields also check for null
     if (
       !email ||
@@ -82,9 +109,18 @@ const RegisterForm: React.FC = () => {
     ) {
       toast.error("Please fill all the field122s");
       console.log("Please fill all the field122s");
-    } else if (!isPhoneValid) {
+    } else if (isValidEmail(email) == false) {
+      toast.error("Please enter a valid email");
+      console.log("Please enter a valid email");
+    } else if (isValidPhoneNumber(phone) == false) {
       toast.error("Please enter a valid phone number");
       console.log("Please enter a valid phone number");
+    } else if (usernameValid == false) {
+      toast.error("Username is already taken");
+      console.log("Username is already taken");
+    } else if (phoneValid == false) {
+      toast.error("Phone number is already registered");
+      console.log("Phone number is already registered");
     } else if (name.length > 50) {
       toast.error("Name should be less than 50 characters");
       console.log("Name should be less than 50 characters");
@@ -101,21 +137,64 @@ const RegisterForm: React.FC = () => {
     } else if (gender == "custom" && customGender.length > 50) {
       toast.error("Please enter the gender less than 50 characters");
     } else if (gender == "custom") {
-      // signup(email, password, name, phone, age, customGender);
-      console.log(
-        "name",
+      const user = signup(
+        email,
+        password,
         name,
-        "phone",
         phone,
-        "age",
         age,
-        "gender",
-        customGender.length,
-        gender
+        customGender,
+        username
       );
+      if (!user) {
+        toast.error("Error registering the user");
+        return;
+      }
+      const session = await login(email, password);
+      if (!session) {
+        toast.error(
+          "Something went wrong. Please log into your account after some time"
+        );
+        return;
+      }
+      const isLoggedIn = await getLoggedInUser();
+      if (isLoggedIn) {
+        redirect("/profile/timeline");
+      } else {
+        toast.error("Logging in error");
+      }
+      // console.log(
+      //   "name",
+      //   name,
+      //   "phone",
+      //   phone,
+      //   "age",
+      //   age,
+      //   "gender",
+      //   customGender.length,
+      //   gender
+      // );
     } else {
-      // signup(email, password, name, phone, age,gender);
-      console.log("name", name, "phone", phone, "age", age, "gender", gender);
+      const user = signup(email, password, name, phone, age, gender, username);
+      if (!user) {
+        toast.error("Error registering the user");
+        return;
+      }
+      const session = await login(email, password);
+      if (!session) {
+        toast.error(
+          "Something went wrong. Please log into your account after some time"
+        );
+        return;
+      }
+      const isLoggedIn = await getLoggedInUser();
+      if (isLoggedIn) {
+        redirect("/profile/timeline");
+      } else {
+        toast.error("Logging in error");
+      }
+
+      // console.log("name", name, "phone", phone, "age", age, "gender", gender);
     }
   };
   return (
@@ -194,12 +273,21 @@ const RegisterForm: React.FC = () => {
           type="text"
           placeholder="Phone Number"
           defaultValue={phone}
-          onChange={(event) => setPhone(event.target.value)}
+          onChange={(event) => handlePhoneChange(event)}
         />
         <DynamicFeatherIcon
           iconName="Phone"
           className="input-icon iw-20 ih-20"
         />
+      </FormGroup>
+      <FormGroup>
+        {phone.length == 0 ? (
+          <p></p>
+        ) : isCheckingPhone ? null : phoneValid ? null : (
+          <p className="ih-20 username-warning">
+            PhoneNumber is already registered
+          </p>
+        )}
       </FormGroup>
       <FormGroup>
         <Label>Age</Label>
@@ -258,12 +346,9 @@ const RegisterForm: React.FC = () => {
         {/* <a href="#">forget password?</a> */}
       </div>
       <div className="btn-section">
-        <Button type="submit" className="btn btn-solid btn-lg">
+        <Button type="submit" className="btn btn-solid btn-lg auth">
           {SignUp}
         </Button>
-        <Link href="/auth/login" className="btn btn-solid btn-lg ms-auto">
-          login
-        </Link>
       </div>
     </form>
   );

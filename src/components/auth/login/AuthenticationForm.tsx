@@ -13,16 +13,32 @@ import {
   RememberMe,
   SignUp,
 } from "../../../utils/constant";
-import { login } from "@/lib/server/appwrite";
+import { getLoggedInUser, login, signin } from "@/lib/server/appwrite";
+import { isValidEmail } from "@/utils/validators";
 
 const AuthenticationForm: React.FC = () => {
   const [show, setShow] = useState(false);
-  const [email, setEmail] = useState("karankartikey72@gmail.com");
-  const [password, setPassword] = useState("Test123@");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const formSubmitHandle = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    login(email, password);
+    if (!email || !password) {
+      toast.error("Please enter email and password");
+    } else if (isValidEmail(email) == false) {
+      toast.error("Please enter valid email");
+    } else if (password.length < 8 && password.length > 50) {
+      toast.error("Please enter a valid password");
+    } else {
+      const session = await signin(email, password);
+      if (session == null) {
+        toast.error(
+          "Wrong credentials, please enter correct email and password"
+        );
+      } else {
+        redirect("/newsfeed/style2");
+      }
+    }
   };
 
   return (
@@ -31,7 +47,6 @@ const AuthenticationForm: React.FC = () => {
         <Label>{EmailAddress}</Label>
         <Input
           type="email"
-          placeholder="Test@gmail.com"
           defaultValue={email}
           onChange={(event) => setEmail(event.target.value)}
         />
@@ -44,7 +59,6 @@ const AuthenticationForm: React.FC = () => {
         <Label>{Password}</Label>
         <Input
           type={show ? "text" : "password"}
-          placeholder="*********"
           defaultValue={password}
           onChange={(event) => setPassword(event.target.value)}
         />
@@ -61,21 +75,21 @@ const AuthenticationForm: React.FC = () => {
             className="form-check-input"
             id="exampleCheck1"
           />
-          <label className="form-check-label" htmlFor="exampleCheck1">
+          {/* <label className="form-check-label" htmlFor="exampleCheck1">
             {RememberMe}
-          </label>
+          </label> */}
         </div>
         <a href="#" className="forget-password">
           {ForgetPassword}
         </a>
       </div>
       <div className="btn-section">
-        <Button type="submit" className="btn btn-solid btn-lg">
+        <Button type="submit" className="btn btn-solid btn-lg auth">
           {Login}
         </Button>
-        <Link href="/auth/register" className="btn btn-solid btn-lg ms-auto">
+        {/* <Link href="/auth/register" className="btn btn-solid btn-lg ms-auto">
           {SignUp}
-        </Link>
+        </Link> */}
       </div>
     </Form>
   );

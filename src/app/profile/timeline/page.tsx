@@ -13,9 +13,22 @@ import ActivityFeeds from "@/components/profile/ActivityFeeds";
 import CollegeMeetCard from "@/components/profile/CollegeMeetCard";
 import WorldWideTrend from "@/components/profile/WorldWideTrend";
 import ProfileLayout from "@/layout/ProfileLayout";
+import { getLoggedInUser } from "@/lib/server/appwrite";
+import { redirect } from "next/navigation";
+import { useEffect } from "react";
 import { Container } from "reactstrap";
 
 const ProfileTimeLine = () => {
+  useEffect(() => {
+    const checkUser = async () => {
+      const user = await getLoggedInUser();
+      console.log("user=", user);
+      if (!user) {
+        redirect("/authentication/login");
+      }
+    };
+    checkUser();
+  }, []);
   return (
     <ProfileLayout title="timeline" loaderName="profileTimeLine">
       <Container fluid className="section-t-space px-0 layout-default">
