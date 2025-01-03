@@ -3312,11 +3312,11 @@
                 bottom: 0;
                 width: 100%;
                 left: 0;
-                top: unset !important;
+                top: 0px;
                 bottom: 0 !important;
                 transform: none !important;
-                height: 100vh;
-                overflow: auto;
+                height: 100%;
+                overflow: visible;
                 border-radius: 0;
                 min-width: auto;
 
@@ -3325,7 +3325,7 @@
                 }
 
                 .dropdown-content {
-                    max-height: unset;
+                    max-height: 100%;
                 }
             }
         }
