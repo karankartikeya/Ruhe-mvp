@@ -20,6 +20,7 @@ import { RootState } from "@/redux-toolkit/store";
 import UserDropDown from "./UserDropDown";
 import { fetchUser } from "@/utils/userService";
 import { useAppDispatch, useAppSelector } from "@/utils/hooks";
+import LoadingLoader from "../LoadingLoader";
 
 const UserProfile: FC<UserProfileInterFace> = ({ toggle }) => {
   const [dropDownOpen, setDropDownOpen] = useState(false);
@@ -45,7 +46,7 @@ const UserProfile: FC<UserProfileInterFace> = ({ toggle }) => {
   }, [user]);
 
   if (loading || localloading) {
-    return <div>Loading...</div>;
+    return <LoadingLoader />;
   }
 
   return (
