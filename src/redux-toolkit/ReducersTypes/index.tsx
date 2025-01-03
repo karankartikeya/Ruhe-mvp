@@ -19,3 +19,9 @@ style7:number[]
 style12:number[]
 favouriteHome:number[]
 }
+
+export interface UserSliceInterFace {
+  data: any | null;
+  loading: boolean;
+  error: string | null;
+}

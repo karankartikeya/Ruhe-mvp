@@ -3,13 +3,21 @@ import ButtonPopover from "./ButtonPopover";
 import { ImagePath, SvgPath } from "../../utils/constant";
 import Image from "next/image";
 import { HoverMessageProps } from "@/layout/LayoutTypes";
+import { useEffect } from "react";
 
 const HoverMessage = ({ name, target, placement, imagePath }: HoverMessageProps) => {
-  const error = console.error;
-  console.error = (...args: any) => {
-    if (/defaultProps/.test(args[0])) return;
-    error(...args);
-  };
+  useEffect(() => {
+    const originalError = console.error;
+    console.error = (...args: any) => {
+      if (!/defaultProps/.test(args[0])) {
+        originalError(...args);
+      }
+    };
+  
+    return () => {
+      console.error = originalError; // Restore original error on cleanup
+    };
+  }, []);
   return (
     <UncontrolledPopover trigger="hover" placement={placement} target={target}>
       <PopoverBody>

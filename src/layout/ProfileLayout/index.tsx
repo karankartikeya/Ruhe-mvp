@@ -10,6 +10,7 @@ import EditCoverModal from "./EditCoverModal";
 const ProfileLayout: FC<ProfileLayoutInterFace> = ({ children, title,profileTab,loaderName }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
+  
   return (
     <CommonLayout mainClass="custom-padding profile-page" loaderName={loaderName}>
       <div className="page-center">

@@ -6,20 +6,50 @@ import { Container } from "reactstrap";
 import { CommonLayoutProps } from "../LayoutTypes";
 import ThemeCustomizer from "./ThemeCustomizer";
 import FullSideBar from "./FullSideBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { skeltonLoaderList } from "@/Data/Layout";
+import SearchLayoutFooter from "../SearchLayout/SearchLayoutFooter";
 
-const CommonLayout: React.FC<CommonLayoutProps> = ({differentLogo,loaderName="defaultLoader",showFullSideBar,children,mainClass,headerClassName,sideBarClassName,HideConversationPanel,ConversationPanelClassName}) => {const [loaderShowKey, setLoaderShowKey] = useState("defaultLoader")
+const CommonLayout: React.FC<CommonLayoutProps> = ({
+  differentLogo,
+  loaderName = "defaultLoader",
+  showFullSideBar,
+  children,
+  mainClass,
+  headerClassName,
+  sideBarClassName,
+  HideConversationPanel,
+  ConversationPanelClassName,
+}) => {
+  const [loaderShowKey, setLoaderShowKey] = useState("defaultLoader");
+  useEffect(() => {
+    document.body.classList.add("bg-smile");
+    return () => {
+      document.body.classList.remove("bg-smile");
+    };
+  }, []);
   return (
     <>
       {skeltonLoaderList[loaderName]}
-      <CommonLayoutHeader headerClassName={headerClassName ? headerClassName : ""} differentLogo={differentLogo}/>
+      <CommonLayoutHeader
+        headerClassName={headerClassName ? headerClassName : ""}
+        differentLogo={differentLogo}
+      />
       <Container fluid className={`page-body  ${mainClass ? mainClass : ""}`}>
-        {showFullSideBar ? <FullSideBar /> : <LayoutSideBar sideBarClassName={sideBarClassName ? sideBarClassName : ""}/>}
+        {showFullSideBar ? (
+          <FullSideBar />
+        ) : (
+          <LayoutSideBar
+            sideBarClassName={sideBarClassName ? sideBarClassName : ""}
+          />
+        )}
         {children}
-        {!HideConversationPanel && <ConversationPanel sidebarClassName={ConversationPanelClassName}  />}
+        {/* {!HideConversationPanel && (
+          <ConversationPanel sidebarClassName={ConversationPanelClassName} />
+        )} */}
       </Container>
-      <ThemeCustomizer />
+      {/* <ThemeCustomizer /> */}
+      <SearchLayoutFooter />
     </>
   );
 };

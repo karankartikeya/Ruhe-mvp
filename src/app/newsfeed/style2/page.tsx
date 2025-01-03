@@ -7,11 +7,32 @@ import ContentLeft from "@/components/NewsFeed/Style1/LeftContent";
 import StorySection from "@/components/NewsFeed/Style1/StorySection";
 import CollegeMeetCard from "@/components/profile/CollegeMeetCard";
 import CommonLayout from "@/layout/CommonLayout";
+import { getLoggedInUser } from "@/lib/server/appwrite";
+import { redirect } from "next/navigation";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { Container } from "reactstrap";
 
 const newsFeedStyle2 = () => {
+  useEffect(() => {
+    const checkUser = async () => {
+      const user = await getLoggedInUser();
+      if (user) {
+        redirect("/newsfeed/style2");
+      } else {
+        redirect("/authentication/login");
+      }
+    };
+    checkUser();
+  }, []);
   return (
-    <CommonLayout mainClass="custom-padding" headerClassName="header-light" sideBarClassName="sidebar-white" loaderName="style1" differentLogo="logo-color.png">
+    <CommonLayout
+      mainClass="custom-padding"
+      headerClassName="header-light"
+      sideBarClassName="sidebar-white"
+      loaderName="style1"
+      differentLogo="logo-color.png"
+    >
       <div className="page-center">
         <StorySection />
         <Container fluid className="section-t-space px-0 layout-default">

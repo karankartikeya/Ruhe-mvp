@@ -13,16 +13,31 @@ import ActivityFeeds from "@/components/profile/ActivityFeeds";
 import CollegeMeetCard from "@/components/profile/CollegeMeetCard";
 import WorldWideTrend from "@/components/profile/WorldWideTrend";
 import ProfileLayout from "@/layout/ProfileLayout";
+import { getLoggedInUser } from "@/lib/server/appwrite";
+import { redirect } from "next/navigation";
+import { useEffect } from "react";
 import { Container } from "reactstrap";
 
 const ProfileTimeLine = () => {
+  useEffect(() => {
+    const checkUser = async () => {
+      const user = await getLoggedInUser();
+      console.log("user=", user);
+      if (!user) {
+        redirect("/authentication/login");
+      }
+    };
+    checkUser();
+  }, []);
   return (
-    <ProfileLayout title="timeline" loaderName="profileTimeLine" >
+    <ProfileLayout title="timeline" loaderName="profileTimeLine">
       <Container fluid className="section-t-space px-0 layout-default">
         <div className="page-content">
           <div className="content-left">
             <AboutUser />
-            <FriendSuggestion mainClassName="d-xl-block d-none" />
+            {/* <FriendSuggestion mainClassName="d-xl-block d-none" /> */}
+
+            {/** build the below UI for liked */}
             <div className="sticky-top d-xl-block d-none">
               <LikePage />
             </div>
@@ -30,9 +45,17 @@ const ProfileTimeLine = () => {
           <div className="content-center">
             <CreatePost />
             <div className="overlay-bg" />
+            {/** build the below UI for users posts */}
             <div className="post-panel infinite-loader-sec section-t-space">
               <SufiyaElizaFirstPost mainImage={11} userImage={15} />
-              <SufiyaElizaMultiplePost moreImage diffrentImage userImage={14} main={40} second={41} third={42}/>
+              <SufiyaElizaMultiplePost
+                moreImage
+                diffrentImage
+                userImage={14}
+                main={40}
+                second={41}
+                third={42}
+              />
               <SufiyaElizaSecondPost userImage={10} />
               <SufiyaElizaThirdPost
                 userImage={1}
@@ -43,12 +66,16 @@ const ProfileTimeLine = () => {
               <SufiyaElizaSecondPost userImage={10} />
             </div>
           </div>
+
           <div className="content-right d-xl-block d-none">
+            {/* Daily Quest update
+            If answered then yippe otherwise please answer now
+              */}
             <CollegeMeetCard />
-            <Gallery />
-            <ActivityFeeds />
+            {/* <Gallery />
+            <ActivityFeeds /> */}
             <div className="sticky-top">
-              <EventsCard eventImage={12} diffrentPath="post" />
+              {/* <EventsCard eventImage={12} diffrentPath="post" /> */}
               <WorldWideTrend />
             </div>
           </div>

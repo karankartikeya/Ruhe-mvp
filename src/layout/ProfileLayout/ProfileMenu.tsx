@@ -18,20 +18,20 @@ const ProfileMenu: FC<ProfileMenuInterFace> = ({title}) => {
           </li>
         ))}
       </ul>
-      <ul className="right-menu d-xl-flex d-none">
+      {/* <ul className="right-menu d-xl-flex d-none">
         <li>
           <div className="search-bar input-style icon-left search-inmenu">
             <DynamicFeatherIcon iconName="Search" className="iw-16 ih-16 icon icon-theme"/>
             <Input type="text" placeholder="search here..." />
           </div>
         </li>
-        <li className={`${title === "acitivity feed"?"active":""}`}>
-          <Link href="/profile/acitivityfeed">
+        <li className={`${title === "mood feed"?"active":""}`}>
+          <Link href="/profile/moodfeed">
             <DynamicFeatherIcon iconName="List" className="iw-14 ih-14 " />
-            <h6>acitivity feed</h6>
+            <h6>Mood Feed</h6>
           </Link>
         </li>
-      </ul>
+      </ul> */}
     </div>
   );
 };
