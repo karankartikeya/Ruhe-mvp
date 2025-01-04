@@ -5,8 +5,10 @@ import { Href } from "../../utils/constant/index";
 import DynamicFeatherIcon from "@/Common/DynamicFeatherIcon";
 import { aboutUser, socialMediaDetail } from "@/Data/profile";
 import SvgIconCommon from "@/Common/SvgIconCommon";
+import { useAppSelector } from "@/utils/hooks";
 
 const AboutUser: FC = () => {
+  const user = useAppSelector((state) => state.userSlice.data);
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   return (
@@ -24,6 +26,16 @@ const AboutUser: FC = () => {
       </div>
       <div className="about-content">
         <ul>
+        <li>
+              <div className="icon">
+              <DynamicFeatherIcon iconName={"Briefcase"} className="iw-18 ih-18"/>
+                
+              </div>
+              <div className="details">
+                <h5></h5>
+                <h6></h6>
+              </div>
+            </li>
           {aboutUser.map((data, index) => (
             <li key={index}>
               <div className="icon">

@@ -186,8 +186,6 @@ export const login = async (email: string, password: string) => {
   }
 };
 
-
-
 {
   /** SIGNIN FUNCTION EXPLICITLY USED ONLY FOR LOGIN PAGE AS OF NOW */
 }
@@ -205,7 +203,7 @@ export const signin = async (email: string, password: string) => {
     });
     const currUser = await getLoggedInUser();
     if (currUser) {
-      return currUser!==null;
+      return currUser !== null;
     } else {
       console.log("err result data....", result);
       return null;
@@ -271,7 +269,6 @@ export const checkUsername = async (username: string) => {
   return checkUsernameData.documents.length === 0;
 };
 
-
 {
   /** CHECK IF PHONENUMBER IS ALREADY REGISTERED */
 }
@@ -284,4 +281,69 @@ export const checkPhone = async (phone: string) => {
   );
   console.log("checkPhone", checkPhoneData.documents);
   return checkPhoneData.documents.length === 0;
+};
+
+{
+  /** GET POSTS */
+}
+
+export const getInfinitePosts = async ({
+  pageParam,
+}: {
+  pageParam: number;
+}) => {
+  const queries: any[] = [Query.orderDesc("$updatedAt"), Query.limit(7)];
+  const user = await getLoggedInUser();
+  if (!user) return null;
+  else if (pageParam) {
+    queries.push(Query.cursorAfter(pageParam.toString()));
+  }
+  const userId = user.userId;
+  try {
+    const posts = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      queries
+    );
+    if (!posts) throw Error;
+    return posts;
+  } catch (error) {
+    console.log("Error while fetching posts", error);
+  }
+};
+
+{
+  /** GET POST BY ID */
+}
+
+export const getPostById = async (postId: string) => {
+  try {
+    const post = await databases.getDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      postId
+    );
+    if (!post) throw Error;
+    return post;
+  } catch (error) {
+    console.log("Error while fetching post by id", error);
+  }
+};
+
+{
+  /** UPDATE POST */
+}
+export const updatePost = async (postId: string, post: any) => {
+  try {
+    const updatedPost = await databases.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      postId,
+      post
+    );
+    if (!updatedPost) throw Error;
+    return updatedPost;
+  } catch (error) {
+    console.log("Error while updating post", error);
+  }
 }

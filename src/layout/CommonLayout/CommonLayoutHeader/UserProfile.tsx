@@ -21,7 +21,6 @@ const UserProfile: FC = () => {
     <li className="header-btn custom-dropdown profile-btn btn-group">
       <a
         className={`main-link ${isComponentVisible ? "show" : ""}`}
-        href={Href}
         onClick={() => setIsComponentVisible(!isComponentVisible)}
       >
         <DynamicFeatherIcon
@@ -44,7 +43,6 @@ const UserProfile: FC = () => {
         </Media>
       </a>
       <div
-        ref={ref}
         className={`dropdown-menu dropdown-menu-right ${
           isComponentVisible ? "show" : ""
         } `}

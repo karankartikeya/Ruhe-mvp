@@ -12,13 +12,21 @@ import AboutUser from "@/components/profile/AboutUser";
 import ActivityFeeds from "@/components/profile/ActivityFeeds";
 import CollegeMeetCard from "@/components/profile/CollegeMeetCard";
 import WorldWideTrend from "@/components/profile/WorldWideTrend";
+import LoadingLoader from "@/layout/LoadingLoader";
 import ProfileLayout from "@/layout/ProfileLayout";
 import { getLoggedInUser } from "@/lib/server/appwrite";
+import { useAppDispatch, useAppSelector } from "@/utils/hooks";
+import { fetchUser } from "@/utils/userService";
 import { redirect } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Container } from "reactstrap";
 
 const ProfileTimeLine = () => {
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.userSlice.data);
+  const loading = useAppSelector((state) => state.userSlice.loading);
+  const [localloading, setLocalLoading] = useState(false);
+
   useEffect(() => {
     const checkUser = async () => {
       const user = await getLoggedInUser();
@@ -29,6 +37,23 @@ const ProfileTimeLine = () => {
     };
     checkUser();
   }, []);
+
+  useEffect(() => {
+    if (!user) {
+      dispatch(fetchUser());
+    }
+  }, [dispatch, user]);
+
+  useEffect(() => {
+    if (user) {
+      setLocalLoading(false);
+    }
+  }, [user]);
+
+  if (loading || localloading) {
+    return <LoadingLoader />;
+  }
+
   return (
     <ProfileLayout title="timeline" loaderName="profileTimeLine">
       <Container fluid className="section-t-space px-0 layout-default">
