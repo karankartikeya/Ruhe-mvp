@@ -33,21 +33,21 @@ const UserProfile: FC<UserProfileInterFace> = ({ toggle }) => {
   const loading = useAppSelector((state) => state.userSlice.loading);
   const [localloading, setLocalLoading] = useState(false);
 
-  useEffect(() => {
-    if (!user) {
-      dispatch(fetchUser());
-    }
-  }, [dispatch, user]);
+  // useEffect(() => {
+  //   if (!user) {
+  //     dispatch(fetchUser());
+  //   }
+  // }, [dispatch, user]);
 
-  useEffect(() => {
-    if (user) {
-      setLocalLoading(false);
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     setLocalLoading(false);
+  //   }
+  // }, [user]);
 
-  if (loading || localloading) {
-    return <LoadingLoader />;
-  }
+  // if (loading || localloading) {
+  //   return <LoadingLoader />;
+  // }
 
   return (
     <div className="profile-cover bg-size blur-up lazyloaded">

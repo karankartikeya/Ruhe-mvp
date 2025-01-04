@@ -34,7 +34,7 @@ const newsFeedStyle2 = () => {
       differentLogo="logo-color.png"
     >
       <div className="page-center">
-        <StorySection />
+        {/* <StorySection /> */}
         <Container fluid className="section-t-space px-0 layout-default">
           <div className="page-content">
             <ContentLeft />

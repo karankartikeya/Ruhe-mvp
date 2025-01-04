@@ -18,7 +18,7 @@ const Style1Skelton: React.FC<LoadingLoaderProps> = ({ show }) => {
       <Container fluid className={`page-body  custom-padding`}>
         <LayoutSideBar sideBarClassName="" />
         <div className="page-center">
-          <StorySection />
+          {/* <StorySection /> */}
           <Container fluid className="section-t-space px-0 layout-default">
             <div className="page-content">
               <div className="content-left">
@@ -35,7 +35,7 @@ const Style1Skelton: React.FC<LoadingLoaderProps> = ({ show }) => {
             </div>
           </Container>
         </div>
-        <ConversationPanel />
+        {/* <ConversationPanel /> */}
       </Container>
     </div>
   );

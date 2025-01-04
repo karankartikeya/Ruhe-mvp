@@ -5,6 +5,7 @@ import { Providers } from "@/redux-toolkit/provider";
 import { ToastContainer } from "react-toastify";
 import { getServerSession } from "next-auth";
 import SessionWrapper from "@/Common/SessionWrapper";
+import SplashCursor from "@/utils/SplashCursor";
 
 export const metadata: Metadata = {
   title: "FriendBookNext",
@@ -41,7 +42,9 @@ export default async function RootLayout({
       </head>
       <body>
         {/* <SessionWrapper session={session}> */}
-        <Providers>{children}</Providers>
+        <Providers>
+          <SplashCursor/>
+          {children}</Providers>
         <ToastContainer />
         {/* </SessionWrapper> */}
       </body>
