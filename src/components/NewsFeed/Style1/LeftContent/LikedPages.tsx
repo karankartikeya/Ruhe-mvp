@@ -5,8 +5,8 @@ import WeatherSection from "./WeatherSection";
 const LikedPages: FC = () => {
   return (
     <div className="sticky-top">
-      <LikePage />
-      <WeatherSection />
+      {/* <LikePage /> */}
+      {/* <WeatherSection /> */}
     </div>
   );
 };

@@ -13,6 +13,7 @@ import { redirect } from "next/navigation";
 import {
   account,
   appwriteConfig,
+  avatars,
   databases,
   storage,
 } from "../appwrite/config";
@@ -137,8 +138,11 @@ export const signup = async (
   username: string
 ) => {
   // const { account } = await createAdminClient();
+
   try {
     const newAccount = await account.create(ID.unique(), email, password, name);
+    const encodedName = encodeURIComponent(name);
+    const avatarURL = `https://cloud.appwrite.io/v1/avatars/initials?name=${encodedName}`;
     if (!newAccount) throw Error;
     const newUser = await saveUser({
       userId: newAccount.$id,
@@ -148,6 +152,7 @@ export const signup = async (
       phone,
       age,
       gender,
+      profileImage: avatarURL
     });
     return newUser;
   } catch {
@@ -168,6 +173,29 @@ export const signup = async (
   //   return error;
   // }
 };
+
+
+export async function getUsers(limit?: number) {
+  const queries: any[] = [Query.orderDesc("$createdAt")];
+
+  if (limit) {
+    queries.push(Query.limit(limit));
+  }
+
+  try {
+    const users = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      queries
+    );
+      console.log("users", users.documents);
+    if (!users) throw Error;
+
+    return users.documents;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 
 export async function updateUser(user: any) {
@@ -315,6 +343,7 @@ export const saveUser = async (user: {
   phone: string;
   age: number;
   gender: string;
+  profileImage: string;
 }) => {
   try {
     const newUser = await databases.createDocument(
