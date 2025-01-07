@@ -8,8 +8,8 @@ import SessionWrapper from "@/Common/SessionWrapper";
 import SplashCursor from "@/utils/SplashCursor";
 
 export const metadata: Metadata = {
-  title: "FriendBookNext",
-  description: "themes.pixelstrap.com",
+  title: "RuheApp",
+  description: "RuheApp is a mental health and wellness social media platform",
 };
 
 export default async function RootLayout({

@@ -152,7 +152,7 @@ export const signup = async (
       phone,
       age,
       gender,
-      profileImage: avatarURL
+      profileImage: avatarURL,
     });
     return newUser;
   } catch {
@@ -174,7 +174,6 @@ export const signup = async (
   // }
 };
 
-
 export async function getUsers(limit?: number) {
   const queries: any[] = [Query.orderDesc("$createdAt")];
 
@@ -188,7 +187,7 @@ export async function getUsers(limit?: number) {
       appwriteConfig.userCollectionId,
       queries
     );
-      console.log("users", users.documents);
+    console.log("users", users.documents);
     if (!users) throw Error;
 
     return users.documents;
@@ -196,7 +195,6 @@ export async function getUsers(limit?: number) {
     console.log(error);
   }
 }
-
 
 export async function updateUser(user: any) {
   const hasFileToUpdate = user.file.length > 0;
@@ -254,9 +252,6 @@ export async function updateUser(user: any) {
     console.log(error);
   }
 }
-
-
-
 
 {
   /** LOGIN FUNCTION */
@@ -706,10 +701,16 @@ export const getDailyQuests = async (userId: string) => {
     const dailyQuests = await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.dailyQuestsCollectionId,
-      [Query.equal("userId", userId), Query.orderDesc("$createdAt")]
+      [Query.orderDesc("$createdAt")]
+      // [Query.equal("userId", userId), Query.orderDesc("$createdAt")]
+    );
+    console.log("desc", dailyQuests);
+    const filteredDailyQuests = dailyQuests.documents.filter(
+      (quest) => quest.userIds["$id"] === userId
     );
     if (!dailyQuests) throw Error;
-    return dailyQuests;
+    console.log("dailyQuests", filteredDailyQuests[0]);
+    return filteredDailyQuests;
   } catch (error) {
     console.log("Error while fetching daily quests", error);
   }

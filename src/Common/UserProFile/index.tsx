@@ -21,7 +21,11 @@ const UserProFile = () => {
           <div className="profile-img">
             <div className="bg-size blur-up lazyloaded">
               <CustomImage
-                src={`https://cloud.appwrite.io/v1/avatars/initials?name=${user.name}`}
+                src={
+                  user.profileImage == null
+                    ? `https://cloud.appwrite.io/v1/avatars/initials?name=${user.name}`
+                    : user.profileImage
+                }
                 className="img-fluid blur-up bg-img lazyloaded"
                 alt="profile"
               />

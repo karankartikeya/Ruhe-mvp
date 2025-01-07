@@ -8,7 +8,7 @@ const ContentLeft: FC = () => {
   return (
     <div className="content-left">
       <UserProFile />
-      <FriendSuggestion/>
+      {/* <FriendSuggestion/> */}
       <LikedPages />
     </div>
   );

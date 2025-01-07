@@ -25,11 +25,11 @@ const newsFeedStyle2 = () => {
   const avatarUrl = avatars.getInitials("karan");
   // const ava = avatarUrl.then((res) => console.log(res));
   console.log("userava=", avatarUrl);
-  
+
   useEffect(() => {
     const checkUser = async () => {
       const user = await getLoggedInUser();
-      console.log("user=", user);
+      // console.log("user==", user);
       if (!user) {
         redirect("/authentication/login");
       }
