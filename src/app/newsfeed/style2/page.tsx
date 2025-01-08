@@ -59,7 +59,7 @@ const newsFeedStyle2 = () => {
       mainClass="custom-padding"
       headerClassName="header-light"
       sideBarClassName="sidebar-white"
-      loaderName="style1"
+      loaderName="style2"
       differentLogo="logo-color.png"
     >
       <div className="page-center">

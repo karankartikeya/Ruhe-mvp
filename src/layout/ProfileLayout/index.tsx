@@ -7,16 +7,27 @@ import UserProfileBox from "./UserProfileBox";
 import ProfileMenu from "./ProfileMenu";
 import EditCoverModal from "./EditCoverModal";
 
-const ProfileLayout: FC<ProfileLayoutInterFace> = ({ children, title,profileTab,loaderName }) => {
+const ProfileLayout: FC<ProfileLayoutInterFace> = ({
+  children,
+  title,
+  profileTab,
+  loaderName,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
-  
+
   return (
-    <CommonLayout mainClass="custom-padding profile-page" loaderName={loaderName}>
+    <CommonLayout
+      mainClass="custom-padding"
+      headerClassName="header-light"
+      sideBarClassName="sidebar-white"
+      loaderName="style2"
+      differentLogo="logo-color.png"
+    >
       <div className="page-center">
         <UserProfile toggle={toggle} />
         <UserProfileBox toggle={toggle} />
-        {!profileTab && <ProfileMenu title={title?title:""} />}
+        {!profileTab && <ProfileMenu title={title ? title : ""} />}
         {children}
       </div>
       <EditCoverModal isOpen={isOpen} toggle={toggle} />

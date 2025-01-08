@@ -227,42 +227,43 @@ export const layoutFooterData = [
     mainTittle: "my account",
     children: [
       { link: "/profile/timeline", title: "timeline" },
-      { link: "/profile/about", title: "about" },
-      { link: "/profile/friends", title: "friends" },
-      { link: "/profile/gallery", title: "gallery" },
-      { title: "settings" },
+      { link: "/profile/moodfeed", title: "MoodFeed" },
+      // { link: "/profile/about", title: "about" },
+      // { link: "/profile/friends", title: "friends" },
+      // { link: "/profile/gallery", title: "gallery" },
+      // { title: "settings" },
     ],
   },
   {
     mainTittle: "quick links",
     children: [
-      { title: "settings" },
+      // { title: "settings" },
       { link: "/helpandsupport", title: "help & support" },
-      { link: "/messanger", title: "messanger" },
-      { link: "/favourite/home", title: "pages" },
-      { link: "/company/about", title: "company" },
+      // { link: "/messanger", title: "messanger" },
+      // { link: "/favourite/home", title: "pages" },
+      // { link: "/company/about", title: "company" },
     ],
   },
-  {
-    mainTittle: "pages",
-    children: [
-      { link: "/event", title: "event" },
-      { link: "/birthday", title: "birthday" },
-      { link: "/weather", title: "weather" },
-      { link: "/music", title: "music" },
-      { link: "/auth/register", title: "register" },
-    ],
-  },
-  {
-    mainTittle: "company",
-    children: [
-      { link: "/company/about", title: "about us" },
-      { link: "/company/blog", title: "blog" },
-      { title: "contact us" },
-      { link: "/company/faq", title: "faq" },
-      { link: "/company/careers", title: "careers" },
-    ],
-  },
+  // {
+  //   mainTittle: "pages",
+  //   children: [
+  //     { link: "/event", title: "event" },
+  //     { link: "/birthday", title: "birthday" },
+  //     { link: "/weather", title: "weather" },
+  //     { link: "/music", title: "music" },
+  //     { link: "/auth/register", title: "register" },
+  //   ],
+  // },
+  // {
+  //   mainTittle: "company",
+  //   children: [
+  //     { link: "/company/about", title: "about us" },
+  //     { link: "/company/blog", title: "blog" },
+  //     { title: "contact us" },
+  //     { link: "/company/faq", title: "faq" },
+  //     { link: "/company/careers", title: "careers" },
+  //   ],
+  // },
 ];
 
 export const companyNavBarData = [

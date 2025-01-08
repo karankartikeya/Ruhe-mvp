@@ -21,9 +21,9 @@ const SearchLayoutFooter: React.FC<SearchLayoutFooterInterFace> = ({diffrentImag
             </div>
             <div className="footer-content">
               <div className="footer-logo">
-                <Image src={`${ImagePath}/icon/${diffrentImage ? "logo.png" : "logo-color.png"}`} alt="" height={47} width={148}/>
+                <Image src={`/ruhelogo2.png`} alt="" height={47} width={148}/>
               </div>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, seddoeiusmod tempor incididunt ut labore et dolore magna aliqua. Utenim ad minim veniam, et dolore magna aliqua. Ut enim ad minimveniam, enim ad minim veniam,{" "}</p>
+              <p>RuheApp is a mental health and wellness focused platform. We believe in Feel not Feed.</p>
               <div className="footer-social">
                 <ul className="d-flex">
                   <li><a href="https://www.facebook.com/"  target="_blank"><FaFacebookF /></a></li>
@@ -57,7 +57,7 @@ const SearchLayoutFooter: React.FC<SearchLayoutFooterInterFace> = ({diffrentImag
         <Row>
           <Col xs="12">
             <div className="sub-footer">
-              <p>Friendbook © 2023. All rights reserved</p>
+              <p>RuheApp © 2025. All rights reserved</p>
             </div>
           </Col>
         </Row>
