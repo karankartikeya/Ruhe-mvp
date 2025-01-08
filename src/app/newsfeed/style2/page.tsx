@@ -6,6 +6,7 @@ import YourGames from "@/components/NewsFeed/Style1/ContentRight/YourGames";
 import ContentLeft from "@/components/NewsFeed/Style1/LeftContent";
 import StorySection from "@/components/NewsFeed/Style1/StorySection";
 import CollegeMeetCard from "@/components/profile/CollegeMeetCard";
+import WorldWideTrend from "@/components/profile/WorldWideTrend";
 import CommonLayout from "@/layout/CommonLayout";
 import LoadingLoader from "@/layout/LoadingLoader";
 import { avatars } from "@/lib/appwrite/config";
@@ -69,7 +70,7 @@ const newsFeedStyle2 = () => {
             <ContentCenter />
             <div className="content-right">
               <CollegeMeetCard />
-              <Gallery />
+              <WorldWideTrend />
               <div className="sticky-top">
                 <EventsCard eventImage={1} />
                 <YourGames />

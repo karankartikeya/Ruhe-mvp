@@ -74,7 +74,7 @@ const CollegeMeetCard: React.FC = () => {
       </div>
       <div className="birthday-content">
         <div className="image-section">
-          <div className="event-group">
+          {/* <div className="event-group">
             {numbers.map((data, index) => (
               <div
                 key={index}
@@ -87,17 +87,17 @@ const CollegeMeetCard: React.FC = () => {
                 />
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
         <div className="details">
-          <h3>
+          {/* <h3>
             <DynamicFeatherIcon
               iconName="User"
               className="icon-light me-2 stroke-width-3 iw-12 ih-12"
             />
             56 {People}
           </h3>
-          <h6>glasgow, scotland</h6>
+          <h6>glasgow, scotland</h6> */}
           <h2>Ques: {dailyQuest[0]?.question}?</h2>
           {dailyQuest[0]?.response == null ? (
             <form

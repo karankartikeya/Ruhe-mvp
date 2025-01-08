@@ -15,13 +15,13 @@
         }
     }
     .page-content .content-left{
-        width: 380px;
+        width: 260px;
     }
     .page-content .content-center:not(.width-abjust){
-        width: calc(100% - 760px);
+        width: calc(100% - 560px);
     }
     .page-content .content-right{
-        width: 380px;
+        width: 290px;
     }
 
     // conversation panel
@@ -94,11 +94,11 @@
 
                 .content-left,
                 .content-right {
-                    width: 380px;
+                    width: 300px;
                 }
 
                 .content-center {
-                    width: calc(100% - 380px);
+                    width: calc(100% - 280px);
                 }
             }
         }
@@ -285,7 +285,7 @@
 
                 .content-left,
                 .content-right {
-                    width: 350px;
+                    width: 300px;
                 }
 
                 .content-center {
@@ -353,12 +353,14 @@
     .layout-default {
         .page-content {
             .content-center {
-                width: calc(100% - 600px);
+                width: calc(100% - 500px);
             }
 
-            .content-left,
+            .content-left {
+                width: 230px;
+            }
             .content-right {
-                width: 300px;
+                width: 270px;
             }
         }
     }
