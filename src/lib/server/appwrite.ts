@@ -483,6 +483,35 @@ export async function getRecentPosts() {
 }
 
 {
+  /** GET TRENDING TOPICS and Number of posts associated with each topic
+   */
+}
+
+export async function getTrendingTopics() {
+  //get it from table collection named trendingTopics
+  //it has field hashtags which is an array of strings and has 5 most talked topics as of now therefore get the first 5 elements of the array and return the number of posts linked with each hashtag
+
+  const trendingTopics = await databases.listDocuments(
+    appwriteConfig.databaseId,
+    appwriteConfig.trendingTopicsCollectionId,
+    [Query.orderDesc("$createdAt"), Query.limit(1)]
+  );
+  if (!trendingTopics) throw Error;
+  const trendingTopicsData = trendingTopics.documents[0];
+  const hashtags = trendingTopicsData.hashtags;
+  const trendingTopicsArray = [];
+  for (let i = 0; i < hashtags.length; i++) {
+    const posts = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      [Query.search("tags", hashtags[i])]
+    );
+    trendingTopicsArray.push({ hashtag: hashtags[i], posts: posts.total });
+  }
+  return trendingTopicsArray;
+}
+
+{
   /** UPDATE POST */
 }
 export async function updatePost(post: any) {

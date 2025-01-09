@@ -108,7 +108,7 @@
                     "default": null
                 },
                 {
-                    "key": "Avatar",
+                    "key": "avatar",
                     "type": "string",
                     "required": false,
                     "array": false,
@@ -129,6 +129,22 @@
                     "required": false,
                     "array": false,
                     "size": 50,
+                    "default": null
+                },
+                {
+                    "key": "userId",
+                    "type": "string",
+                    "required": true,
+                    "array": false,
+                    "size": 80,
+                    "default": null
+                },
+                {
+                    "key": "profileImage",
+                    "type": "string",
+                    "required": false,
+                    "array": false,
+                    "size": 100,
                     "default": null
                 }
             ],
@@ -391,16 +407,35 @@
                     "default": null
                 },
                 {
-                    "key": "userId",
+                    "key": "userIds",
                     "type": "relationship",
                     "required": false,
                     "array": false,
                     "relatedCollection": "676bde140030242594e9",
                     "relationType": "manyToOne",
                     "twoWay": false,
-                    "twoWayKey": "677328b500134103768e",
+                    "twoWayKey": "dailyQuests",
                     "onDelete": "cascade",
                     "side": "parent"
+                }
+            ],
+            "indexes": []
+        },
+        {
+            "$id": "677fbf3d00364722db71",
+            "$permissions": [],
+            "databaseId": "676bddfd003548ae5cd8",
+            "name": "trendingTopics",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "hashtags",
+                    "type": "string",
+                    "required": false,
+                    "array": true,
+                    "size": 100,
+                    "default": null
                 }
             ],
             "indexes": []
