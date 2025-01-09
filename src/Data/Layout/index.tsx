@@ -82,12 +82,12 @@ export const userMenuData: UserMenuDataInterFace[] = [
 
 
 export const sideBarData: sideBarDataType[] = [
-  { path: "/newsfeed/style2", icon: "File", tooltipTittle: "newsfeed" },
-  // { path: "/favourite/home", icon: "Star", tooltipTittle: "Favourite" },
-  // { path: Href, icon: "User", tooltipTittle: "Groups" },
-  // { path: "/music", icon: "Headphones", tooltipTittle: "Music" },
+  { path: "/newsfeed/style2", icon: "Home", tooltipTittle: "newsfeed" },
+  { path: "/profile/moodfeed", icon: "Book", tooltipTittle: "MoodFeed" },
+  { path: "/post/create-post", icon: "Plus", tooltipTittle: "New Post" },
+  { path: "/search", icon: "Search", tooltipTittle: "Search" },
   // { path: "/weather", icon: "Cloud", tooltipTittle: "Weather" },
-  { path: "/event", icon: "Calendar", tooltipTittle: "Event" },
+  // { path: "/event", icon: "Calendar", tooltipTittle: "Event" },
 ];
 
 export const smallSideBarData: SideBarDataInterFace[] = [

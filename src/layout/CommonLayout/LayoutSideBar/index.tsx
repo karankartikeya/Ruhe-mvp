@@ -21,7 +21,12 @@ const LayoutSideBar: FC<CommonLayoutSideBarInterFace> = ({sideBarClassName}) => 
         {/* <BirthdayList /> */}
         {/* <GamesList /> */}
       </ul>
-      <LogoutIcon />
+      <div className="main-icon">
+        <a href='/profile/timeline'>
+          <DynamicFeatherIcon iconName="User" className="bar-icon" />
+        </a>
+      </div>
+      {/* <LogoutIcon /> */}
     </div>
   );
 };

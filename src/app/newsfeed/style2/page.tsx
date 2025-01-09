@@ -71,10 +71,13 @@ const newsFeedStyle2 = () => {
             <div className="content-right">
               <CollegeMeetCard />
               <WorldWideTrend />
-              <div className="sticky-top">
+
+              {/** Give this an adspace or for an event */}
+              
+              {/* <div className="sticky-top">
                 <EventsCard eventImage={1} />
                 <YourGames />
-              </div>
+              </div> */}
             </div>
           </div>
         </Container>

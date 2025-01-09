@@ -18,13 +18,23 @@ export interface sideBarDataType {
   path: string;
   title?: string;
   tooltipTittle?: string;
-  icon: "File" | "Star" | "User" | "Headphones" | "Cloud" | "Calendar";
+  icon:
+    | "File"
+    | "Star"
+    | "User"
+    | "Headphones"
+    | "Cloud"
+    | "Calendar"
+    | "Home"
+    | "Plus"
+    | "Search"
+    | "Book";
 }
 export interface HorizontalSidebarInterFace {
   children?: ReactNode;
   toggleMenu?: boolean;
   toggleSideBar?: () => void;
-  loaderName?:string
+  loaderName?: string;
 }
 export interface CommonLayoutProps {
   mainClass?: string;
@@ -34,8 +44,8 @@ export interface CommonLayoutProps {
   showFullSideBar?: boolean;
   HideConversationPanel?: boolean;
   ConversationPanelClassName?: string;
-  loaderName?:string
-  differentLogo?:string
+  loaderName?: string;
+  differentLogo?: string;
 }
 
 export interface CommonLayoutHeaderInterFace {
@@ -47,8 +57,8 @@ export interface CommonLayoutSideBarInterFace {
 }
 export interface FavoriteLayoutProps {
   children: ReactNode;
-  FavoriteTabs?:ReactNode
-  loaderName:string
+  FavoriteTabs?: ReactNode;
+  loaderName: string;
 }
 
 export interface NotificationListsProps {
@@ -88,8 +98,8 @@ export interface ConversationPanelInterFace {
 export interface ProfileLayoutInterFace {
   children: ReactNode;
   title?: string;
-  profileTab?:boolean
-  loaderName:string
+  profileTab?: boolean;
+  loaderName: string;
 }
 
 export interface ProfileMenuInterFace {
@@ -98,7 +108,7 @@ export interface ProfileMenuInterFace {
 
 export interface ModalInterFace {
   isOpen: boolean;
-  updateBackGround?:boolean
+  updateBackGround?: boolean;
   toggle: () => void;
 }
 export interface UserProfileInterFace {
@@ -120,18 +130,18 @@ export interface UserDropDownInterFace {
   toggleDropDown: () => void;
 }
 
-export interface CompanyLayoutInterFace{
-  children:ReactNode
-  title:string
-  activeNav?:string
-} 
+export interface CompanyLayoutInterFace {
+  children: ReactNode;
+  title: string;
+  activeNav?: string;
+}
 
-export interface  CompanyHomeSectionInterFace {
-  title:string
+export interface CompanyHomeSectionInterFace {
+  title: string;
 }
 
 export interface CompanyHeaderInterFace {
-  activeNav?:string
+  activeNav?: string;
 }
 
 export interface LoadingLoaderProps {
@@ -140,7 +150,12 @@ export interface LoadingLoaderProps {
 
 export interface commonInterFace {
   closeFriendsData: SingleData[];
-  recentChats?:boolean;
+  recentChats?: boolean;
 }
 
-export interface HoverMessageProps {imagePath:string,name:string,target: string;placement: "right"|"top";}
+export interface HoverMessageProps {
+  imagePath: string;
+  name: string;
+  target: string;
+  placement: "right" | "top";
+}

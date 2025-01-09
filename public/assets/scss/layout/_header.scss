@@ -306,6 +306,12 @@ header {
         height: 50px;
         display: none;
     }
+    .plus-group{
+        display: none;
+    }
+    .left-group{
+        display: none !important;
+    }
 
     .navbar-nav {
         .back-btn {

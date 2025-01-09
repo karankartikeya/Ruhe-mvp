@@ -10,12 +10,12 @@ import { Col, Container, Row } from "reactstrap";
 
 const ProfileTimeLine = () => {
   return (
-    <ProfileLayout title="acitivity feed" loaderName="activityFeedProfile">
+    <ProfileLayout title="timeline" loaderName="profileTimeLine">
       <Container fluid className="section-t-space px-0">
-      <Row className="event-body">
+        <Row className="event-body">
           <Col xl="6">
             <EventSlider />
-            <EventCategory/>
+            <EventCategory />
           </Col>
           <Col xl="6">
             <div className="calender-section custom-calender section-t-space  section-b-space">

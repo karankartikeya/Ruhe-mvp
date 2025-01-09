@@ -56,7 +56,7 @@ const ProfileTimeLine = () => {
 
   return (
     <ProfileLayout title="timeline" loaderName="profileTimeLine">
-      <Container fluid className="section-t-space px-0 layout-default">
+      <Container fluid className="section-t-space px-0 ">
         <div className="page-content">
           <div className="content-left">
             <AboutUser />

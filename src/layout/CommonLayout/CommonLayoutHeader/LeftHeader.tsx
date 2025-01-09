@@ -6,8 +6,8 @@ const LeftHeader = ({differentLogo}:{differentLogo?:string}) => {
   return (
     <div className="header-left">
       <BrandLogo differentLogo={differentLogo} />
-      {/* <SearchBox />
-      <LeftButtons /> */}
+      <SearchBox />
+      <LeftButtons />
     </div>
   );
 };

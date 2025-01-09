@@ -12,11 +12,16 @@ import UserProfileMenu from "./UserProfileMenu";
 import CustomImage from "@/Common/CustomImage";
 import useOutsideDropdown from "@/utils/useOutsideDropdown";
 import { useAppSelector } from "@/utils/hooks";
+import LoadingLoader from "@/layout/LoadingLoader";
 
 const UserProfile: FC = () => {
   const { isComponentVisible, ref, setIsComponentVisible } =
     useOutsideDropdown(false);
   const user = useAppSelector((state) => state.userSlice.data);
+  const loading = useAppSelector((state) => state.userSlice.loading);
+  if (!user || loading) {
+    return <LoadingLoader />;
+  }
   return (
     <li className="header-btn custom-dropdown profile-btn btn-group">
       <a
@@ -25,12 +30,16 @@ const UserProfile: FC = () => {
       >
         <DynamicFeatherIcon
           iconName="User"
-          className="icon-light stroke-width-3 d-sm-none d-block iw-16 ih-16"
+          className="icon-light stroke-width-3 d-md-none d-block iw-16 ih-16"
         />
-        <Media className="d-none d-sm-flex">
+        <Media className="d-none d-md-flex">
           <div className="user-img bg-size blur-up lazyloaded ">
             <CustomImage
-              src={`${ImagePath}/user-sm/1.jpg`}
+              src={
+                user.profileImage == null
+                  ? `https://cloud.appwrite.io/v1/avatars/initials?name=${user.name}`
+                  : user.profileImage
+              }
               className="img-fluid blur-up lazyload bg-img"
               alt="user"
             />

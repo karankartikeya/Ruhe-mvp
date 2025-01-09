@@ -19,7 +19,7 @@ const EventsCard: FC<EventsCardInterFace> = ({eventImage,diffrentPath}) => {
         <CustomImage src={`${ImagePath}/${diffrentPath?diffrentPath:"event"}/${eventImage}.jpg`} className="img-fluid blur-up lazyload bg-img" alt="event"/>
         <div className="card-title">
           <h3>{Event}</h3>
-          <div className="settings">
+          {/* <div className="settings">
             <div className="setting-btn">
               <a href={Href} className="d-flex">
                 <DynamicFeatherIcon iconName="RotateCw" className="icon icon-dark stroke-width-3 iw-11 ih-11"/>
@@ -42,7 +42,7 @@ const EventsCard: FC<EventsCardInterFace> = ({eventImage,diffrentPath}) => {
                 </DropdownMenu>
               </Dropdown>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="play-btn" onClick={toggleEventModal}>
           <img src={`${ImagePath}/icon/play.png`} className="img-fluid blur-up lazyloaded" alt="play"/>
@@ -55,15 +55,15 @@ const EventsCard: FC<EventsCardInterFace> = ({eventImage,diffrentPath}) => {
           Lorem Ipsum is simply dummy text of the printing and typesetting industry
           <span>15256 {PeopleGoing}</span>
         </p>
-        <div className="bottom-part">
+        {/* <div className="bottom-part">
           <a href={Href} className="event-btn">{GoingNotGoing}</a>
         </div>
         <a href={Href} className="share-btn">
           <DynamicFeatherIcon iconName="CornerUpRight" className="icon-dark stroke-width-3 iw-14 ih-14"
           />
-        </a>
+        </a> */}
       </div>
-      <CommonVideoModal modal={eventModal} toggle={toggleEventModal}/>
+      {/* <CommonVideoModal modal={eventModal} toggle={toggleEventModal}/> */}
     </div>
   );
 };
