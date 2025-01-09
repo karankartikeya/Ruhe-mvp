@@ -8,13 +8,18 @@ const LeftButtons: React.FC = () => {
   const [showFriendList, setShowFriendList] = useState(false);
 
   return (
-    <ul className="btn-group">
+    <ul className="plus-group">
       <li className="header-btn home-btn">
-        <Link className="main-link" href="/newsfeed/style1">
+        <Link className="main-link" href="/newsfeed/style2">
           <DynamicFeatherIcon iconName="Home" className="icon-light stroke-width-3 iw-16 ih-16"/>
         </Link>
       </li>
-      <li className="header-btn custom-dropdown dropdown-lg add-friend">
+      <li className="header-btn mood-btn">
+        <Link href="/profile/moodfeed" className="main-link">
+          <DynamicFeatherIcon iconName="Book" className="icon-light stroke-width-3 iw-16 ih-16"/>
+        </Link>
+      </li>
+      {/* <li className="header-btn custom-dropdown dropdown-lg add-friend">
         <a className={`main-link ${showFriendList ? "show" : ""}`} href={Href}>
           <DynamicFeatherIcon iconName="UserPlus" className="icon-light stroke-width-3 iw-16 ih-16" onClick={() => setShowFriendList(!showFriendList)}/>
         </a>
@@ -27,7 +32,7 @@ const LeftButtons: React.FC = () => {
           </div>
           <DropdownContent />
         </div>
-      </li>
+      </li> */}
     </ul>
   );
 };

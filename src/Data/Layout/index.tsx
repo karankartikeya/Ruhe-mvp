@@ -82,12 +82,12 @@ export const userMenuData: UserMenuDataInterFace[] = [
 
 
 export const sideBarData: sideBarDataType[] = [
-  { path: "/newsfeed/style2", icon: "File", tooltipTittle: "newsfeed" },
-  // { path: "/favourite/home", icon: "Star", tooltipTittle: "Favourite" },
-  // { path: Href, icon: "User", tooltipTittle: "Groups" },
-  // { path: "/music", icon: "Headphones", tooltipTittle: "Music" },
+  { path: "/newsfeed/style2", icon: "Home", tooltipTittle: "newsfeed" },
+  { path: "/profile/moodfeed", icon: "Book", tooltipTittle: "MoodFeed" },
+  { path: "/post/create-post", icon: "Plus", tooltipTittle: "New Post" },
+  { path: "/search", icon: "Search", tooltipTittle: "Search" },
   // { path: "/weather", icon: "Cloud", tooltipTittle: "Weather" },
-  { path: "/event", icon: "Calendar", tooltipTittle: "Event" },
+  // { path: "/event", icon: "Calendar", tooltipTittle: "Event" },
 ];
 
 export const smallSideBarData: SideBarDataInterFace[] = [
@@ -227,42 +227,43 @@ export const layoutFooterData = [
     mainTittle: "my account",
     children: [
       { link: "/profile/timeline", title: "timeline" },
-      { link: "/profile/about", title: "about" },
-      { link: "/profile/friends", title: "friends" },
-      { link: "/profile/gallery", title: "gallery" },
-      { title: "settings" },
+      { link: "/profile/moodfeed", title: "MoodFeed" },
+      // { link: "/profile/about", title: "about" },
+      // { link: "/profile/friends", title: "friends" },
+      // { link: "/profile/gallery", title: "gallery" },
+      // { title: "settings" },
     ],
   },
   {
     mainTittle: "quick links",
     children: [
-      { title: "settings" },
+      // { title: "settings" },
       { link: "/helpandsupport", title: "help & support" },
-      { link: "/messanger", title: "messanger" },
-      { link: "/favourite/home", title: "pages" },
-      { link: "/company/about", title: "company" },
+      // { link: "/messanger", title: "messanger" },
+      // { link: "/favourite/home", title: "pages" },
+      // { link: "/company/about", title: "company" },
     ],
   },
-  {
-    mainTittle: "pages",
-    children: [
-      { link: "/event", title: "event" },
-      { link: "/birthday", title: "birthday" },
-      { link: "/weather", title: "weather" },
-      { link: "/music", title: "music" },
-      { link: "/auth/register", title: "register" },
-    ],
-  },
-  {
-    mainTittle: "company",
-    children: [
-      { link: "/company/about", title: "about us" },
-      { link: "/company/blog", title: "blog" },
-      { title: "contact us" },
-      { link: "/company/faq", title: "faq" },
-      { link: "/company/careers", title: "careers" },
-    ],
-  },
+  // {
+  //   mainTittle: "pages",
+  //   children: [
+  //     { link: "/event", title: "event" },
+  //     { link: "/birthday", title: "birthday" },
+  //     { link: "/weather", title: "weather" },
+  //     { link: "/music", title: "music" },
+  //     { link: "/auth/register", title: "register" },
+  //   ],
+  // },
+  // {
+  //   mainTittle: "company",
+  //   children: [
+  //     { link: "/company/about", title: "about us" },
+  //     { link: "/company/blog", title: "blog" },
+  //     { title: "contact us" },
+  //     { link: "/company/faq", title: "faq" },
+  //     { link: "/company/careers", title: "careers" },
+  //   ],
+  // },
 ];
 
 export const companyNavBarData = [

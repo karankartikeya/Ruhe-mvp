@@ -29,6 +29,9 @@ export const friendSuggestionSlider = [
   { className: "pink", image: 2 },
   { className: "blue", image: 7 },
   { className: "skin", image: 1 },
+  { className: "skin", image: 1 },{ className: "skin", image: 1 },
+  { className: "skin", image: 1 },
+  { className: "skin", image: 1 },
 ];
 
 export const friendSuggestionSliderSetting = {

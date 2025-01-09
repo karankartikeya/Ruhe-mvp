@@ -9,7 +9,7 @@ const BrandLogo = ({ differentLogo }: { differentLogo?: string }) => {
         <Image
           width={147}
           height={46}
-          src={`${ImagePath}/icon/${differentLogo?differentLogo:"logo.png"}`}
+          src={`/ruhelogo2.png`}
           alt="logo"
           className="img-fluid blur-up lazyloaded"
         />

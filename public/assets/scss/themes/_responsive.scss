@@ -15,13 +15,13 @@
         }
     }
     .page-content .content-left{
-        width: 380px;
+        width: 260px;
     }
     .page-content .content-center:not(.width-abjust){
-        width: calc(100% - 760px);
+        width: calc(100% - 560px);
     }
     .page-content .content-right{
-        width: 380px;
+        width: 290px;
     }
 
     // conversation panel
@@ -94,11 +94,11 @@
 
                 .content-left,
                 .content-right {
-                    width: 380px;
+                    width: 300px;
                 }
 
                 .content-center {
-                    width: calc(100% - 380px);
+                    width: calc(100% - 280px);
                 }
             }
         }
@@ -285,7 +285,7 @@
 
                 .content-left,
                 .content-right {
-                    width: 350px;
+                    width: 300px;
                 }
 
                 .content-center {
@@ -353,12 +353,14 @@
     .layout-default {
         .page-content {
             .content-center {
-                width: calc(100% - 600px);
+                width: calc(100% - 500px);
             }
 
-            .content-left,
+            .content-left {
+                width: 230px;
+            }
             .content-right {
-                width: 300px;
+                width: 270px;
             }
         }
     }
@@ -3222,17 +3224,143 @@
             width: auto;
         }
     }
-
     .breadcrumb-section {
         height: 360px;
     }
-
+// .plus-group{
+//     display: block !important;
+// }
     .element-card {
         .card-header {
             padding: 0 0 0px 0;
         }
     }
+    .mobile-fix-menu{
+        display: block !important;
+    }
 
+
+    // header
+    header {
+        .custom-padding {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .mobile-fix-menu {
+            display: block;
+        }
+        .btn-group{
+            display: block !important;
+        }
+        .plus-group{
+            display: block;
+        }
+        .left-group{
+            display: block;
+        }
+        .header-section {
+            .header-btn {
+                .count {
+                    display: none;
+                }
+
+                .main-link {
+                    padding: 0;
+                }
+
+                &.app-btn {
+                    padding-left: 14px;
+                }
+
+                &.home-btn {
+                    position: fixed;
+                    left: 5%;
+                    bottom: 16px;
+                    z-index: 1;
+                }
+                &.plus-btn{
+                    position: fixed;
+                    left: 50%;
+                    bottom: 16px;
+                    z-index: 1;
+                }
+
+                &.mood-btn {
+                    position: fixed;
+                    left: 28%;
+                    bottom: 16px;
+                    z-index: 1;
+                }
+
+                // &.add-friend {
+                //     position: fixed;
+                //     left: 32%;
+                //     bottom: 16px;
+                //     z-index: 1;
+                // }
+
+                &.profile-btn {
+                    padding: 2px 0;
+                    position: fixed;
+                    left: 90%;
+                    bottom: 15px;
+                    z-index: 1;
+                }
+
+                &.message-btn {
+                    position: fixed;
+                    left: 70%;
+                    bottom: 16px;
+                }
+
+                &.notification-btn {
+                    position: fixed;
+                    left: 80%;
+                    bottom: 16px;
+                }
+            }
+
+            .header-left {
+                .brand-logo {
+                    img {
+                        width: 120px;
+                    }
+                }
+
+                .search-box {
+                    .icon {
+                        left: 14px;
+                    }
+
+                    .form-control {
+                        padding: 10px 10px 10px 40px;
+                        width: 100%;
+                    }
+
+                    .search-suggestion {
+                        width: 210px;
+                        top: 55px;
+                        left: -10px;
+                    }
+                }
+            }
+        }
+
+        &.header-menu {
+            .custom-padding {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+        }
+    }
+
+
+
+
+
+
+    
     .blog_section {
         .blog-wrap {
             .blog-details {
@@ -3797,7 +3925,12 @@
         .mobile-fix-menu {
             display: block;
         }
-
+        .plus-group{
+            display: block;
+        }
+        .left-group{
+            display: block;
+        }
         .header-section {
             .header-btn {
                 .count {
@@ -3814,29 +3947,43 @@
 
                 &.home-btn {
                     position: fixed;
-                    left: 16%;
-                    bottom: 16px;
-                }
-
-                &.add-friend {
-                    position: fixed;
-                    left: 32%;
+                    left: 5%;
                     bottom: 16px;
                     z-index: 1;
                 }
+                &.plus-btn{
+                    position: fixed;
+                    left: 50%;
+                    bottom: 16px;
+                    z-index: 1;
+                }
+
+                &.mood-btn {
+                    position: fixed;
+                    left: 28%;
+                    bottom: 16px;
+                    z-index: 1;
+                }
+
+                // &.add-friend {
+                //     position: fixed;
+                //     left: 32%;
+                //     bottom: 16px;
+                //     z-index: 1;
+                // }
 
                 &.profile-btn {
                     padding: 2px 0;
                     position: fixed;
-                    left: 48%;
+                    left: 90%;
                     bottom: 15px;
+                    z-index: 1;
                 }
 
                 &.message-btn {
                     position: fixed;
-                    left: 64%;
+                    left: 70%;
                     bottom: 16px;
-                    z-index: 1;
                 }
 
                 &.notification-btn {

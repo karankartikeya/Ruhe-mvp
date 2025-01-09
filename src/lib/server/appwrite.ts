@@ -13,6 +13,7 @@ import { redirect } from "next/navigation";
 import {
   account,
   appwriteConfig,
+  avatars,
   databases,
   storage,
 } from "../appwrite/config";
@@ -137,8 +138,11 @@ export const signup = async (
   username: string
 ) => {
   // const { account } = await createAdminClient();
+
   try {
     const newAccount = await account.create(ID.unique(), email, password, name);
+    const encodedName = encodeURIComponent(name);
+    const avatarURL = `https://cloud.appwrite.io/v1/avatars/initials?name=${encodedName}`;
     if (!newAccount) throw Error;
     const newUser = await saveUser({
       userId: newAccount.$id,
@@ -148,6 +152,7 @@ export const signup = async (
       phone,
       age,
       gender,
+      profileImage: avatarURL,
     });
     return newUser;
   } catch {
@@ -169,6 +174,27 @@ export const signup = async (
   // }
 };
 
+export async function getUsers(limit?: number) {
+  const queries: any[] = [Query.orderDesc("$createdAt")];
+
+  if (limit) {
+    queries.push(Query.limit(limit));
+  }
+
+  try {
+    const users = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      queries
+    );
+    console.log("users", users.documents);
+    if (!users) throw Error;
+
+    return users.documents;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export async function updateUser(user: any) {
   const hasFileToUpdate = user.file.length > 0;
@@ -226,9 +252,6 @@ export async function updateUser(user: any) {
     console.log(error);
   }
 }
-
-
-
 
 {
   /** LOGIN FUNCTION */
@@ -315,6 +338,7 @@ export const saveUser = async (user: {
   phone: string;
   age: number;
   gender: string;
+  profileImage: string;
 }) => {
   try {
     const newUser = await databases.createDocument(
@@ -459,6 +483,35 @@ export async function getRecentPosts() {
 }
 
 {
+  /** GET TRENDING TOPICS and Number of posts associated with each topic
+   */
+}
+
+export async function getTrendingTopics() {
+  //get it from table collection named trendingTopics
+  //it has field hashtags which is an array of strings and has 5 most talked topics as of now therefore get the first 5 elements of the array and return the number of posts linked with each hashtag
+
+  const trendingTopics = await databases.listDocuments(
+    appwriteConfig.databaseId,
+    appwriteConfig.trendingTopicsCollectionId,
+    [Query.orderDesc("$createdAt"), Query.limit(1)]
+  );
+  if (!trendingTopics) throw Error;
+  const trendingTopicsData = trendingTopics.documents[0];
+  const hashtags = trendingTopicsData.hashtags;
+  const trendingTopicsArray = [];
+  for (let i = 0; i < hashtags.length; i++) {
+    const posts = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      [Query.search("tags", hashtags[i])]
+    );
+    trendingTopicsArray.push({ hashtag: hashtags[i], posts: posts.total });
+  }
+  return trendingTopicsArray;
+}
+
+{
   /** UPDATE POST */
 }
 export async function updatePost(post: any) {
@@ -560,7 +613,7 @@ export async function uploadFile(file: File) {
 }
 
 // ============================== GET FILE URL
-export function getFilePreview(fileId: string) {
+export async function getFilePreview(fileId: string) {
   try {
     const fileUrl = storage.getFilePreview(
       appwriteConfig.storageId,
@@ -677,10 +730,16 @@ export const getDailyQuests = async (userId: string) => {
     const dailyQuests = await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.dailyQuestsCollectionId,
-      [Query.equal("userId", userId), Query.orderDesc("$createdAt")]
+      [Query.orderDesc("$createdAt")]
+      // [Query.equal("userId", userId), Query.orderDesc("$createdAt")]
+    );
+    console.log("desc", dailyQuests);
+    const filteredDailyQuests = dailyQuests.documents.filter(
+      (quest) => quest.userIds["$id"] === userId
     );
     if (!dailyQuests) throw Error;
-    return dailyQuests;
+    console.log("dailyQuests", filteredDailyQuests[0]);
+    return filteredDailyQuests;
   } catch (error) {
     console.log("Error while fetching daily quests", error);
   }

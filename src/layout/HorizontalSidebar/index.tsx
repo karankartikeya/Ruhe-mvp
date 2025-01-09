@@ -15,7 +15,7 @@ const HorizontalSidebar: FC<HorizontalSidebarInterFace> = ({children,toggleMenu,
     <>
     {skeltonLoaderList[loaderName]}
       <header className={`${!toggleMenu ? "header-menu" : ""}`}>
-        <div className="mobile-fix-menu" />
+        {/* <div className="mobile-fix-menu" /> */}
         <Container fluid className="custom-padding">
           <div className="header-section">
             <div className="header-left">
