@@ -10,7 +10,7 @@ const LoginHeaderSection = () => {
     <div className="header-section">
       <div className="logo-sec">
         <Link href="/newsfeed/style1">
-          <Image height={46} width={147} src={iconLogo} alt="logo" className="img-fluid blur-up lazyloaded"/>
+          <Image height={46} width={147} src={'/ruhelogo2.png'} alt="logo" className="img-fluid blur-up lazyloaded bg-white"/>
         </Link>
       </div>
       <div className="right-links">

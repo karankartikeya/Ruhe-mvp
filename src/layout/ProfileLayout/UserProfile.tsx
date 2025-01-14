@@ -84,7 +84,7 @@ const UserProfile: FC<UserProfileInterFace> = ({ toggle }) => {
               <span>❤</span>
             </h2>
             <h5>{user == null ? null : user.username}</h5>
-            <UserData />
+            {/* <UserData /> */}
             <a href={Href} onClick={toggle} className="btn btn-solid">
               {EditProfile}
             </a>
