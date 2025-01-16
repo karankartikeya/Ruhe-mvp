@@ -4,8 +4,8 @@ export const navSettingData = [
   { icon: "user", title: "account" },
   { icon: "lock", title: "privacy" },
   { icon: "bell", title: "notification" },
-  { icon: "photo-video", title: "story" },
-  { icon: "question-circle", title: "help", navigate: "/helpandsupport" },
+  // { icon: "photo-video", title: "story" },
+  // { icon: "question-circle", title: "help", navigate: "/helpandsupport" },
 ];
 
 export const settingHomeData = [
@@ -13,6 +13,6 @@ export const settingHomeData = [
   { image: "account", name: "account" },
   { image: "privacy", name: "privacy" },
   { image: "notification", name: "notification" },
-  { image: "story", name: "story" },
-  { image: "help", name: "help" },
+  // { image: "story", name: "story" },
+  // { image: "help", name: "help" },
 ];

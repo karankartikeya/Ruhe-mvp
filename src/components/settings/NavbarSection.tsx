@@ -7,32 +7,50 @@ import { Fragment } from "react";
 import { Href } from "../../utils/constant/index";
 import { navSettingData } from "@/Data/setting";
 import Link from "next/link";
+import { useAppSelector } from "@/utils/hooks";
 
-const NavbarSection: React.FC<NavBarInterFace> = ({activeTab,setActiveTab ,setShowSideBar,showSideBar}) => {
- 
+const NavbarSection: React.FC<NavBarInterFace> = ({
+  activeTab,
+  setActiveTab,
+  setShowSideBar,
+  showSideBar,
+}) => {
+  const user = useAppSelector((state) => state.userSlice.data);
+
   return (
     <Col xl="3" lg="4">
-      <div className={`setting-sidebar ${showSideBar ?"show ":""}`}>
-        <div className="back-btn d-lg-none d-block" onClick={()=>setShowSideBar(prev=>!prev)}>
+      <div className={`setting-sidebar ${showSideBar ? "show " : ""}`}>
+        <div
+          className="back-btn d-lg-none d-block"
+          onClick={() => setShowSideBar((prev) => !prev)}
+        >
           <DynamicFeatherIcon iconName="X" className="icon-theme" />
         </div>
         <div className="user-details">
           <div className="user-img bg-size blur-up lazyloaded">
             <CustomImage
-              src={`${ImagePath}/user/3.jpg`}
+              src={
+                user.profileImage == null
+                  ? `https://cloud.appwrite.io/v1/avatars/initials?name=${user.name}`
+                  : user.profileImage
+              }
               className="img-fluid blur-up lazyload bg-img"
               alt=""
             />
           </div>
-          <h5>Josephin water</h5>
-          <h6>Josephin.water@gmail.com</h6>
+          <h5>{user.name}</h5>
+          <h6>{user.username}</h6>
         </div>
         <div className="tab-section">
           <Nav pills className=" flex-column">
             {navSettingData.map((data, index) => (
               <Fragment key={index}>
                 {!data.navigate ? (
-                  <NavLink className={` ${activeTab === index + 1 ? "active" : ""}`} onClick={()=>setActiveTab(index+1)} href={Href}>
+                  <NavLink
+                    className={` ${activeTab === index + 1 ? "active" : ""}`}
+                    onClick={() => setActiveTab(index + 1)}
+                    href={"#"}
+                  >
                     <i className={`fa fa-${data.icon} me-2`} />
                     {data.title}
                   </NavLink>

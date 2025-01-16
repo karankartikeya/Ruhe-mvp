@@ -71,12 +71,12 @@ export const userMenuData: UserMenuDataInterFace[] = [
     heading: "setting & privacy",
     headingDetail: "all settings & privacy",
   },
-  {
-    navigate: "/helpandsupport",
-    icon: "HelpCircle",
-    heading: "help & support",
-    headingDetail: "browse help here",
-  },
+  // {
+  //   navigate: "/helpandsupport",
+  //   icon: "HelpCircle",
+  //   heading: "help & support",
+  //   headingDetail: "browse help here",
+  // },
 ];
 
 
