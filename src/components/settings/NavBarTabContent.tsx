@@ -15,7 +15,7 @@ export interface NavBarInterFace {
   setShowSideBar:Dispatch<SetStateAction<boolean>>
 }
 
-const NavBarTabContent: React.FC<NavBarInterFace> = ({ activeTab ,setShowSideBar }) => {
+const NavBarTabContent: React.FC<NavBarInterFace> = ({ activeTab ,setShowSideBar, setActiveTab }) => {
   return (
     <Col xl="9" lg="8">
       <div className="d-lg-none d-block text-right mb-3">
@@ -25,7 +25,7 @@ const NavBarTabContent: React.FC<NavBarInterFace> = ({ activeTab ,setShowSideBar
       </div>
       <TabContent activeTab={activeTab}>
         <TabPane tabId={1}>
-          <SettingHome />
+          <SettingHome activeTab= {activeTab} setActiveTab={setActiveTab}/>
         </TabPane>
         <TabPane tabId={2}>
           <GeneralSetting />
@@ -36,12 +36,12 @@ const NavBarTabContent: React.FC<NavBarInterFace> = ({ activeTab ,setShowSideBar
         <TabPane tabId={4}>
           <PrivacySetting />
         </TabPane>
-        <TabPane tabId={5}>
+        {/* <TabPane tabId={5}>
           <Notification />
-        </TabPane>
-        <TabPane tabId={6}>
+        </TabPane> */}
+        {/* <TabPane tabId={6}>
           <SharingOptions />
-        </TabPane>
+        </TabPane> */}
       </TabContent>
     </Col>
   );

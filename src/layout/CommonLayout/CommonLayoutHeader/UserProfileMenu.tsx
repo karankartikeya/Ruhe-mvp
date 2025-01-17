@@ -6,12 +6,11 @@ import { Media } from "reactstrap";
 import { LogOut } from "../../../utils/constant";
 import { logout } from "@/lib/server/appwrite";
 const UserProfileMenu: FC = () => {
-
   const handleLogOut = () => {
     logout();
   };
   return (
-    <ul className='friend-list'>
+    <ul className="friend-list">
       {userMenuData.map((data, index) => (
         <li key={index}>
           <Link href={data.navigate}>
@@ -19,7 +18,7 @@ const UserProfileMenu: FC = () => {
               <DynamicFeatherIcon iconName={data.icon} />
               <Media body>
                 <div>
-                  <h5 className='mt-0'>{data.heading}</h5>
+                  <h5 className="mt-0">{data.heading}</h5>
                   <h6>{data.headingDetail}</h6>
                 </div>
               </Media>
@@ -30,10 +29,10 @@ const UserProfileMenu: FC = () => {
       <li onClick={handleLogOut}>
         <a>
           <Media>
-            <DynamicFeatherIcon iconName='LogOut' />
+            <DynamicFeatherIcon iconName="LogOut" />
             <Media body>
               <div>
-                <h5 className='mt-0'>{LogOut}</h5>
+                <h5 className="mt-0">{LogOut}</h5>
               </div>
             </Media>
           </Media>

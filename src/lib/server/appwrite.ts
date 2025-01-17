@@ -16,8 +16,10 @@ import {
   avatars,
   databases,
   storage,
+  users,
 } from "../appwrite/config";
 import { error } from "console";
+import { UserUpdate } from "../../../types";
 
 export async function createSessionClient() {
   const client = new Client()
@@ -196,56 +198,55 @@ export async function getUsers(limit?: number) {
   }
 }
 
-export async function updateUser(user: any) {
-  const hasFileToUpdate = user.file.length > 0;
+export async function updateUser(user: UserUpdate) {
+  // const hasFileToUpdate = user.file.length > 0;
   try {
-    let image = {
-      imageUrl: user.imageUrl,
-      imageId: user.imageId,
-    };
+    //   let image = {
+    //     imageUrl: user.imageUrl,
+    //     imageId: user.imageId,
+    //   };
 
-    if (hasFileToUpdate) {
-      // Upload new file to appwrite storage
-      const uploadedFile = await uploadFile(user.file[0]);
-      if (!uploadedFile) throw Error;
+    //   if (hasFileToUpdate) {
+    //     // Upload new file to appwrite storage
+    //     const uploadedFile = await uploadFile(user.file[0]);
+    //     if (!uploadedFile) throw Error;
 
-      // Get new file url
-      const fileUrl = getFilePreview(uploadedFile.$id);
-      if (!fileUrl) {
-        await deleteFile(uploadedFile.$id);
-        throw Error;
-      }
+    //     // Get new file url
+    //     const fileUrl = getFilePreview(uploadedFile.$id);
+    //     if (!fileUrl) {
+    //       await deleteFile(uploadedFile.$id);
+    //       throw Error;
+    //     }
 
-      image = { ...image, imageUrl: fileUrl, imageId: uploadedFile.$id };
-    }
+    //     image = { ...image, imageUrl: fileUrl, imageId: uploadedFile.$id };
+    //   }
 
     //  Update user
     const updatedUser = await databases.updateDocument(
       appwriteConfig.databaseId,
       appwriteConfig.userCollectionId,
-      user.userId,
+      user.docId,
       {
         name: user.name,
-        bio: user.bio,
-        imageUrl: image.imageUrl,
-        imageId: image.imageId,
+        phone: user.phone,
+        email: user.email,
       }
     );
 
     // Failed to update
-    if (!updatedUser) {
-      // Delete new file that has been recently uploaded
-      if (hasFileToUpdate) {
-        await deleteFile(image.imageId);
-      }
-      // If no new file uploaded, just throw error
-      throw Error;
-    }
+    // if (!updatedUser) {
+    //   // Delete new file that has been recently uploaded
+    //   if (hasFileToUpdate) {
+    //     await deleteFile(image.imageId);
+    //   }
+    //   // If no new file uploaded, just throw error
+    //   throw Error;
+    // }
 
-    // Safely delete old file after successful update
-    if (user.imageId && hasFileToUpdate) {
-      await deleteFile(user.imageId);
-    }
+    // // Safely delete old file after successful update
+    // if (user.imageId && hasFileToUpdate) {
+    //   await deleteFile(user.imageId);
+    // }
 
     return updatedUser;
   } catch (error) {
@@ -350,6 +351,27 @@ export const saveUser = async (user: {
     return newUser;
   } catch (error) {
     console.log("Error while saving user to db", error);
+  }
+};
+{
+  /** DELETE USER */
+}
+
+export const deleteUser = async (docId: string, userId: string) => {
+  try {
+    console.log("docId", docId);
+    console.log("userId", userId);
+    const statusCode = await databases.deleteDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      docId
+    );
+    if (!statusCode) return null;
+    const deleteUser = await users.delete(userId);
+    if (!deleteUser) return null;
+    return { status: "Ok" };
+  } catch (error) {
+    console.log("Error while deleting user", error);
   }
 };
 

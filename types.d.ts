@@ -15,6 +15,17 @@ export interface User {
     userId: string;
     profileImage?: string;
   }
+
+  export interface UserUpdate{
+    docId: string;
+    name: string;
+    username?: string;
+    phone: string;
+    bio?: string;
+    email: string;
+    avatar?: string;
+    role?: string
+  }
   
   export interface Follow {
     $id: string;
