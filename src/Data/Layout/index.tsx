@@ -219,7 +219,8 @@ export const profileMenuData: dataInterFace[] = [
   // { navigate: "/profile/about", name: "about", icon: "Info" },
   // { navigate: "/profile/friends", name: "friends", icon: "Users" },
   // { navigate: "/profile/gallery", name: "photos", icon: "Image" },
-  { navigate: "/profile/moodfeed", name: "mood feed", icon: "List" },
+  { navigate: "/profile/moodfeed", name: "moodfeed", icon: "List" },
+  { navigate: "/profile/bookmarks", name: "bookmarks", icon: "Image" },
 ];
 
 export const layoutFooterData = [

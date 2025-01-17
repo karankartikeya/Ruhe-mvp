@@ -21,7 +21,7 @@ import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Container } from "reactstrap";
 
-const ProfileTimeLine = () => {
+const ProfileBookmarks = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.userSlice.data);
   const loading = useAppSelector((state) => state.userSlice.loading);
@@ -55,7 +55,7 @@ const ProfileTimeLine = () => {
   }
 
   return (
-    <ProfileLayout title="timeline" loaderName="profileTimeLine">
+    <ProfileLayout title="bookmarks" loaderName="profileTimeLine">
       <Container fluid className="section-t-space px-0 ">
         <div className="page-content">
           <div className="content-left">
@@ -68,7 +68,7 @@ const ProfileTimeLine = () => {
             </div>
           </div>
           <div className="content-center">
-            <CreatePost />
+            {/* <CreatePost /> */}
             <div className="overlay-bg" />
             {/** build the below UI for users posts */}
             <div className="post-panel infinite-loader-sec section-t-space">
@@ -110,4 +110,4 @@ const ProfileTimeLine = () => {
   );
 };
 
-export default ProfileTimeLine;
+export default ProfileBookmarks;

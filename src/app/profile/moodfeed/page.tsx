@@ -10,7 +10,7 @@ import { Col, Container, Row } from "reactstrap";
 
 const ProfileTimeLine = () => {
   return (
-    <ProfileLayout title="timeline" loaderName="profileTimeLine">
+    <ProfileLayout title="moodfeed" loaderName="profileTimeLine">
       <Container fluid className="section-t-space px-0">
         <Row className="event-body">
           <Col xl="6">
