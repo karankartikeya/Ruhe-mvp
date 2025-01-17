@@ -9,7 +9,10 @@ export interface NavBarInterFace {
   setActiveTab: Dispatch<SetStateAction<number>>;
 }
 
-const SettingHome: React.FC<NavBarInterFace> = ({activeTab, setActiveTab}) => {
+const SettingHome: React.FC<NavBarInterFace> = ({
+  activeTab,
+  setActiveTab,
+}) => {
   const user = useAppSelector((state) => state.userSlice.data);
   return (
     <div className="setting-home">
@@ -19,7 +22,12 @@ const SettingHome: React.FC<NavBarInterFace> = ({activeTab, setActiveTab}) => {
       </div>
       <Row>
         {settingHomeData.map((data, index) => (
-          <Col xl="4" sm="6" key={index} onClick={()=>setActiveTab(index+2)}>
+          <Col
+            xl="4"
+            sm="6"
+            key={index}
+            onClick={() => setActiveTab(index + 2)}
+          >
             <a className="detail-box">
               <img
                 src={`${SvgPath}/setting/${data.image}.svg`}

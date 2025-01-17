@@ -36,9 +36,9 @@ const NavBarTabContent: React.FC<NavBarInterFace> = ({ activeTab ,setShowSideBar
         <TabPane tabId={4}>
           <PrivacySetting />
         </TabPane>
-        <TabPane tabId={5}>
+        {/* <TabPane tabId={5}>
           <Notification />
-        </TabPane>
+        </TabPane> */}
         {/* <TabPane tabId={6}>
           <SharingOptions />
         </TabPane> */}

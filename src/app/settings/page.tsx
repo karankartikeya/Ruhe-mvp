@@ -14,7 +14,6 @@ import { redirect } from "next/navigation";
 import { fetchUser } from "@/utils/userService";
 
 const Settings = () => {
-
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.userSlice.data);
   const loading = useAppSelector((state) => state.userSlice.loading);
@@ -46,7 +45,7 @@ const Settings = () => {
     }
   }, [user]);
 
-  if (loading || localloading) {
+  if (loading || localloading || !user) {
     return <LoadingLoader />;
   }
 

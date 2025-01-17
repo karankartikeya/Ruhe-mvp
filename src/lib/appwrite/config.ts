@@ -1,4 +1,4 @@
-import { Client, Account, Databases, Storage, Avatars } from "node-appwrite";
+import { Client, Account, Databases, Storage, Avatars, Users } from "node-appwrite";
 
 export const appwriteConfig = {
   url: process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT,
@@ -25,4 +25,5 @@ export const account = new Account(client);
 export const databases = new Databases(client);
 export const storage = new Storage(client);
 export const avatars = new Avatars(client);
+export const users = new Users(client);
 
