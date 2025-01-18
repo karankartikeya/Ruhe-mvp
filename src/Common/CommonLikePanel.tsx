@@ -17,7 +17,7 @@ const CommonLikePanel: FC = () => {
         </ul>
         <h6>+75</h6>
       </div>
-      <div className="right-stats">
+      {/* <div className="right-stats">
         <ul>
           <li>
             <h5>
@@ -32,7 +32,7 @@ const CommonLikePanel: FC = () => {
             </h5>
           </li>
         </ul>
-      </div>
+      </div> */}
     </div>
   );
 };
