@@ -16,6 +16,14 @@ body {
         .bg-white{
             background-color: #112032 !important;
         }
+        .ce-toolbar__actions, .ce-toolbar__actions--opened{
+            background-color: #8d8f92 !important;
+        }
+        .ce-paragraph a{
+            color: red;
+            font-weight: bold;
+            text-decoration: underline !important;
+        }
         .icon-dark {
             stroke: #cccccc;
         }

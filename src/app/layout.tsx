@@ -33,6 +33,7 @@ export default async function RootLayout({
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
+        <script src="https://cdn.jsdelivr.net/npm/@editorjs/simple-image"></script>
 
         <link
           href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
