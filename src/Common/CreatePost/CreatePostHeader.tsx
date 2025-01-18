@@ -12,6 +12,8 @@ import List from "@editorjs/list";
 import ImageTool from "@editorjs/image";
 import { BlockToolConstructable } from "@editorjs/editorjs";
 
+export const MAX_CHARACTERS = 10;
+
 const CreatePostHeader: FC<CreatePostHeaderInterFace> = ({
   writePost,
   setShowPostButton,
@@ -26,10 +28,10 @@ const CreatePostHeader: FC<CreatePostHeaderInterFace> = ({
       console.log(JSON.stringify(outputData.blocks));
     });
   };
-
+  let isProgrammaticallyUpdating = false;
   useEffect(() => {
     editorInstance.current = new EditorJS({
-      holderId: "editorjs",
+      holder: "editorjs",
       placeholder: "Let's write an awesome story!",
       tools: {
         header: {
@@ -38,6 +40,9 @@ const CreatePostHeader: FC<CreatePostHeaderInterFace> = ({
         },
         list: {
           class: List as unknown as BlockToolConstructable,
+          inlineToolbar: true,
+        },
+        paragraph: {
           inlineToolbar: true,
         },
         // image: {
@@ -50,8 +55,76 @@ const CreatePostHeader: FC<CreatePostHeaderInterFace> = ({
         //   },
         // },
       },
-    });
+      onChange: async () => {
+        if (isProgrammaticallyUpdating) {
+          // Skip if triggered by a programmatic update
+          isProgrammaticallyUpdating = false;
+          return;
+        }
 
+        function couldBeCounted(block: any) {
+          return "text" in block.data;
+        }
+
+        function getBlocksTextLen(blocks: any) {
+          return blocks
+            .filter(couldBeCounted)
+            .reduce((sum: any, block: any) => {
+              sum += block.data.text.length;
+              return sum;
+            }, 0);
+        }
+
+        const limit = MAX_CHARACTERS;
+        const content = await editorInstance.current?.save();
+        const textLength = getBlocksTextLen(content?.blocks);
+
+        if (textLength <= limit) {
+          console.log("You can post now");
+          return;
+        }
+
+        const currentBlockIndex =
+          editorInstance.current?.blocks.getCurrentBlockIndex();
+        if (currentBlockIndex === undefined) {
+          return;
+        }
+
+        const currentBlock = content?.blocks[currentBlockIndex];
+        if (!currentBlock || !couldBeCounted(currentBlock)) {
+          return;
+        }
+
+        const otherBlocks = content?.blocks.filter(
+          (block: any) => block.id !== currentBlock.id
+        );
+        const otherBlocksLen = getBlocksTextLen(otherBlocks);
+        const remainingCharacters = limit - otherBlocksLen;
+
+        if (currentBlock.data.text.length > remainingCharacters) {
+          isProgrammaticallyUpdating = true; // Set flag before programmatic update
+
+          // Trim the text in the current block
+          const updatedText = currentBlock.data.text.slice(
+            0,
+            remainingCharacters
+          );
+
+          // Update the block's content in EditorJS
+          editorInstance.current?.blocks.update(currentBlock.id!, {
+            text: updatedText,
+          });
+
+          // Force save to update internal state
+          const updatedContent = await editorInstance.current?.save();
+          console.log("Updated content after trimming:", updatedContent);
+
+          editorInstance.current?.caret.setToBlock(currentBlockIndex, "end");
+          console.log("Content trimmed to fit the limit.");
+          console.log("content", content);
+        }
+      },
+    });
     return () => {
       if (
         editorInstance.current &&
