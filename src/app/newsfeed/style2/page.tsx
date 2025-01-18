@@ -77,7 +77,7 @@ const newsFeedStyle2 = () => {
               {/* <div className="sticky-top">
                 <EventsCard eventImage={1} />
                 <YourGames />
-              </div> */}
+              </div> */} 
             </div>
           </div>
         </Container>
