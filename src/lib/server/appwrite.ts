@@ -19,7 +19,7 @@ import {
   users,
 } from "../appwrite/config";
 import { error } from "console";
-import { UserUpdate } from "../../../types";
+import { INewPost, Post, UserUpdate } from "../../../types";
 
 export async function createSessionClient() {
   const client = new Client()
@@ -380,22 +380,21 @@ export const deleteUser = async (docId: string, userId: string) => {
 {
   /** CREATE POST */
 }
-export const createPost = async (post: any) => {
+export const createPost = async (post: INewPost) => {
   try {
-    //upload File to appwrite storage
-    const uploadedFile = await uploadFile(post.file[0]);
-    if (!uploadedFile) throw Error;
+    // //upload File to appwrite storage
+    // const uploadedFile = await uploadFile(post.file[0]);
+    // if (!uploadedFile) throw Error;
 
-    //Get file url
-    const fileUrl = getFilePreview(uploadedFile.$id);
-    if (!fileUrl) {
-      await deleteFile(uploadedFile.$id);
-      throw Error;
-    }
-    //convert tags to array
+    // //Get file url
+    // const fileUrl = getFilePreview(uploadedFile.$id);
+    // if (!fileUrl) {
+    //   await deleteFile(uploadedFile.$id);
+    //   throw Error;
+    // }
+    // //convert tags to array
 
-    const tags = post.tags?.replace(/ /g, "").split(",") || [];
-
+    // const tags = post.tags?.replace(/ /g, "").split(",") || [];
     //create post
     const newPost = await databases.createDocument(
       appwriteConfig.databaseId,
@@ -404,13 +403,11 @@ export const createPost = async (post: any) => {
       {
         userId: post.userId,
         content: post.content,
-        imageUrl: fileUrl,
-        imageId: uploadedFile.$id,
-        tags: tags,
+        tags: post.tags,
       }
     );
     if (!newPost) {
-      await deleteFile(uploadedFile.$id);
+      // await deleteFile(uploadedFile.$id);
       throw Error;
     }
     return newPost;
@@ -518,8 +515,10 @@ export async function getTrendingTopics() {
     appwriteConfig.trendingTopicsCollectionId,
     [Query.orderDesc("$createdAt"), Query.limit(1)]
   );
+  // console.log("trendingTopics", trendingTopics);
   if (!trendingTopics) throw Error;
   const trendingTopicsData = trendingTopics.documents[0];
+  // console.log("trendingTopicsData", trendingTopicsData);
   const hashtags = trendingTopicsData.hashtags;
   const trendingTopicsArray = [];
   for (let i = 0; i < hashtags.length; i++) {

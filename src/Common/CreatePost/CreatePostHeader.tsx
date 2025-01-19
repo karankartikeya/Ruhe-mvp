@@ -11,6 +11,10 @@ import Header from "@editorjs/header";
 import List from "@editorjs/list";
 import ImageTool from "@editorjs/image";
 import { BlockToolConstructable } from "@editorjs/editorjs";
+import { createPost } from "@/lib/server/appwrite";
+import { set } from "lodash";
+import { useAppSelector } from "@/utils/hooks";
+import { toast } from "react-toastify";
 
 export const MAX_CHARACTERS = 500;
 
@@ -21,13 +25,80 @@ const CreatePostHeader: FC<CreatePostHeaderInterFace> = ({
   const editorInstance = useRef<EditorJS | null>(null);
   const theme = localStorage.getItem("theme");
   const [textTheme, setTextTheme] = useState(theme);
+  const [postText, setPostText] = useState("");
+  const [tags, setTags] = useState<string[]>([]);
+  const user = useAppSelector((state) => state.userSlice.data);
+  function extractTags(jsonString: string): string[] {
+    try {
+      // console.log("jsonString", jsonString);
+      // Parse the JSON string into an object
+      const data = JSON.parse(jsonString);
+
+      // Check if the required structure exists
+      if (!data.blocks || !Array.isArray(data.blocks)) {
+        throw new Error("Invalid data format");
+      }
+
+      // Regex to match hashtags
+      const hashtagRegex = /#\w+/g;
+
+      // Extract tags from paragraph blocks
+      const tags: string[] = [];
+
+      data.blocks.forEach((block: any) => {
+        if (block.type === "paragraph" && block.data?.text) {
+          const matches = block.data.text.match(hashtagRegex);
+          if (matches) {
+            tags.push(...matches);
+          }
+        }
+      });
+      setTags(tags);
+      return tags;
+    } catch (error) {
+      console.error("Error extracting tags:", error);
+      return [];
+    }
+  }
+
+  const savePost = async (content: string, hashtag: string[]) => {
+    const data = JSON.parse(content);
+    if (data.blocks.length === 0 || user.userId.length === 0) {
+      toast.error("Please write something to post");
+      return;
+    } else {
+      const res = await createPost({
+        userId: user.$id,
+        content: content,
+        tags: hashtag != null ? hashtag : [],
+      });
+      if (!res) {
+        console.log("Post not created");
+        toast.error("Error creating post");
+      }
+      toast.success("Post created successfully");
+      editorInstance.current?.clear();
+    }
+  };
 
   const handleSubmit = () => {
+    let postTextData = "";
+    let tagss: string[] = [];
     editorInstance.current?.save().then((outputData) => {
-      console.log(outputData);
-      console.log(JSON.stringify(outputData.blocks));
+      // console.log(JSON.stringify(outputData));
+      // console.log(JSON.stringify(outputData.blocks));
+      const newPost = JSON.stringify(outputData);
+      postTextData = newPost;
+      setPostText(JSON.stringify(outputData));
+      tagss = extractTags(JSON.stringify(outputData));
+      setTags(tagss);
+      // console.log("postText", newPost, " - tags", tagss);
+      savePost(newPost, tagss);
+      // console.log("tags", extractTags(postText));
     });
+    // console.log("postTextData", postTextData.length == 0);
   };
+
   let isProgrammaticallyUpdating = false;
   useEffect(() => {
     editorInstance.current = new EditorJS({

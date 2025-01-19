@@ -94,7 +94,7 @@ const CollegeMeetCard: React.FC = () => {
             56 {People}
           </h3>
           <h6>glasgow, scotland</h6> */}
-          <p className="dq-question"><u>Ques:</u>&nbsp; {dailyQuest[0]?.question}?</p>
+          <p className="dq-question"><u>Ques:</u>&nbsp; {dailyQuest[0]?.question}</p>
           {dailyQuest[0]?.response == null ? (
             <form
               onSubmit={(e: FormEvent<HTMLFormElement>) => e.preventDefault()}
