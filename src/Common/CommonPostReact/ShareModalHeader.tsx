@@ -9,23 +9,7 @@ const ShareModalHeader: FC = () => {
 
   return (
     <div className="setting-dropdown">
-      <Dropdown isOpen={postDropDown} toggle={() => setPostDropDown(!postDropDown)} className="custom-dropdown arrow-none dropdown-sm btn-group">
-        <DropdownToggle color="transparent">
-          <h5>
-            {ShareAsPost}
-            <DynamicFeatherIcon iconName="ChevronDown" className="iw-14" />
-          </h5>
-        </DropdownToggle>
-        <DropdownMenu>
-          <ul>
-            {dropDownList.map((data, index) => (
-              <li key={index}>
-                <a href={Href}>{data}</a>
-              </li>
-            ))}
-          </ul>
-        </DropdownMenu>
-      </Dropdown>
+      <h3>Daily Quest</h3>
     </div>
   );
 };

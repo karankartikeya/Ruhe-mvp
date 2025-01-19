@@ -36,15 +36,15 @@ const CommonPostReact: FC = () => {
               <DynamicFeatherIcon iconName="MessageSquare" className="iw-18 ih-18"/>{Comment}
             </a>
           </li>
-          {/* <li onClick={toggleModal}>
+          <li onClick={toggleModal}>
             <a href={Href} >
               <DynamicFeatherIcon iconName="Share" className="iw-16 ih-16" />{Share}
             </a>
-          </li> */}
+          </li>
         </ul>
       </div>  
       <CommentSection  showComment={showComment} />
-      {/* <ShareModal showModal={showModal} toggleModal={toggleModal}/> */}
+      <ShareModal type="post" showModal={showModal} toggleModal={toggleModal}/>
     </>
   );
 };

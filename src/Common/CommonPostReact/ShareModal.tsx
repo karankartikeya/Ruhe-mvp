@@ -1,36 +1,91 @@
-import { FC } from "react";
-import {Button,Input,Modal,ModalBody,ModalFooter,ModalHeader} from "reactstrap";
+import { FC, useEffect, useState } from "react";
+import {
+  Button,
+  Input,
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from "reactstrap";
 import ShareModalHeader from "./ShareModalHeader";
 import UserDropDown from "./UserDropDown";
 import { ImagePath, sharePost } from "../../utils/constant";
 import { ShareModalProps } from "../CommonInterFace";
 import CustomImage from "../CustomImage";
+import { useAppSelector } from "@/utils/hooks";
+import { getDailyQuests } from "@/lib/server/appwrite";
 
-const ShareModal: FC<ShareModalProps> = ({ showModal, toggleModal }) => {
+type DailyQuestProps = {
+  question: string;
+  response: string;
+};
+const ShareModal: FC<ShareModalProps> = ({ type, showModal, toggleModal }) => {
+  const [dailyQuest, setDailyQuest] = useState<DailyQuestProps[]>([]);
+  const user = useAppSelector((state) => state.userSlice.data);
+  console.log("userout==", dailyQuest);
+  const loading = useAppSelector((state) => state.userSlice.loading);
+  useEffect(() => {
+    // console.log("user==", user);
+    const fetchDailyQuest = async () => {
+      console.log("user==", user);
+      const res = await getDailyQuests(user.$id);
+      console.log("res==", res);
+      res?.map((quest) => {
+        setDailyQuest((prev) => [
+          ...prev,
+          {
+            question: quest.question,
+            response: quest.response,
+          },
+        ]);
+      });
+      // const res = await getDailyQuests(user.$id);
+      // console.log("res==", res);
+    };
+    fetchDailyQuest();
+  }, []);
+
   return (
-    <Modal isOpen={showModal} toggle={toggleModal} centered modalClassName="mobile-full-width" contentClassName="share-modal">
+    <Modal
+      isOpen={showModal}
+      toggle={toggleModal}
+      centered
+      modalClassName="mobile-full-width"
+      contentClassName="share-modal"
+    >
       <ModalHeader toggle={toggleModal}>
         <ShareModalHeader />
       </ModalHeader>
       <ModalBody>
         <UserDropDown />
-        <div className="input-section">
-          <Input type="text" className="emojiPicker" placeholder="write a comment.."/>
-        </div>
+
         <div className="post-section ratio2_1">
           <div className="post-img bg-size blur-up lazyloaded">
-            <CustomImage src={`${ImagePath}/post/1.jpg`} className="img-fluid blur-up lazyload bg-img" alt=""/>
+            <CustomImage
+              src={`${ImagePath}/post/1.jpg`}
+              className="img-fluid blur-up lazyload bg-img"
+              alt=""
+            />
           </div>
           <div className="post-content">
-            <h3>Today Our Three Cute Puppy Dog Birthday !!!!</h3>
+            <h3>
+              <u>Ques:</u> {dailyQuest[0]?.question}
+            </h3>
             <h5 className="tag">
-              <span>#ourcutepuppy,</span> #puppy, #birthday, #dog
+              <span>#ourcutepuppy</span>
             </h5>
           </div>
         </div>
+        <div className="input-section">
+          <Input
+            type="text"
+            className="emojiPicker"
+            placeholder="write your daily quest.."
+          />
+        </div>
       </ModalBody>
       <ModalFooter>
-        <Button color="solid">{sharePost}</Button>
+        <Button color="solid">Submit</Button>
       </ModalFooter>
     </Modal>
   );

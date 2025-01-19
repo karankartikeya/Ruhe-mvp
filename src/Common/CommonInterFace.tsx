@@ -47,6 +47,7 @@ export interface CreatePostInterface {
 }
 
 export interface ShareModalProps {
+  type: "post" | "dailyQuest";
   showModal: boolean;
   toggleModal: () => void;
 }
