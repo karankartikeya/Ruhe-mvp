@@ -47,7 +47,7 @@ export default async function RootLayout({
       <body>
         {/* <SessionWrapper session={session}> */}
         <Providers>
-          <SplashCursor />
+          {/* <SplashCursor /> */}
           {children}
         </Providers>
         <ToastContainer />

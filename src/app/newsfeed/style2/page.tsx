@@ -23,9 +23,9 @@ const newsFeedStyle2 = () => {
   const user = useAppSelector((state) => state.userSlice.data);
   const loading = useAppSelector((state) => state.userSlice.loading);
   const [localloading, setLocalLoading] = useState(false);
-  const avatarUrl = avatars.getInitials("karan");
-  // const ava = avatarUrl.then((res) => console.log(res));
-  console.log("userava=", avatarUrl);
+  // const avatarUrl = avatars.getInitials(user?.name);
+  // // const ava = avatarUrl.then((res) => console.log(res));
+  // console.log("userava=", avatarUrl);
 
   useEffect(() => {
     const checkUser = async () => {
@@ -50,7 +50,7 @@ const newsFeedStyle2 = () => {
     }
   }, [user]);
 
-  if (loading || localloading) {
+  if (loading || localloading || !user) {
     return <LoadingLoader />;
   }
 

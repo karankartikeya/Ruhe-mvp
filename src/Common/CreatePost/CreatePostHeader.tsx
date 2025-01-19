@@ -12,7 +12,7 @@ import List from "@editorjs/list";
 import ImageTool from "@editorjs/image";
 import { BlockToolConstructable } from "@editorjs/editorjs";
 
-export const MAX_CHARACTERS = 10;
+export const MAX_CHARACTERS = 500;
 
 const CreatePostHeader: FC<CreatePostHeaderInterFace> = ({
   writePost,
