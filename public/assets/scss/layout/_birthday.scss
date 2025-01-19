@@ -26,6 +26,13 @@
         align-items: flex-start;
 
         .title {
+            h1{
+                color: rgba(var(--white), 1);
+                font-size: 34px;
+                font-weight: 600;
+                text-transform: capitalize;
+                margin-bottom: 10px;
+            }
             h3 {
                 color: rgba(var(--white), 1);
                 text-transform: capitalize;
@@ -47,7 +54,7 @@
     }
 
     .birthday-content {
-        margin-top: 30px;
+        
 
         .image-section {
             display: flex;
@@ -94,7 +101,7 @@
         }
 
         .details {
-            text-align: center;
+            // text-align: center;
             margin-top: 18px;
 
             h3 {
@@ -114,6 +121,18 @@
                 color: rgba(var(--white), 0.7);
                 font-size: $h6-size;
                 line-height: 1.8;
+            }
+
+            .dq-question{
+                font-weight: 600;
+                font-size: 15px;
+                color: rgb(126, 87, 217) !important;
+            }
+
+            .dq-answer{
+                font-weight: 600;
+                font-size: 15px;
+                color: rgb(33, 126, 202) !important;
             }
 
             form {
@@ -170,7 +189,7 @@
         }
 
         &:after {
-            background-image: linear-gradient(-38deg, rgb(0, 152, 225) 0%, rgb(27, 220, 237) 100%);
+            background-image: linear-gradient(-38deg, rgb(196, 197, 197) 0%, rgb(27, 220, 237) 100%);
         }
     }
 

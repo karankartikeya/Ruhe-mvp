@@ -51,11 +51,7 @@ const CollegeMeetCard: React.FC = () => {
 
   return (
     <div className="birthday-section event-sec bg-size blur-up lazyloaded">
-      <CustomImage
-        src={`${ImagePath}/event-bg.jpg`}
-        className="img-fluid blur-up lazyload bg-img d-none"
-        alt="birthday"
-      />
+      
       <div className="birthday-top">
         <div className="title">
           <h1>Daily Quest</h1>
@@ -98,7 +94,7 @@ const CollegeMeetCard: React.FC = () => {
             56 {People}
           </h3>
           <h6>glasgow, scotland</h6> */}
-          <h2>Ques: {dailyQuest[0]?.question}?</h2>
+          <p className="dq-question"><u>Ques:</u>&nbsp; {dailyQuest[0]?.question}?</p>
           {dailyQuest[0]?.response == null ? (
             <form
               onSubmit={(e: FormEvent<HTMLFormElement>) => e.preventDefault()}
@@ -113,7 +109,7 @@ const CollegeMeetCard: React.FC = () => {
             </form>
           ) : (
             <>
-              <h3>Ans. {dailyQuest[0]?.response}</h3>
+              <p className="dq-answer"><u>Ans.</u>&nbsp; {dailyQuest[0]?.response}</p>
             </>
           )}
         </div>
