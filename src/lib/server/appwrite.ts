@@ -440,17 +440,17 @@ export async function searchPosts(searchTerm: string) {
 }
 
 export const getInfinitePosts = async ({
-  pageParam,
+  pageParam
 }: {
-  pageParam: number;
+  pageParam?: string | null;
 }) => {
-  const queries: any[] = [Query.orderDesc("$updatedAt"), Query.limit(7)];
+  const queries: any[] = [Query.orderDesc("$updatedAt"), Query.limit(2)];
   const user = await getLoggedInUser();
   if (!user) return null;
   else if (pageParam) {
     queries.push(Query.cursorAfter(pageParam.toString()));
   }
-  const userId = user.userId;
+  // const userId = user.userId;
   try {
     const posts = await databases.listDocuments(
       appwriteConfig.databaseId,

@@ -9,8 +9,8 @@ import { PostDetailInterFace } from "../../../Style1Types";
 const PostDetails: FC<PostDetailInterFace> = ({mainImage}) => {
   return (
     <div className="post-details">
-      <PostImage mainImage={mainImage}  />
-      <DetailBox heading={BirthdayHeading} span={BirthdaySpan} />
+      {/* <PostImage mainImage={mainImage}  /> */}
+      {/* <DetailBox heading={BirthdayHeading} span={BirthdaySpan} /> */}
       <CommonLikePanel />
       <CommonPostReact />
     </div>

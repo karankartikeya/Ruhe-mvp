@@ -42,6 +42,8 @@ export interface Post {
   ImageUrl?: string;
   tags?: string[]; // Array of strings
   ImageId?: string;
+  user_details?: string[];
+  createdAt?: string;
 }
 
 export interface INewPost {

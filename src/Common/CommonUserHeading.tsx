@@ -7,27 +7,48 @@ import { CommonUserHeadingProps } from "./CommonInterFace";
 import CustomImage from "./CustomImage";
 import HoverMessage from "./HoverMessage";
 
-const CommonUserHeading: FC<CommonUserHeadingProps> = ({ image,id }) => {
+const CommonUserHeading: FC<CommonUserHeadingProps> = ({ name, time }) => {
   const [showOption, setShowOption] = useState(false);
+
   return (
     <div className="post-title">
       <div className="profile">
         <Media>
-          <a className="popover-cls user-img bg-size blur-up lazyloaded" href={Href} id={id}>
-            <CustomImage src={`${ImagePath}/user-sm/${image}.jpg`} className="img-fluid blur-up lazyload bg-img" alt="user"/>
+          <a
+            className="popover-cls user-img bg-size blur-up lazyloaded"
+            href={Href}
+            id={name}
+          >
+            <CustomImage
+              src={"https://cloud.appwrite.io/v1/avatars/initials?name=karan"}
+              className="img-fluid blur-up lazyload bg-img"
+              alt="user"
+            />
           </a>
           <Media body>
-            <h5>sufiya eliza</h5>
-            <h6>30 mins ago</h6>
+            <h5>{name}</h5>
+            <h6>{time}</h6>
           </Media>
         </Media>
-        <HoverMessage placement={"right"} target={id} name={"sufiya eliza"} imagePath={`user-sm/${image}.jpg`} />
+        {/* <HoverMessage
+          placement={"right"}
+          target="SufiyaElizaFirstPost"
+          name={"sufiya eliza"}
+          imagePath="https://cloud.appwrite.io/v1/avatars/initials?name=karan"
+        /> */}
       </div>
       <div className="setting-btn ms-auto setting-dropdown no-bg">
-        <Dropdown isOpen={showOption} toggle={() => setShowOption(!showOption)} className="custom-dropdown arrow-none dropdown-sm btn-group">
+        <Dropdown
+          isOpen={showOption}
+          toggle={() => setShowOption(!showOption)}
+          className="custom-dropdown arrow-none dropdown-sm btn-group"
+        >
           <DropdownToggle color="transparent">
             <div>
-              <DynamicFeatherIcon iconName="MoreHorizontal" className="icon icon-font-color iw-14"/>
+              <DynamicFeatherIcon
+                iconName="MoreHorizontal"
+                className="icon icon-font-color iw-14"
+              />
             </div>
           </DropdownToggle>
           <DropdownMenu>
@@ -35,7 +56,10 @@ const CommonUserHeading: FC<CommonUserHeadingProps> = ({ image,id }) => {
               {postDropDownOption.map((data, index) => (
                 <li key={index}>
                   <a href={Href}>
-                    <DynamicFeatherIcon iconName={data.iconName} className="icon icon-font-color iw-14"/>
+                    <DynamicFeatherIcon
+                      iconName={data.iconName}
+                      className="icon icon-font-color iw-14"
+                    />
                     {data.post}
                   </a>
                 </li>

@@ -228,6 +228,14 @@
                     "array": false,
                     "size": 150,
                     "default": null
+                },
+                {
+                    "key": "user_details",
+                    "type": "string",
+                    "required": false,
+                    "array": true,
+                    "size": 300,
+                    "default": null
                 }
             ],
             "indexes": []
