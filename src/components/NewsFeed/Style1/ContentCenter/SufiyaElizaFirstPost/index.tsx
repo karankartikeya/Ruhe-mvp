@@ -6,7 +6,7 @@ import { SufiyaElizaFirstPostInterFace } from "../../Style1Types";
 const SufiyaElizaFirstPost: FC<SufiyaElizaFirstPostInterFace> = ({mainImage,userImage,className}) => {
   return (
     <div className={`post-wrapper col-grid-box d-block section-t-space ${className ?className:""} `}>
-      <CommonUserHeading image={userImage} id="SufiyaElizaFirstPost" />
+      {/* <CommonUserHeading image={userImage} id="SufiyaElizaFirstPost" /> */}
       <PostDetails mainImage={mainImage} />
     </div>
   );
