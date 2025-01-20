@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { ChangeEvent, FC, useEffect, useState } from "react";
 import {
   Button,
   Input,
@@ -13,7 +13,8 @@ import { ImagePath, sharePost } from "../../utils/constant";
 import { ShareModalProps } from "../CommonInterFace";
 import CustomImage from "../CustomImage";
 import { useAppSelector } from "@/utils/hooks";
-import { getDailyQuests } from "@/lib/server/appwrite";
+import { createDailyQuest, getDailyQuests } from "@/lib/server/appwrite";
+import { toast } from "react-toastify";
 
 type DailyQuestProps = {
   question: string;
@@ -21,9 +22,24 @@ type DailyQuestProps = {
 };
 const ShareModal: FC<ShareModalProps> = ({ type, showModal, toggleModal }) => {
   const [dailyQuest, setDailyQuest] = useState<DailyQuestProps[]>([]);
+  const [response, setResponse] = useState<string>("");
   const user = useAppSelector((state) => state.userSlice.data);
-  console.log("userout==", dailyQuest);
+  // console.log("userout==", dailyQuest);
   const loading = useAppSelector((state) => state.userSlice.loading);
+  const handleSubmission = async () => {
+    const feedDailyQues = await createDailyQuest({
+      question: dailyQuest[0]?.question,
+      userId: user.$id,
+      response: response,
+    });
+    if (!feedDailyQues) {
+      console.log("Error submitting daily quest", feedDailyQues);
+      toast.error("Error submitting daily quest");
+    }
+    else{
+      toast.success("Daily quest submitted successfully");
+    }
+  };
   useEffect(() => {
     // console.log("user==", user);
     const fetchDailyQuest = async () => {
@@ -80,12 +96,16 @@ const ShareModal: FC<ShareModalProps> = ({ type, showModal, toggleModal }) => {
           <Input
             type="text"
             className="emojiPicker"
+            value={response}
+            onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              setResponse(event.target.value)
+            }
             placeholder="write your daily quest.."
           />
         </div>
       </ModalBody>
       <ModalFooter>
-        <Button color="solid">Submit</Button>
+        <Button color="solid" onClick={handleSubmission}>Submit</Button>
       </ModalFooter>
     </Modal>
   );

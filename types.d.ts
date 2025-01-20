@@ -110,6 +110,12 @@ export interface DailyQuest {
   userIds?: string; // Relationship to User
 }
 
+export interface DailyQuestResponse {
+  question?: string;
+  userId?: string;
+  response?: string;
+}
+
 // Aggregated types
 export interface AppwriteCollections {
   users: User;

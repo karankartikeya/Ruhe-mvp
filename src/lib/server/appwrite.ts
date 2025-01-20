@@ -19,7 +19,7 @@ import {
   users,
 } from "../appwrite/config";
 import { error } from "console";
-import { INewPost, Post, UserUpdate } from "../../../types";
+import { DailyQuestResponse, INewPost, Post, UserUpdate } from "../../../types";
 
 export async function createSessionClient() {
   const client = new Client()
@@ -712,8 +712,9 @@ export const getMoods = async (userId: string) => {
 {
   /** CREATE DAILY QUEST */
 }
-export const createDailyQuest = async (dailyQuest: any) => {
+export const createDailyQuest = async (dailyQuest: DailyQuestResponse) => {
   try {
+    console.log("dailyQuest in api", dailyQuest);
     //generate random points based on the time of submission
     //if submitted before 12pm, points will be between 6-10
     //if submitted after 12pm, points will be between 1-5
@@ -730,10 +731,10 @@ export const createDailyQuest = async (dailyQuest: any) => {
       appwriteConfig.dailyQuestsCollectionId,
       ID.unique(),
       {
-        userId: dailyQuest.userId,
+        userIds: dailyQuest.userId,
         question: dailyQuest.question,
         response: dailyQuest.response,
-        points: points,
+        points: String(points),
       }
     );
     if (!newDailyQuest) throw Error;
