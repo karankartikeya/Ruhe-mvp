@@ -19,7 +19,7 @@ const Modal = () => {
 
   let modals:{ [key: string]: React.ReactElement } = {
     modal1: <StoriesModal showModal toggle={modalClose} />,
-    modal2: <ShareModal showModal toggleModal={modalClose} />,
+    // modal2: <ShareModal showModal toggleModal={modalClose} />,
     modal3: <CommonGalleryModal modal toggle={modalClose} />,
     modal4: <CommonVideoModal modal toggle={modalClose}/>,
     modal5: <EditCoverModal isOpen toggle={modalClose} />,
