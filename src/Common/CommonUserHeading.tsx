@@ -6,6 +6,12 @@ import { postDropDownOption } from "@/Data/NewsFeed";
 import { CommonUserHeadingProps } from "./CommonInterFace";
 import CustomImage from "./CustomImage";
 import HoverMessage from "./HoverMessage";
+import {
+  FacebookIcon,
+  FacebookShareButton,
+  WhatsappIcon,
+  WhatsappShareButton,
+} from "react-share";
 
 const CommonUserHeading: FC<CommonUserHeadingProps> = ({ name, time }) => {
   const [showOption, setShowOption] = useState(false);
@@ -52,8 +58,9 @@ const CommonUserHeading: FC<CommonUserHeadingProps> = ({ name, time }) => {
             </div>
           </DropdownToggle>
           <DropdownMenu>
+            
             <ul>
-              {postDropDownOption.map((data, index) => (
+              {/* {postDropDownOption.map((data, index) => (
                 <li key={index}>
                   <a href={Href}>
                     <DynamicFeatherIcon
@@ -63,7 +70,26 @@ const CommonUserHeading: FC<CommonUserHeadingProps> = ({ name, time }) => {
                     {data.post}
                   </a>
                 </li>
-              ))}
+              ))} */}
+
+              <li>
+                <FacebookShareButton
+                  url={"google.com"}
+                  className="Demo__some-network__share-button"
+                >
+                 <FacebookIcon size={32} round />
+                </FacebookShareButton>
+              </li>
+              <li>
+                <WhatsappShareButton
+                  url={"google.com"}
+                  title={"Newpost"}
+                  separator=":: "
+                  className="Demo__some-network__share-button"
+                >
+                  <WhatsappIcon size={32} round />
+                </WhatsappShareButton>
+              </li>
             </ul>
           </DropdownMenu>
         </Dropdown>
