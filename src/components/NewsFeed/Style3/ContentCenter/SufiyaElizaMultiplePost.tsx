@@ -10,10 +10,10 @@ import { SufiyaElizaMultiplePostInterFace } from "../../Style1/Style1Types";
 const SufiyaElizaMultiplePost: FC<SufiyaElizaMultiplePostInterFace> = ({moreImage,diffrentImage,userImage,main,second,third}) => {
   return (
     <div className="post-wrapper col-grid-box section-t-space d-block">
-      <CommonUserHeading image={userImage?userImage:1} id="SufiyaElizaMultiplePost" />
+      {/* <CommonUserHeading image={userImage?userImage:1} id="SufiyaElizaMultiplePost" /> */}
       <div className="post-details">
         <PostImages moreImage={moreImage} diffrentImage={diffrentImage} main={main }second={second}  third={third} />
-        <DetailBox heading={BirthdayHeading} span={BirthdaySpan} />
+        {/* <DetailBox heading={BirthdayHeading} span={BirthdaySpan} /> */}
         <CommonLikePanel />
         <CommonPostReact />
       </div>

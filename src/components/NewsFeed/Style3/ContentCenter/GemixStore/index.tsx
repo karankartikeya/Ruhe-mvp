@@ -17,7 +17,7 @@ const GemixStore = () => {
       <GemixStoreTitle />
       <div className="post-details">
         <StoreProducts />
-        <DetailBox heading={storeHeading} span={storeSpan} />
+        {/* <DetailBox heading={storeHeading} span={storeSpan} /> */}
         <CommonLikePanel />
         <CommonPostReact />
       </div>
