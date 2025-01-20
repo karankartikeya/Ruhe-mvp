@@ -11,7 +11,7 @@ import { SufiyaElizaThirdPostInterface } from "../Style1Types";
 const SufiyaElizaThirdPost: FC<SufiyaElizaThirdPostInterface> = ({fourthPost,userImage,iframeLink}) => {
   return (
     <div className="post-wrapper col-grid-box section-t-space d-block">
-      <CommonUserHeading image={userImage} id="SufiyaElizaThirdPost" />
+      {/* <CommonUserHeading image={userImage} id="SufiyaElizaThirdPost" /> */}
       <div className="post-details">
         <div className="img-wrapper">
           {fourthPost ? (
@@ -28,7 +28,7 @@ const SufiyaElizaThirdPost: FC<SufiyaElizaThirdPostInterface> = ({fourthPost,use
             </div>
           )}
         </div>
-        <DetailBox heading={CelebrationNewAlbum} span={CelebrationSpan} />
+        {/* <DetailBox heading={CelebrationNewAlbum} span={CelebrationSpan} /> */}
         <CommonLikePanel />
         <CommonPostReact />
       </div>
