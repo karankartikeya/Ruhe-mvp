@@ -71,7 +71,7 @@ const ProfileTimeLine = () => {
             <CreatePost />
             <div className="overlay-bg" />
             {/** build the below UI for users posts */}
-            <div className="post-panel infinite-loader-sec section-t-space">
+            {/* <div className="post-panel infinite-loader-sec section-t-space">
               <SufiyaElizaFirstPost mainImage={11} userImage={15} />
               <SufiyaElizaMultiplePost
                 moreImage
@@ -89,7 +89,7 @@ const ProfileTimeLine = () => {
               <SufiyaElizaSecondPost userImage={15} />
               <SufiyaElizaSecondPost userImage={15} />
               <SufiyaElizaSecondPost userImage={10} />
-            </div>
+            </div> */}
           </div>
 
           <div className="content-right d-xl-block d-none">
