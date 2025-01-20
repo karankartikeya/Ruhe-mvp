@@ -404,6 +404,7 @@ export const createPost = async (post: INewPost) => {
         userId: post.userId,
         content: post.content,
         tags: post.tags,
+        user_details: post.userDetails,
       }
     );
     if (!newPost) {

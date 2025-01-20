@@ -9,7 +9,12 @@ const RenderEditorContent: React.FC<{ content: OutputData }> = ({ content }) => 
           case "header":
             return <h3 key={index}>{block.data.text}</h3>;
           case "paragraph":
-            return <p key={index}>{block.data.text}</p>;
+            return (
+              <p
+                key={index}
+                dangerouslySetInnerHTML={{ __html: block.data.text }}
+              />
+            );
           case "list":
             return (
               <ul key={index}>
@@ -25,6 +30,7 @@ const RenderEditorContent: React.FC<{ content: OutputData }> = ({ content }) => 
     </div>
   );
 };
+
 
 
 export default RenderEditorContent;

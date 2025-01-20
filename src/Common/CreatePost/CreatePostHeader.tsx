@@ -27,7 +27,12 @@ const CreatePostHeader: FC<CreatePostHeaderInterFace> = ({
   const [textTheme, setTextTheme] = useState(theme);
   const [postText, setPostText] = useState("");
   const [tags, setTags] = useState<string[]>([]);
+  let userName = "";
+  let userDetails: string[] = [];
   const user = useAppSelector((state) => state.userSlice.data);
+  userName = user.name;
+  userDetails.push(userName);
+  
   function extractTags(jsonString: string): string[] {
     try {
       // console.log("jsonString", jsonString);
@@ -63,6 +68,7 @@ const CreatePostHeader: FC<CreatePostHeaderInterFace> = ({
 
   const savePost = async (content: string, hashtag: string[]) => {
     const data = JSON.parse(content);
+    
     if (data.blocks.length === 0 || user.userId.length === 0) {
       toast.error("Please write something to post");
       return;
@@ -71,6 +77,7 @@ const CreatePostHeader: FC<CreatePostHeaderInterFace> = ({
         userId: user.$id,
         content: content,
         tags: hashtag != null ? hashtag : [],
+        userDetails: userDetails,
       });
       if (!res) {
         console.log("Post not created");

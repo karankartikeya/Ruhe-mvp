@@ -50,6 +50,7 @@ export interface INewPost {
   userId: string;
   content: string;
   tags?: string[];
+  userDetails?: string[];
 }
 
 export interface Comment {

@@ -36,6 +36,7 @@ const PostPanel: React.FC = () => {
       <div className="post-panel infinite-loader-sec section-t-space">
         {postsData.map((post: any) => (
           <PostSection
+            key={post.$id}
             $id={post.$id}
             userId={post.userId}
             user_details={post.user_details}
