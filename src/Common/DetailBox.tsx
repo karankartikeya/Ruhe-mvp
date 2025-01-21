@@ -12,7 +12,7 @@ import {
 import { Post } from "../../types";
 import RenderEditorContent from "@/components/NewsFeed/Style1/ContentCenter/SufiyaElizaFirstPost/PostDetails/RenderEditorContent";
 import { useAppSelector } from "@/utils/hooks";
-import { set } from "lodash";
+import { debounce } from "lodash";  // Import debounce
 
 const DetailBox: FC<DetailBoxProps> = ({ postId, postContent }) => {
   const [bookMarkActive, setBookMarkActive] = useState(false);
@@ -34,14 +34,9 @@ const DetailBox: FC<DetailBoxProps> = ({ postId, postContent }) => {
     } else {
       setBookMarkActive(false);
     }
-  }, []);
-  // useEffect(() => {
-  //   const userBookmarks = JSON.parse(user?.bookmarks);
-  //   const isBookmarked = user?.bookmarks.includes(postId);
-  //   setBookMarkActive(isBookmarked);
-  // }, []);
+  }, [user, postId]);
 
-  const handleSubmit = async () => {
+  const handleSubmitDebounced = debounce(async () => {
     if (bookMarkActive) {
       setBookMarkActive(false);
       bookmarkArray = bookmarkArray.filter(
@@ -66,23 +61,8 @@ const DetailBox: FC<DetailBoxProps> = ({ postId, postContent }) => {
         toast.error("something went wrong");
       }
     }
-    // toast.success("bookmark successful");
-  };
+  }, 500); // 500ms debounce delay
 
-  // useEffect(() => {
-  //   const getPosts = async () => {
-  //     const posts = await getInfinitePosts({ pageParam });
-  //     posts?.documents.map((post) => {
-  //       // console.log("poste==", post);
-  //     });
-  //     // console.log("posts==", posts?.documents);
-  //     setPostsData(posts?.documents);
-  //   };
-  //   getPosts();
-  // }, []);
-  const numbers = [1, 2, 3];
-  // const post = postsData[0] as Post;
-  // console.log("post====>==", post);
   return (
     <div className="detail-box">
       <RenderEditorContent content={postContent} />
@@ -93,24 +73,10 @@ const DetailBox: FC<DetailBoxProps> = ({ postId, postContent }) => {
           iconName="Bookmark"
           className="iw-14 ih-14"
           onClick={() => {
-            handleSubmit();
+            handleSubmitDebounced(); // Use debounced function
           }}
         />
       </div>
-      {/* <div className="people-likes">
-        <ul>
-          {numbers.map((data, index) => (
-            <li key={index} className="popover-cls bg-size blur-up lazyloaded">
-              <CustomImage
-                src={`${ImagePath}/user-sm/${data}.jpg`}
-                className="img-fluid blur-up lazyload bg-img"
-                alt="image"
-              />
-            </li>
-          ))}
-        </ul>
-        <h6>+12 {PeopleReactThisPost}</h6>
-      </div> */}
     </div>
   );
 };
