@@ -22,7 +22,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Container } from "reactstrap";
 
-export const dynamic = "force-dynamic"; // Force dynamic rendering
+
 
 
 const ProfileTimeLine = () => {
