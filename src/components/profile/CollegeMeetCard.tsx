@@ -26,7 +26,7 @@ const CollegeMeetCard: React.FC = () => {
   const dispatch = useAppDispatch();
   const [dailyQuest, setDailyQuest] = useState<DailyQuestProps[]>([]);
   const user = useAppSelector((state) => state.userSlice.data);
-  console.log("userout==", dailyQuest);
+  // console.log("userout==", dailyQuest);
   const loading = useAppSelector((state) => state.userSlice.loading);
   useEffect(() => {
     // console.log("user==", user);

@@ -62,75 +62,76 @@ const ProfileTab: React.FC = () => {
     return <LoadingLoader />;
   }
   return (
-    <ProfileLayout profileTab loaderName="profileTimeLine">
-      {/* <div className="profile-menu section-t-space">
-        <Nav tabs>
-          {profileNav.map((data, index) => (
-            <NavItem key={index}>
-              <Link
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault(); // Prevent default anchor behavior
-                  setActiveTab(index + 1); // Set active tab
-                }}
-                className={`nav-link ${activeTab === index + 1 ? "active" : ""}`}
-              >
-                <DynamicFeatherIcon
-                  iconName={data.icon}
-                  className="iw-14 ih-14"
-                />
-                <h6>{data.title}</h6>
-              </Link>
-            </NavItem>
-          ))}
-        </Nav>
-      </div>
-      <TabContent activeTab={activeTab}>
-        <TabPane tabId={1} className="section-t-space px-0">
-          <TimeLineTabContent />
-        </TabPane>
-        <TabPane tabId={2} className="section-t-space">
-          <AboutTabContent />
-        </TabPane>
-        <TabPane tabId={3} className="section-t-space">
-          <Container fluid>
-            <div className="page-content">
-              <div className="content-center w-100">
-                <FriendListBox />
-              </div>
-            </div>
-          </Container>
-        </TabPane>
-        <TabPane tabId={4} className="section-t-space">
-          <Container fluid>
-            <div className="page-content">
-              <div className="content-center w-100">
-                <CommonGalleryPhotos />
-              </div>
-            </div>
-          </Container>
-        </TabPane>
-        <TabPane tabId={5} className="section-t-space">
-          <Container fluid>
-            <div className="page-content">
-              <Col lg="5" className="content-left">
-                <ActivityFeed />
-              </Col>
-              <Col
-                lg="7"
-                className="content-center d-none d-xl-block about-profile-item"
-              >
-                <div className="post-panel">
-                  <div className="post-wrapper">
-                    <SufiyaElizaFirstPost mainImage={1} userImage={1} />
-                  </div>
-                </div>
-              </Col>
-            </div>
-          </Container>
-        </TabPane>
-      </TabContent> */}
-    </ProfileLayout>
+    // <ProfileLayout profileTab loaderName="profileTimeLine">
+    //   <div className="profile-menu section-t-space">
+    //     <Nav tabs>
+    //       {profileNav.map((data, index) => (
+    //         <NavItem key={index}>
+    //           <Link
+    //             href="#"
+    //             onClick={(e) => {
+    //               e.preventDefault(); // Prevent default anchor behavior
+    //               setActiveTab(index + 1); // Set active tab
+    //             }}
+    //             className={`nav-link ${activeTab === index + 1 ? "active" : ""}`}
+    //           >
+    //             <DynamicFeatherIcon
+    //               iconName={data.icon}
+    //               className="iw-14 ih-14"
+    //             />
+    //             <h6>{data.title}</h6>
+    //           </Link>
+    //         </NavItem>
+    //       ))}
+    //     </Nav>
+    //   </div>
+    //   <TabContent activeTab={activeTab}>
+    //     <TabPane tabId={1} className="section-t-space px-0">
+    //       <TimeLineTabContent />
+    //     </TabPane>
+    //     <TabPane tabId={2} className="section-t-space">
+    //       <AboutTabContent />
+    //     </TabPane>
+    //     <TabPane tabId={3} className="section-t-space">
+    //       <Container fluid>
+    //         <div className="page-content">
+    //           <div className="content-center w-100">
+    //             <FriendListBox />
+    //           </div>
+    //         </div>
+    //       </Container>
+    //     </TabPane>
+    //     <TabPane tabId={4} className="section-t-space">
+    //       <Container fluid>
+    //         <div className="page-content">
+    //           <div className="content-center w-100">
+    //             <CommonGalleryPhotos />
+    //           </div>
+    //         </div>
+    //       </Container>
+    //     </TabPane>
+    //     <TabPane tabId={5} className="section-t-space">
+    //       <Container fluid>
+    //         <div className="page-content">
+    //           <Col lg="5" className="content-left">
+    //             <ActivityFeed />
+    //           </Col>
+    //           <Col
+    //             lg="7"
+    //             className="content-center d-none d-xl-block about-profile-item"
+    //           >
+    //             <div className="post-panel">
+    //               <div className="post-wrapper">
+    //                 <SufiyaElizaFirstPost mainImage={1} userImage={1} />
+    //               </div>
+    //             </div>
+    //           </Col>
+    //         </div>
+    //       </Container>
+    //     </TabPane>
+    //   </TabContent>
+    // </ProfileLayout>
+    <h3>Profile Tab</h3>
   );
 };
 
