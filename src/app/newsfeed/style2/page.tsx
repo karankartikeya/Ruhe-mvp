@@ -66,7 +66,7 @@ const newsFeedStyle2 = () => {
       loaderName="style2"
       differentLogo="logo-color.png"
     >
-      <div className="page-center">
+      {/* <div className="page-center">
         <Container fluid className="section-t-space px-0 layout-default">
           <div className="page-content">
             <ContentLeft />
@@ -77,7 +77,7 @@ const newsFeedStyle2 = () => {
             </div>
           </div>
         </Container>
-      </div>
+      </div> */}
     </CommonLayout>
   );
 };

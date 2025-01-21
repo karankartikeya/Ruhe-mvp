@@ -63,7 +63,7 @@ const ProfileTab: React.FC = () => {
   }
   return (
     <ProfileLayout profileTab loaderName="profileTimeLine">
-      <div className="profile-menu section-t-space">
+      {/* <div className="profile-menu section-t-space">
         <Nav tabs>
           {profileNav.map((data, index) => (
             <NavItem key={index}>
@@ -129,7 +129,7 @@ const ProfileTab: React.FC = () => {
             </div>
           </Container>
         </TabPane>
-      </TabContent>
+      </TabContent> */}
     </ProfileLayout>
   );
 };
