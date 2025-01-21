@@ -50,7 +50,7 @@ const newsFeedStyle2 = () => {
     }
   }, [user]);
 
-  if (loading || localloading) {
+  if (loading || localloading || !user) {
     return <LoadingLoader />;
   }
 

@@ -270,6 +270,13 @@
                         @extend %loader-skeleton;
                     }
 
+                    .list-postdata{
+                        color: white !important;
+                        margin-top: 5px !important;
+                        margin-bottom: 5px !important;
+                        font-weight: 200;
+                    }
+
                     .tag {
                         width: 50%;
                         height: 17px;
@@ -1136,6 +1143,12 @@
                 width: 80%;
                 height: 20px;
                 @extend %loader-skeleton;
+            }
+            .list-postdata{
+                color: white !important;
+                margin-top: 5px !important;
+                margin-bottom: 5px !important;
+                font-weight: 200;
             }
 
             .tag {

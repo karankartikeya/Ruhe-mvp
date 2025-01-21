@@ -520,6 +520,12 @@
                     color: rgba(var(--title-color), 1);
                     max-width: 89%;
                 }
+                .list-postdata{
+                    color: rgba(var(--title-color),1) !important;
+                    margin-top: 5px !important;
+                    margin-bottom: 5px !important;
+                    font-weight: 400 !important;
+                }
 
                 .tag {
                     color: rgba(var(--font-color), 1);
