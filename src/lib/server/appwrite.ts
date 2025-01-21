@@ -441,11 +441,11 @@ export async function searchPosts(searchTerm: string) {
 }
 
 export const getInfinitePosts = async ({
-  pageParam
+  pageParam,
 }: {
   pageParam?: string | null;
 }) => {
-  const queries: any[] = [Query.orderDesc("$updatedAt"), Query.limit(2)];
+  const queries: any[] = [Query.orderDesc("$updatedAt"), Query.limit(5)];
   const user = await getLoggedInUser();
   if (!user) return null;
   else if (pageParam) {
@@ -765,6 +765,128 @@ export const getDailyQuests = async (userId: string) => {
     return filteredDailyQuests;
   } catch (error) {
     console.log("Error while fetching daily quests", error);
+  }
+};
+
+export const createBookmarks = async (
+  userId: string,
+  postId: string,
+  bookmarks: string[]
+) => {
+  try {
+    console.log("entered the jungle with values=>", userId, postId, bookmarks);
+    const newBookmark = await databases.createDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.bookmarksCollectionId,
+      ID.unique(),
+      {
+        userId: userId,
+        postId: postId,
+      }
+    );
+    if (!newBookmark) throw Error;
+    console.log("calling save bookmark with id=>", newBookmark.$id);
+    const saveBookmarktoUser = await saveBookmarktoUserBookmarks(
+      postId,
+      userId,
+      newBookmark.$id,
+      bookmarks
+    );
+    return saveBookmarktoUser;
+  } catch (error) {
+    console.log("Error while creating bookmark", error);
+  }
+};
+
+export const saveBookmarktoUserBookmarks = async (
+  postId: string,
+  userId: string,
+  bookmarkId: string,
+  bookmarks: string[]
+) => {
+  try {
+    console.log("entered the saving jungle with values=>", postId, userId, bookmarkId);
+    const newBookmark = {postId: postId, bookmarkId: bookmarkId};
+    const stringifiedBookmarks = JSON.stringify(newBookmark);
+    bookmarks.push(stringifiedBookmarks);
+    console.log("bookmarks got stringed", bookmarks);
+    const saveBookmarktoUserBookmark = await databases.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      userId,
+      {
+        bookmarks: bookmarks,
+      }
+    );
+    return saveBookmarktoUserBookmark;
+  } catch (error) {
+    console.log("Error while saving bookmark to user bookmarks", error);
+  }
+};
+
+export const deleteBookmark = async (bookmarkId: string, userbookmarks:string[], userId:string) => {
+  try {
+    console.log("entered the jungle with values=>", bookmarkId, userbookmarks, userId);
+    const statusCode = await databases.deleteDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.bookmarksCollectionId,
+      bookmarkId
+    );
+    if (!statusCode) throw Error;
+    console.log("status code==>", statusCode);
+    const deleteBookmarkUserDb = await deleteBookmarkFromUser(userId, userbookmarks);
+    return deleteBookmarkUserDb;
+    return { status: "Ok" };
+  } catch (error) {
+    console.log("Error while deleting bookmark", error);
+  }
+};
+
+export const deleteBookmarkFromUser = async (userId: string,bookmarks: string[]) => {
+  try {
+    console.log("entered the saving deletejungle with values=>", userId, bookmarks);
+    const saveBookmarktoUserBookmark = await databases.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.userCollectionId,
+      userId,
+      {
+        bookmarks: bookmarks,
+      }
+    );
+    console.log("saveBookmarktoUserBookmark==>", saveBookmarktoUserBookmark);
+    return saveBookmarktoUserBookmark;
+  } catch (error) {
+    console.log("Error while deleting bookmark from user bookmarks", error);
+  }
+}
+
+
+export const getBookmarks = async (userId: string) => {
+  try {
+    const bookmarks = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.bookmarksCollectionId,
+      [Query.orderDesc("$createdAt")]
+    );
+    const filteredBookmarks = bookmarks.documents.filter(
+      (bookmark) => bookmark.userId["$id"] === userId
+    );
+    if (!bookmarks) throw Error;
+    console.log("bookmarks==>", filteredBookmarks);
+    //fetch posts with this postId
+    // const bookmarkedPosts = [];
+    // for (let i = 0; i < filteredBookmarks.length; i++) {
+    //   const post = await databases.getDocument(
+    //     appwriteConfig.databaseId,
+    //     appwriteConfig.postCollectionId,
+    //     filteredBookmarks[i].postId["$id"]
+    //   );
+    //   bookmarkedPosts.push(post);
+    // }
+    // return bookmarkedPosts;
+    return filteredBookmarks;
+  } catch (error) {
+    console.log("Error while fetching bookmarks", error);
   }
 };
 

@@ -146,6 +146,14 @@
                     "array": false,
                     "size": 100,
                     "default": null
+                },
+                {
+                    "key": "bookmarks",
+                    "type": "string",
+                    "required": false,
+                    "array": true,
+                    "size": 200,
+                    "default": null
                 }
             ],
             "indexes": []
@@ -444,6 +452,41 @@
                     "array": true,
                     "size": 100,
                     "default": null
+                }
+            ],
+            "indexes": []
+        },
+        {
+            "$id": "678fdca900027936cf81",
+            "$permissions": [],
+            "databaseId": "676bddfd003548ae5cd8",
+            "name": "bookmarks",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "userId",
+                    "type": "relationship",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "676bde140030242594e9",
+                    "relationType": "manyToOne",
+                    "twoWay": false,
+                    "twoWayKey": "678fdd46000c64c0937b",
+                    "onDelete": "cascade",
+                    "side": "parent"
+                },
+                {
+                    "key": "postId",
+                    "type": "relationship",
+                    "required": false,
+                    "array": false,
+                    "relatedCollection": "6771c5260038fdd0e6d3",
+                    "relationType": "manyToOne",
+                    "twoWay": false,
+                    "twoWayKey": "678fdd73002e0eb1ebc2",
+                    "onDelete": "cascade",
+                    "side": "parent"
                 }
             ],
             "indexes": []
