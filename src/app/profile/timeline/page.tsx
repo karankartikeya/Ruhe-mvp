@@ -18,11 +18,16 @@ import { getLoggedInUser } from "@/lib/server/appwrite";
 import { useAppDispatch, useAppSelector } from "@/utils/hooks";
 import { fetchUser } from "@/utils/userService";
 import { redirect } from "next/navigation";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Container } from "reactstrap";
 
+export const dynamic = "force-dynamic"; // Force dynamic rendering
+
+
 const ProfileTimeLine = () => {
   const dispatch = useAppDispatch();
+  const router  = useRouter();
   const user = useAppSelector((state) => state.userSlice.data);
   const loading = useAppSelector((state) => state.userSlice.loading);
   const [localloading, setLocalLoading] = useState(false);
@@ -32,7 +37,7 @@ const ProfileTimeLine = () => {
       const user = await getLoggedInUser();
       console.log("user=", user);
       if (!user) {
-        redirect("/authentication/login");
+        router.push("/authentication/login");
       }
     };
     checkUser();

@@ -2,7 +2,6 @@
 import DynamicFeatherIcon from "@/Common/DynamicFeatherIcon";
 import ProfileLayout from "@/layout/ProfileLayout";
 import { Col, Container, Nav, NavItem, TabContent, TabPane } from "reactstrap";
-import { Href } from "../../../utils/constant/index";
 import { useState } from "react";
 import { profileNav } from "@/Data/profile";
 import TimeLineTabContent from "@/components/profile/ProfileTabs/TimeLineTabContent";
@@ -11,6 +10,7 @@ import FriendListBox from "@/components/profile/FriendListBox";
 import CommonGalleryPhotos from "@/Common/CommonGalleryPhotos";
 import ActivityFeed from "@/components/profile/ActivityFeed";
 import SufiyaElizaFirstPost from "@/components/NewsFeed/Style1/ContentCenter/SufiyaElizaFirstPost";
+import Link from "next/link";
 
 const ProfileTab: React.FC = () => {
   const [activeTab, setActiveTab] = useState(1);
@@ -21,17 +21,20 @@ const ProfileTab: React.FC = () => {
         <Nav tabs>
           {profileNav.map((data, index) => (
             <NavItem key={index}>
-              <a
-                onClick={() => setActiveTab(index + 1)}
-                className={activeTab === index + 1 ? "active" : ""}
-                href={Href}
+              <Link
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault(); // Prevent default anchor behavior
+                  setActiveTab(index + 1); // Set active tab
+                }}
+                className={`nav-link ${activeTab === index + 1 ? "active" : ""}`}
               >
                 <DynamicFeatherIcon
                   iconName={data.icon}
                   className="iw-14 ih-14"
                 />
                 <h6>{data.title}</h6>
-              </a>
+              </Link>
             </NavItem>
           ))}
         </Nav>
@@ -67,7 +70,10 @@ const ProfileTab: React.FC = () => {
               <Col lg="5" className="content-left">
                 <ActivityFeed />
               </Col>
-              <Col lg="7" className="content-center d-none d-xl-block about-profile-item">
+              <Col
+                lg="7"
+                className="content-center d-none d-xl-block about-profile-item"
+              >
                 <div className="post-panel">
                   <div className="post-wrapper">
                     <SufiyaElizaFirstPost mainImage={1} userImage={1} />
