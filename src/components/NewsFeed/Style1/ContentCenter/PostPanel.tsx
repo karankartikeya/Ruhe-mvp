@@ -30,7 +30,7 @@ const PostPanel: React.FC = () => {
   }, []);
   const numbers = [1, 2, 3];
   const post = postsData[0] as Post;
-  console.log("post====>==", post);
+  // console.log("post====>==", post);
   return (
     <>
       <div className="post-panel infinite-loader-sec section-t-space">

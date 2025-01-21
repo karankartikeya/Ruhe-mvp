@@ -445,7 +445,7 @@ export const getInfinitePosts = async ({
 }: {
   pageParam?: string | null;
 }) => {
-  const queries: any[] = [Query.orderDesc("$updatedAt"), Query.limit(2)];
+  const queries: any[] = [Query.orderDesc("$updatedAt"), Query.limit(5)];
   const user = await getLoggedInUser();
   if (!user) return null;
   else if (pageParam) {
