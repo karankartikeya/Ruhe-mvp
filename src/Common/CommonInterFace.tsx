@@ -31,6 +31,7 @@ export interface CommonUserHeadingProps {
 }
 
 export interface DetailBoxProps {
+  postId: string;
   postContent: OutputData;
 }
 

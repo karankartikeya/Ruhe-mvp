@@ -14,6 +14,7 @@ export interface User {
   gender?: string;
   userId: string;
   profileImage?: string;
+  bookmarks?: string[];
 }
 
 export interface UserUpdate {
@@ -125,4 +126,9 @@ export interface AppwriteCollections {
   likes: Like;
   moods: Mood;
   dailyQuests: DailyQuest;
+}
+
+export interface Bookmarks{
+  postId: string;
+  userId: string;
 }

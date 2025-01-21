@@ -13,6 +13,7 @@ export const appwriteConfig = {
   commentsCollectionId: process.env.NEXT_PUBLIC_APPWRITE_COMMENTS_COLLECTION_ID!,
   followersCollectionId: process.env.NEXT_PUBLIC_APPWRITE_FOLLOWERS_COLLECTION_ID!,
   trendingTopicsCollectionId: process.env.NEXT_PUBLIC_APPWRITE_TRENDING_TOPICS_COLLECTION_ID!,
+  bookmarksCollectionId: process.env.NEXT_PUBLIC_APPWRITE_BOOKMARKS_COLLECTION_ID!,
 };
 
 export const client = new Client();

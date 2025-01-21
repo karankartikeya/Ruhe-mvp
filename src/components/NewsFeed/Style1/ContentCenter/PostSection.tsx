@@ -20,7 +20,7 @@ const PostSection: FC<Post> = ({$id, userId, user_details, content, tags, create
     <div className="post-wrapper col-grid-box section-t-space d-block">
       <CommonUserHeading name={user_details![0]} time={timeAgo} />
       <div className="post-details">
-        <DetailBox postContent={contentFix} />
+        <DetailBox postId={$id} postContent={contentFix} />
         {/* <CommonLikePanel /> */}
         <CommonPostReact />
       </div>
