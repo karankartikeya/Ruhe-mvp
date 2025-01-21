@@ -18,13 +18,11 @@ import { getLoggedInUser } from "@/lib/server/appwrite";
 import { useAppDispatch, useAppSelector } from "@/utils/hooks";
 import { fetchUser } from "@/utils/userService";
 import { redirect } from "next/navigation";
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Container } from "reactstrap";
 
 const ProfileTimeLine = () => {
   const dispatch = useAppDispatch();
-  const router = useRouter();
   const user = useAppSelector((state) => state.userSlice.data);
   const loading = useAppSelector((state) => state.userSlice.loading);
   const [localloading, setLocalLoading] = useState(false);
@@ -34,7 +32,7 @@ const ProfileTimeLine = () => {
       const user = await getLoggedInUser();
       console.log("user=", user);
       if (!user) {
-        router.push("/authentication/login");
+        redirect("/authentication/login");
       }
     };
     checkUser();
@@ -57,59 +55,58 @@ const ProfileTimeLine = () => {
   }
 
   return (
-    <h3> Timeline</h3>
-    // <ProfileLayout title="timeline" loaderName="profileTimeLine">
-    //   <Container fluid className="section-t-space px-0 ">
-    //     <div className="page-content">
-    //       <div className="content-left">
-    //         <AboutUser />
-    //         {/* <FriendSuggestion mainClassName="d-xl-block d-none" /> */}
+    <ProfileLayout title="timeline" loaderName="profileTimeLine">
+      <Container fluid className="section-t-space px-0 ">
+        <div className="page-content">
+          <div className="content-left">
+            <AboutUser />
+            {/* <FriendSuggestion mainClassName="d-xl-block d-none" /> */}
 
-    //         {/** build the below UI for liked */}
-    //         <div className="sticky-top d-xl-block d-none">
-    //           <LikePage />
-    //         </div>
-    //       </div>
-    //       <div className="content-center">
-    //         <CreatePost />
-    //         <div className="overlay-bg" />
-    //         {/** build the below UI for users posts */}
-    //         {/* <div className="post-panel infinite-loader-sec section-t-space">
-    //           <SufiyaElizaFirstPost mainImage={11} userImage={15} />
-    //           <SufiyaElizaMultiplePost
-    //             moreImage
-    //             diffrentImage
-    //             userImage={14}
-    //             main={40}
-    //             second={41}
-    //             third={42}
-    //           />
-    //           <SufiyaElizaSecondPost userImage={10} />
-    //           <SufiyaElizaThirdPost
-    //             userImage={1}
-    //             iframeLink="https://giphy.com/embed/xl2zRzM8sVo3td58kS"
-    //           />
-    //           <SufiyaElizaSecondPost userImage={15} />
-    //           <SufiyaElizaSecondPost userImage={15} />
-    //           <SufiyaElizaSecondPost userImage={10} />
-    //         </div> */}
-    //       </div>
+            {/** build the below UI for liked */}
+            <div className="sticky-top d-xl-block d-none">
+              <LikePage />
+            </div>
+          </div>
+          <div className="content-center">
+            <CreatePost />
+            <div className="overlay-bg" />
+            {/** build the below UI for users posts */}
+            {/* <div className="post-panel infinite-loader-sec section-t-space">
+              <SufiyaElizaFirstPost mainImage={11} userImage={15} />
+              <SufiyaElizaMultiplePost
+                moreImage
+                diffrentImage
+                userImage={14}
+                main={40}
+                second={41}
+                third={42}
+              />
+              <SufiyaElizaSecondPost userImage={10} />
+              <SufiyaElizaThirdPost
+                userImage={1}
+                iframeLink="https://giphy.com/embed/xl2zRzM8sVo3td58kS"
+              />
+              <SufiyaElizaSecondPost userImage={15} />
+              <SufiyaElizaSecondPost userImage={15} />
+              <SufiyaElizaSecondPost userImage={10} />
+            </div> */}
+          </div>
 
-    //       <div className="content-right d-xl-block d-none">
-    //         {/* Daily Quest update
-    //         If answered then yippe otherwise please answer now
-    //           */}
-    //         {/* <CollegeMeetCard /> */}
-    //         {/* <Gallery />
-    //         <ActivityFeeds /> */}
-    //         <div className="sticky-top">
-    //           {/* <EventsCard eventImage={12} diffrentPath="post" /> */}
-    //           <WorldWideTrend />
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </Container>
-    // </ProfileLayout>
+          <div className="content-right d-xl-block d-none">
+            {/* Daily Quest update
+            If answered then yippe otherwise please answer now
+              */}
+            <CollegeMeetCard />
+            {/* <Gallery />
+            <ActivityFeeds /> */}
+            <div className="sticky-top">
+              {/* <EventsCard eventImage={12} diffrentPath="post" /> */}
+              <WorldWideTrend />
+            </div>
+          </div>
+        </div>
+      </Container>
+    </ProfileLayout>
   );
 };
 

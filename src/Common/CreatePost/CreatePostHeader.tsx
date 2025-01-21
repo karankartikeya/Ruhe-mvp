@@ -23,10 +23,11 @@ const CreatePostHeader: FC<CreatePostHeaderInterFace> = ({
   setShowPostButton,
 }) => {
   const editorInstance = useRef<EditorJS | null>(null);
-  const theme = localStorage.getItem("theme");
+  const [theme, setTheme] =useState("");
   const [textTheme, setTextTheme] = useState(theme);
   const [postText, setPostText] = useState("");
   const [tags, setTags] = useState<string[]>([]);
+  let isProgrammaticallyUpdating = false;
   let userName = "";
   let userDetails: string[] = [];
   const user = useAppSelector((state) => state.userSlice.data);
@@ -106,8 +107,8 @@ const CreatePostHeader: FC<CreatePostHeaderInterFace> = ({
     // console.log("postTextData", postTextData.length == 0);
   };
 
-  let isProgrammaticallyUpdating = false;
   useEffect(() => {
+    setTheme(localStorage.getItem("theme")||"light");
     editorInstance.current = new EditorJS({
       holder: "editorjs",
       placeholder: "Let's write an awesome story!",
@@ -213,6 +214,9 @@ const CreatePostHeader: FC<CreatePostHeaderInterFace> = ({
       }
     };
   }, []);
+
+  
+
   return (
     <div className={`static-section ${writePost ? "d-none" : ""}`}>
       <div className="card-title">
