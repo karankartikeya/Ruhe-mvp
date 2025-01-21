@@ -30,7 +30,7 @@ const CreatePostHeader: FC<CreatePostHeaderInterFace> = ({
   let userName = "";
   let userDetails: string[] = [];
   const user = useAppSelector((state) => state.userSlice.data);
-  userName = user.name;
+  userName = user?.name;
   userDetails.push(userName);
   
   function extractTags(jsonString: string): string[] {

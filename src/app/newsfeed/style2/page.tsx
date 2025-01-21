@@ -8,7 +8,8 @@ import LoadingLoader from "@/layout/LoadingLoader";
 import { getLoggedInUser } from "@/lib/server/appwrite";
 import { useAppDispatch, useAppSelector } from "@/utils/hooks";
 import { fetchUser } from "@/utils/userService";
-import { useRouter } from "next/router";
+import { useRouter } from "next/compat/router";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Container } from "reactstrap";
 
@@ -20,21 +21,26 @@ const newsFeedStyle2 = () => {
   const loading = useAppSelector((state) => state.userSlice.loading);
   const [localloading, setLocalLoading] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     const checkUser = async () => {
-      try {
-        const user = await getLoggedInUser();
-        if (!user) {
+      if(router && !router.isReady) {
+        try {
+          const user = await getLoggedInUser();
+          if (!user) {
+            router.push("/authentication/login");
+          }
+        } catch (error) {
+          console.error("Error fetching user:", error);
           router.push("/authentication/login");
         }
-      } catch (error) {
-        console.error("Error fetching user:", error);
-        router.push("/authentication/login");
-      }
+      };
+      const search = searchParams.get("search");
+      
     };
     checkUser();
-  }, [router]);
+  }, [router, searchParams]);
 
   useEffect(() => {
     if (!user) {

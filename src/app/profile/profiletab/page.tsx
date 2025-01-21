@@ -2,7 +2,7 @@
 import DynamicFeatherIcon from "@/Common/DynamicFeatherIcon";
 import ProfileLayout from "@/layout/ProfileLayout";
 import { Col, Container, Nav, NavItem, TabContent, TabPane } from "reactstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { profileNav } from "@/Data/profile";
 import TimeLineTabContent from "@/components/profile/ProfileTabs/TimeLineTabContent";
 import AboutTabContent from "@/components/profile/ProfileTabs/AboutTabContent";
@@ -11,10 +11,56 @@ import CommonGalleryPhotos from "@/Common/CommonGalleryPhotos";
 import ActivityFeed from "@/components/profile/ActivityFeed";
 import SufiyaElizaFirstPost from "@/components/NewsFeed/Style1/ContentCenter/SufiyaElizaFirstPost";
 import Link from "next/link";
+import { getLoggedInUser } from "@/lib/server/appwrite";
+import { fetchUser } from "@/utils/userService";
+import LoadingLoader from "@/layout/LoadingLoader";
+import { useAppDispatch, useAppSelector } from "@/utils/hooks";
+import { useRouter } from "next/compat/router";
+import { useSearchParams } from "next/navigation";
 
 const ProfileTab: React.FC = () => {
   const [activeTab, setActiveTab] = useState(1);
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.userSlice.data);
+  const loading = useAppSelector((state) => state.userSlice.loading);
+  const [localloading, setLocalLoading] = useState(false);
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
+  useEffect(() => {
+    const checkUser = async () => {
+      if(router && !router.isReady) {
+        try {
+          const user = await getLoggedInUser();
+          if (!user) {
+            router.push("/authentication/login");
+          }
+        } catch (error) {
+          console.error("Error fetching user:", error);
+          router.push("/authentication/login");
+        }
+      };
+      const search = searchParams.get("search");
+      
+    };
+    checkUser();
+  }, [router, searchParams]);
+
+  useEffect(() => {
+    if (!user) {
+      dispatch(fetchUser());
+    }
+  }, [dispatch, user]);
+
+  useEffect(() => {
+    if (user) {
+      setLocalLoading(false);
+    }
+  }, [user]);
+
+  if (loading || localloading || !user) {
+    return <LoadingLoader />;
+  }
   return (
     <ProfileLayout profileTab loaderName="profileTimeLine">
       <div className="profile-menu section-t-space">
