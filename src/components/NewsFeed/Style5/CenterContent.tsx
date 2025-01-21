@@ -7,7 +7,6 @@ import SufiyaElizaFirstPost from "../Style1/ContentCenter/SufiyaElizaFirstPost";
 import SufiyaElizaMultiplePost from "../Style3/ContentCenter/SufiyaElizaMultiplePost";
 import SufiyaElizaSecondPost from "../Style1/ContentCenter/SufiyaElizaSecondPost";
 import SufiyaElizaMapPost from "./SufiyaElizaMapPost";
-
 const CenterContent: FC = () => {
   return (
     <div className="content-center content-full">

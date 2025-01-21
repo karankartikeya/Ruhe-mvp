@@ -14,7 +14,7 @@ const SufiyaElizaTwoPhotoPost:FC<SufiyaElizaTwoPhotoPostInterFace>  = ({diffrent
   const toggle = () => setModalOpen(!modalOpen);
   return (
     <div className="post-wrapper col-grid-box section-t-space d-block">
-      <CommonUserHeading image={1} id="SufiyaElizaTwoPhotoPost" />
+      {/* <CommonUserHeading image={1} id="SufiyaElizaTwoPhotoPost" /> */}
       <div className="post-details">
         <div className="img-wrapper">
           <div className="gallery-section">
@@ -33,7 +33,7 @@ const SufiyaElizaTwoPhotoPost:FC<SufiyaElizaTwoPhotoPostInterFace>  = ({diffrent
             </div>
           </div>
         </div>
-        <DetailBox heading={BirthdayHeading} span={BirthdaySpan} />
+        {/* <DetailBox heading={BirthdayHeading} span={BirthdaySpan} /> */}
         <CommonLikePanel />
         <CommonPostReact />
       </div>

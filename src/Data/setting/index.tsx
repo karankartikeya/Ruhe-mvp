@@ -1,4 +1,9 @@
-export const navSettingData = [
+interface NavSetting {
+  icon: string;
+  title: string;
+  navigate?: string; // Optional property
+}
+export const navSettingData:NavSetting[] = [
   { icon: "home", title: "Home" },
   { icon: "info", title: "personal info" },
   { icon: "user", title: "account" },

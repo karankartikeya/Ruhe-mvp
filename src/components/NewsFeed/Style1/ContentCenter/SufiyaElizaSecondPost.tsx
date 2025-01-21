@@ -9,9 +9,9 @@ import { SufiyaElizaSecondPostInterFace } from "../Style1Types";
 const SufiyaElizaSecondPost: FC<SufiyaElizaSecondPostInterFace> = ({userImage}) => {
   return (
     <div className="post-wrapper col-grid-box section-t-space d-block">
-      <CommonUserHeading image={userImage} id="SufiyaElizaSecondPost" />
+      {/* <CommonUserHeading image={userImage} id="SufiyaElizaSecondPost" /> */}
       <div className="post-details">
-        <DetailBox heading={CelebrationNewAlbum} span={CelebrationSpan} />
+        {/* <DetailBox heading={CelebrationNewAlbum} span={CelebrationSpan} /> */}
         <CommonLikePanel />
         <CommonPostReact />
       </div>

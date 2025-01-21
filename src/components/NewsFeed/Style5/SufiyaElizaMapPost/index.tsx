@@ -9,10 +9,10 @@ import MapImage from "./MapImage";
 const SufiyaElizaMapPost: FC = () => {
   return (
     <div className="post-wrapper">
-      <CommonUserHeading image={1} id="SufiyaElizaMapPost" />
+      {/* <CommonUserHeading image={1} id="SufiyaElizaMapPost" /> */}
       <div className="post-details ratio_55">
         <MapImage />
-        <DetailBox heading={MapHeading} span={MapSpan} />
+        {/* <DetailBox heading={MapHeading} span={MapSpan} /> */}
         <CommonLikePanel />
         <CommonPostReact />
       </div>

@@ -13,7 +13,7 @@ const OptionDropDown: FC = () => {
         <DropdownToggle color="transparent">
           <h5> {Public} <DynamicFeatherIcon iconName="ChevronDown" className="iw-14" /></h5>
         </DropdownToggle>
-        <DropdownMenu>
+        {/* <DropdownMenu>
           <ul>
             {createPostDropDown.map((data, index) => (
               <li key={index}>
@@ -24,7 +24,7 @@ const OptionDropDown: FC = () => {
               </li>
             ))}
           </ul>
-        </DropdownMenu>
+        </DropdownMenu> */}
       </Dropdown>
     </div>
   );

@@ -22,7 +22,7 @@ const HoverMessage = ({ name, target, placement, imagePath }: HoverMessageProps)
     <UncontrolledPopover trigger="hover" placement={placement} target={target}>
       <PopoverBody>
         <Media className="popover-media">
-          <Image height={60} width={60} className="img-fluid user-img" src={`${ImagePath}/${imagePath}`} alt="user" />
+          <Image height={60} width={60} className="img-fluid user-img" src={imagePath} alt="user" />
           <Media body>
             <h4>{name}</h4>
             <h6>

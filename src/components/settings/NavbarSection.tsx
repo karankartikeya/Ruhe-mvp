@@ -42,14 +42,14 @@ const NavbarSection: React.FC<NavBarInterFace> = ({
           <h6>{user.username}</h6>
         </div>
         <div className="tab-section">
-          <Nav pills className=" flex-column">
-            {navSettingData.map((data, index) => (
+          <Nav pills className="flex-column">
+            {navSettingData?.map((data, index) => (
               <Fragment key={index}>
                 {!data.navigate ? (
                   <NavLink
                     className={` ${activeTab === index + 1 ? "active" : ""}`}
                     onClick={() => setActiveTab(index + 1)}
-                    href={"#"}
+                    href="#"
                   >
                     <i className={`fa fa-${data.icon} me-2`} />
                     {data.title}

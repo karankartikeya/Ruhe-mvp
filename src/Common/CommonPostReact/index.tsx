@@ -44,7 +44,7 @@ const CommonPostReact: FC = () => {
         </ul>
       </div>  
       <CommentSection  showComment={showComment} />
-      <ShareModal showModal={showModal} toggleModal={toggleModal}/>
+      <ShareModal type="post" showModal={showModal} toggleModal={toggleModal}/>
     </>
   );
 };

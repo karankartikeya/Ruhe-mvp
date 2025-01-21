@@ -16,6 +16,14 @@ body {
         .bg-white{
             background-color: #112032 !important;
         }
+        .ce-toolbar__actions, .ce-toolbar__actions--opened{
+            background-color: #8d8f92 !important;
+        }
+        .ce-paragraph a{
+            color: red;
+            font-weight: bold;
+            text-decoration: underline !important;
+        }
         .icon-dark {
             stroke: #cccccc;
         }
@@ -479,6 +487,10 @@ body {
             .form-control {
                 color: #b7b7b7;
             }
+        }
+
+        .reply{
+            background-color: #232e42;
         }
 
         .notification-btn {
@@ -1422,7 +1434,7 @@ body {
             &.dropdown-sm {
                 .dropdown-menu {
                     background-color: #112032;
-                    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1);
+                    // box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1);
                 }
             }
         }

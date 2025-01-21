@@ -1,3 +1,4 @@
+import { OutputData } from "@editorjs/editorjs";
 import * as Icon from "react-feather";
 
 export interface FeatherIconType {
@@ -23,13 +24,14 @@ export interface CreatePostHeaderInterFace {
 }
 
 export interface CommonUserHeadingProps {
-  image: number;
-  id:string
+  // image: number;
+  name?: string;
+  id?:string
+  time?: string;
 }
 
 export interface DetailBoxProps {
-  heading: string;
-  span: string;
+  postContent: OutputData;
 }
 
 export interface CommentSectionInterFace {
@@ -47,6 +49,7 @@ export interface CreatePostInterface {
 }
 
 export interface ShareModalProps {
+  type: "post" | "dailyQuest";
   showModal: boolean;
   toggleModal: () => void;
 }

@@ -9,6 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@editorjs/editorjs": "^2.30.7",
+    "@editorjs/header": "^2.8.8",
+    "@editorjs/image": "^2.10.1",
+    "@editorjs/list": "^2.0.2",
+    "@editorjs/simple-image": "^1.6.0",
     "@fullcalendar/core": "^6.1.15",
     "@fullcalendar/daygrid": "^6.1.15",
     "@fullcalendar/interaction": "^6.1.15",
@@ -24,6 +29,7 @@
     "appwrite-cli": "^6.1.0",
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
+    "date-fns": "^4.1.0",
     "emoji-picker-react": "^4.12.0",
     "eslint": "^9.17.0",
     "eslint-config-next": "^15.1.2",
@@ -42,6 +48,7 @@
     "react-icons": "^5.4.0",
     "react-insta-stories": "^2.7.0",
     "react-redux": "^9.2.0",
+    "react-share": "^5.1.2",
     "react-slick": "^0.30.3",
     "react-toastify": "^11.0.2",
     "reactstrap": "^9.2.3",

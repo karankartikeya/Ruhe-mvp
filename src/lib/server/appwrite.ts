@@ -19,7 +19,7 @@ import {
   users,
 } from "../appwrite/config";
 import { error } from "console";
-import { UserUpdate } from "../../../types";
+import { DailyQuestResponse, INewPost, Post, UserUpdate } from "../../../types";
 
 export async function createSessionClient() {
   const client = new Client()
@@ -380,22 +380,21 @@ export const deleteUser = async (docId: string, userId: string) => {
 {
   /** CREATE POST */
 }
-export const createPost = async (post: any) => {
+export const createPost = async (post: INewPost) => {
   try {
-    //upload File to appwrite storage
-    const uploadedFile = await uploadFile(post.file[0]);
-    if (!uploadedFile) throw Error;
+    // //upload File to appwrite storage
+    // const uploadedFile = await uploadFile(post.file[0]);
+    // if (!uploadedFile) throw Error;
 
-    //Get file url
-    const fileUrl = getFilePreview(uploadedFile.$id);
-    if (!fileUrl) {
-      await deleteFile(uploadedFile.$id);
-      throw Error;
-    }
-    //convert tags to array
+    // //Get file url
+    // const fileUrl = getFilePreview(uploadedFile.$id);
+    // if (!fileUrl) {
+    //   await deleteFile(uploadedFile.$id);
+    //   throw Error;
+    // }
+    // //convert tags to array
 
-    const tags = post.tags?.replace(/ /g, "").split(",") || [];
-
+    // const tags = post.tags?.replace(/ /g, "").split(",") || [];
     //create post
     const newPost = await databases.createDocument(
       appwriteConfig.databaseId,
@@ -404,13 +403,12 @@ export const createPost = async (post: any) => {
       {
         userId: post.userId,
         content: post.content,
-        imageUrl: fileUrl,
-        imageId: uploadedFile.$id,
-        tags: tags,
+        tags: post.tags,
+        user_details: post.userDetails,
       }
     );
     if (!newPost) {
-      await deleteFile(uploadedFile.$id);
+      // await deleteFile(uploadedFile.$id);
       throw Error;
     }
     return newPost;
@@ -443,17 +441,17 @@ export async function searchPosts(searchTerm: string) {
 }
 
 export const getInfinitePosts = async ({
-  pageParam,
+  pageParam
 }: {
-  pageParam: number;
+  pageParam?: string | null;
 }) => {
-  const queries: any[] = [Query.orderDesc("$updatedAt"), Query.limit(7)];
+  const queries: any[] = [Query.orderDesc("$updatedAt"), Query.limit(2)];
   const user = await getLoggedInUser();
   if (!user) return null;
   else if (pageParam) {
     queries.push(Query.cursorAfter(pageParam.toString()));
   }
-  const userId = user.userId;
+  // const userId = user.userId;
   try {
     const posts = await databases.listDocuments(
       appwriteConfig.databaseId,
@@ -518,8 +516,10 @@ export async function getTrendingTopics() {
     appwriteConfig.trendingTopicsCollectionId,
     [Query.orderDesc("$createdAt"), Query.limit(1)]
   );
+  // console.log("trendingTopics", trendingTopics);
   if (!trendingTopics) throw Error;
   const trendingTopicsData = trendingTopics.documents[0];
+  // console.log("trendingTopicsData", trendingTopicsData);
   const hashtags = trendingTopicsData.hashtags;
   const trendingTopicsArray = [];
   for (let i = 0; i < hashtags.length; i++) {
@@ -712,8 +712,9 @@ export const getMoods = async (userId: string) => {
 {
   /** CREATE DAILY QUEST */
 }
-export const createDailyQuest = async (dailyQuest: any) => {
+export const createDailyQuest = async (dailyQuest: DailyQuestResponse) => {
   try {
+    console.log("dailyQuest in api", dailyQuest);
     //generate random points based on the time of submission
     //if submitted before 12pm, points will be between 6-10
     //if submitted after 12pm, points will be between 1-5
@@ -730,10 +731,10 @@ export const createDailyQuest = async (dailyQuest: any) => {
       appwriteConfig.dailyQuestsCollectionId,
       ID.unique(),
       {
-        userId: dailyQuest.userId,
+        userIds: dailyQuest.userId,
         question: dailyQuest.question,
         response: dailyQuest.response,
-        points: points,
+        points: String(points),
       }
     );
     if (!newDailyQuest) throw Error;

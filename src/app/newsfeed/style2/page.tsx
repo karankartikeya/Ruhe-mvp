@@ -62,8 +62,8 @@ const newsFeedStyle2 = () => {
       loaderName="style2"
       differentLogo="logo-color.png"
     >
+      <h3>Newsfeed</h3>
       <div className="page-center">
-        {/* <StorySection /> */}
         <Container fluid className="section-t-space px-0 layout-default">
           <div className="page-content">
             <ContentLeft />

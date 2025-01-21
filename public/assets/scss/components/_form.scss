@@ -143,6 +143,16 @@
           right: 48px;
         }
       }
+      .post-icon{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+  
+        &.icon-3 {
+          right:5px;
+          font-weight: 600;
+        }
+      }
     }
   }
 }
