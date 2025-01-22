@@ -7,30 +7,43 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux-toolkit/store";
 import { styleOneMoreComponent } from "@/Data/NewsFeed";
 import { useEffect, useState } from "react";
-import { getInfinitePosts } from "@/lib/server/appwrite";
+import { getBookmarks, getInfinitePosts } from "@/lib/server/appwrite";
 import { Post } from "../../../../../types";
 import PostSection from "./PostSection";
+import { BookmarkInterFace } from "@/Common/CommonInterFace";
+import { useAppSelector } from "@/utils/hooks";
 
-const PostPanel: React.FC = () => {
+const PostPanel: React.FC<BookmarkInterFace> = ({ type }) => {
   const level = useSelector(
     (state: RootState) => state.ShowMorePostSlice.style1
   );
+  const user = useAppSelector((state) => state.userSlice.data);
   const [pageParam, setPageParam] = useState<string | null>(null);
   const [postsData, setPostsData] = useState<any>([]);
   useEffect(() => {
     const getPosts = async () => {
-      const posts = await getInfinitePosts({ pageParam });
-      posts?.documents.map((post) => {
-        console.log("poste==", post);
-      });
-      console.log("posts==", posts?.documents);
-      setPostsData(posts?.documents);
+      if (type !== "bookmarks") {
+        const posts = await getInfinitePosts({ pageParam });
+        posts?.documents.map((post) => {
+          // console.log("poste==", post);
+        });
+        // console.log("posts==", posts?.documents);
+        setPostsData(posts?.documents);
+        return;
+      } else {
+        const posts = await getBookmarks(user.$id);
+        posts?.map((post) => {
+          // console.log("bookmarkedpost from clientside==", post);
+        });
+        setPostsData(posts);
+        return;
+      }
     };
     getPosts();
   }, []);
   const numbers = [1, 2, 3];
   const post = postsData[0] as Post;
-  // console.log("post====>==", post);
+  // console.log("bookpost====>==", post);
   return (
     <>
       <div className="post-panel infinite-loader-sec section-t-space">

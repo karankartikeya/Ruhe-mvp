@@ -12,7 +12,7 @@ export default async function Login() {
   useEffect(() => {
     const checkUser = async () => {
       const user = await getLoggedInUser();
-      console.log("user=", user);
+      // console.log("user=", user);
       if (user) {
         redirect("/newsfeed/style2");
       }

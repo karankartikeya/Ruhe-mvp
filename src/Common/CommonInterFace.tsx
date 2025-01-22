@@ -116,3 +116,7 @@ export interface DetailGalleryInterFace {
   showPhotos: boolean;
   setShowPhotos: (value: boolean) => void;
 }
+
+export interface BookmarkInterFace {
+  type?: "allpost" | "bookmarks";
+}

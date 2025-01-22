@@ -42,7 +42,7 @@ const DetailBox: FC<DetailBoxProps> = ({ postId, postContent }) => {
       bookmarkArray = bookmarkArray.filter(
         (bookmark: any) => bookmark.bookmarkId !== bookmarkId
       );
-      console.log("bookMarkId==>==>", bookmarkId);
+      // console.log("bookMarkId==>==>", bookmarkId);
       bookmarkArray = bookmarkArray.map((item: any) => JSON.stringify(item));
       const deletedBookmark = await deleteBookmark(bookmarkId!, bookmarkArray, user?.$id);
       if (!deletedBookmark) {

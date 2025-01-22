@@ -28,7 +28,7 @@ export async function createSessionClient() {
 
   const session = (await cookies()).get(SESSION_COOKIE);
   if (!session || !session.value) {
-    console.log("No active session");
+    //console.log("No active session");
     return {
       get account() {
         return new Account(client);
@@ -63,13 +63,13 @@ export async function createSessionClient() {
 //     const currAccount = await account.get();
 //     return currAccount;
 //   } catch (error) {
-//     console.log(error);
+//     //console.log(error);
 //   }
 // }
 
 // export async function getLoggedInUser() {
 //   try {
-//     console.log("checking");
+//     //console.log("checking");
 //     // const { account } = await createSessionClient();
 //     const user = await getAccount();
 //     if (!user) throw error;
@@ -81,7 +81,7 @@ export async function createSessionClient() {
 //     if (!currentUser) throw error;
 //     return currentUser.documents[0];
 //   } catch (error) {
-//     console.log(error);
+//     //console.log(error);
 //     return null;
 //   }
 // }
@@ -92,23 +92,23 @@ export async function getAccount() {
     const { account } = await createSessionClient();
     const session = await account.getSession("current");
     if (!session) {
-      console.log("No active session");
+      //console.log("No active session");
       return null;
     }
     const currAccount = await account.get();
     return currAccount;
   } catch (error) {
-    console.log("Error fetching account: ", error);
+    //console.log("Error fetching account: ", error);
     return null;
   }
 }
 
 export async function getLoggedInUser() {
   try {
-    console.log("Checking for logged-in user...");
+    //console.log("Checking for logged-in user...");
     const user = await getAccount();
     if (!user) {
-      console.log("User not logged in");
+      //console.log("User not logged in");
       return null;
     }
     const currentUser = await databases.listDocuments(
@@ -117,12 +117,12 @@ export async function getLoggedInUser() {
       [Query.equal("userId", user.$id)]
     );
     if (currentUser.documents.length === 0) {
-      console.log("User not found in database");
+      //console.log("User not found in database");
       return null;
     }
     return currentUser.documents[0];
   } catch (error) {
-    console.log("Error in getLoggedInUser: ", error);
+    //console.log("Error in getLoggedInUser: ", error);
     return null;
   }
 }
@@ -161,7 +161,7 @@ export const signup = async (
     return error;
   }
   // const result = await account.createEmailPasswordSession(email, password);
-  // console.log("result", result);
+  // //console.log("result", result);
   // const setCookie = (await cookies()).set(SESSION_COOKIE, result.secret, {
   //   path: "/",
   //   httpOnly: true,
@@ -171,7 +171,7 @@ export const signup = async (
   // if (setCookie) {
   //   redirect("/newsfeed/style2");
   // } else {
-  //   console.log("err result data....", result);
+  //   //console.log("err result data....", result);
   //   return error;
   // }
 };
@@ -189,12 +189,12 @@ export async function getUsers(limit?: number) {
       appwriteConfig.userCollectionId,
       queries
     );
-    console.log("users", users.documents);
+    //console.log("users", users.documents);
     if (!users) throw Error;
 
     return users.documents;
   } catch (error) {
-    console.log(error);
+    //console.log(error);
   }
 }
 
@@ -250,7 +250,7 @@ export async function updateUser(user: UserUpdate) {
 
     return updatedUser;
   } catch (error) {
-    console.log(error);
+    //console.log(error);
   }
 }
 
@@ -259,10 +259,10 @@ export async function updateUser(user: UserUpdate) {
 }
 export const login = async (email: string, password: string) => {
   try {
-    console.log("runnning code");
+    //console.log("runnning code");
     // const { account } = await createAdminClient();
     const result = await account.createEmailPasswordSession(email, password);
-    console.log("result data....", result);
+    //console.log("result data....", result);
     const session = (await cookies()).set(SESSION_COOKIE, result.secret, {
       path: "/",
       httpOnly: true,
@@ -270,15 +270,15 @@ export const login = async (email: string, password: string) => {
       secure: true,
     });
     // if (result) {
-    //   console.log("success result data....", result);
+    //   //console.log("success result data....", result);
     //   redirect("/newsfeed/style2");
     // } else {
-    //   console.log("err result data....", result);
+    //   //console.log("err result data....", result);
     // }
-    // console.log("result data....", result);
+    // //console.log("result data....", result);
     return result;
   } catch {
-    console.log("error");
+    //console.log("error");
     return null;
   }
 };
@@ -288,10 +288,10 @@ export const login = async (email: string, password: string) => {
 }
 export const signin = async (email: string, password: string) => {
   try {
-    console.log("runnning code");
+    //console.log("runnning code");
     // const { account } = await createAdminClient();
     const result = await account.createEmailPasswordSession(email, password);
-    console.log("result data....", result);
+    //console.log("result data....", result);
     const session = (await cookies()).set(SESSION_COOKIE, result.secret, {
       path: "/",
       httpOnly: true,
@@ -302,18 +302,18 @@ export const signin = async (email: string, password: string) => {
     if (currUser) {
       return currUser !== null;
     } else {
-      console.log("err result data....", result);
+      //console.log("err result data....", result);
       return null;
     }
     // if (result) {
-    //   console.log("success result data....", result);
+    //   //console.log("success result data....", result);
     //   redirect("/newsfeed/style2");
     // } else {
-    //   console.log("err result data....", result);
+    //   //console.log("err result data....", result);
     // }
-    // console.log("result data....", result);
+    // //console.log("result data....", result);
   } catch {
-    console.log("error");
+    //console.log("error");
     return null;
   }
 };
@@ -350,7 +350,7 @@ export const saveUser = async (user: {
     );
     return newUser;
   } catch (error) {
-    console.log("Error while saving user to db", error);
+    //console.log("Error while saving user to db", error);
   }
 };
 {
@@ -359,8 +359,8 @@ export const saveUser = async (user: {
 
 export const deleteUser = async (docId: string, userId: string) => {
   try {
-    console.log("docId", docId);
-    console.log("userId", userId);
+    //console.log("docId", docId);
+    //console.log("userId", userId);
     const statusCode = await databases.deleteDocument(
       appwriteConfig.databaseId,
       appwriteConfig.userCollectionId,
@@ -371,7 +371,7 @@ export const deleteUser = async (docId: string, userId: string) => {
     if (!deleteUser) return null;
     return { status: "Ok" };
   } catch (error) {
-    console.log("Error while deleting user", error);
+    //console.log("Error while deleting user", error);
   }
 };
 
@@ -413,7 +413,7 @@ export const createPost = async (post: INewPost) => {
     }
     return newPost;
   } catch (error) {
-    console.log("Error while creating post", error);
+    //console.log("Error while creating post", error);
   }
 };
 
@@ -432,7 +432,7 @@ export async function searchPosts(searchTerm: string) {
 
     return posts;
   } catch (error) {
-    console.log(error);
+    //console.log(error);
   }
 }
 
@@ -461,7 +461,7 @@ export const getInfinitePosts = async ({
     if (!posts) throw Error;
     return posts;
   } catch (error) {
-    console.log("Error while fetching posts", error);
+    //console.log("Error while fetching posts", error);
   }
 };
 
@@ -479,7 +479,7 @@ export const getPostById = async (postId: string) => {
     if (!post) throw Error;
     return post;
   } catch (error) {
-    console.log("Error while fetching post by id", error);
+    //console.log("Error while fetching post by id", error);
   }
 };
 
@@ -498,7 +498,7 @@ export async function getRecentPosts() {
 
     return posts;
   } catch (error) {
-    console.log(error);
+    //console.log(error);
   }
 }
 
@@ -516,10 +516,10 @@ export async function getTrendingTopics() {
     appwriteConfig.trendingTopicsCollectionId,
     [Query.orderDesc("$createdAt"), Query.limit(1)]
   );
-  // console.log("trendingTopics", trendingTopics);
+  // //console.log("trendingTopics", trendingTopics);
   if (!trendingTopics) throw Error;
   const trendingTopicsData = trendingTopics.documents[0];
-  // console.log("trendingTopicsData", trendingTopicsData);
+  // //console.log("trendingTopicsData", trendingTopicsData);
   const hashtags = trendingTopicsData.hashtags;
   const trendingTopicsArray = [];
   for (let i = 0; i < hashtags.length; i++) {
@@ -593,7 +593,7 @@ export async function updatePost(post: any) {
 
     return updatedPost;
   } catch (error) {
-    console.log(error);
+    //console.log(error);
   }
 }
 
@@ -616,7 +616,7 @@ export async function deletePost(postId?: string, imageId?: string) {
 
     return { status: "Ok" };
   } catch (error) {
-    console.log(error);
+    //console.log(error);
   }
 }
 
@@ -630,7 +630,7 @@ export async function uploadFile(file: File) {
 
     return uploadedFile;
   } catch (error) {
-    console.log(error);
+    //console.log(error);
   }
 }
 
@@ -650,7 +650,7 @@ export async function getFilePreview(fileId: string) {
 
     return fileUrl;
   } catch (error) {
-    console.log(error);
+    //console.log(error);
   }
 }
 
@@ -660,7 +660,7 @@ export async function deleteFile(fileId: string) {
 
     return { status: "ok" };
   } catch (error) {
-    console.log(error);
+    //console.log(error);
   }
 }
 
@@ -686,7 +686,7 @@ export const createMood = async (mood: any) => {
     if (!newMood) throw Error;
     return newMood;
   } catch (error) {
-    console.log("Error while creating mood", error);
+    //console.log("Error while creating mood", error);
   }
 };
 
@@ -703,7 +703,7 @@ export const getMoods = async (userId: string) => {
     if (!moods) throw Error;
     return moods;
   } catch (error) {
-    console.log("Error while fetching moods", error);
+    //console.log("Error while fetching moods", error);
   }
 };
 
@@ -714,7 +714,7 @@ export const getMoods = async (userId: string) => {
 }
 export const createDailyQuest = async (dailyQuest: DailyQuestResponse) => {
   try {
-    console.log("dailyQuest in api", dailyQuest);
+    //console.log("dailyQuest in api", dailyQuest);
     //generate random points based on the time of submission
     //if submitted before 12pm, points will be between 6-10
     //if submitted after 12pm, points will be between 1-5
@@ -740,7 +740,7 @@ export const createDailyQuest = async (dailyQuest: DailyQuestResponse) => {
     if (!newDailyQuest) throw Error;
     return newDailyQuest;
   } catch (error) {
-    console.log("Error while creating daily quest", error);
+    //console.log("Error while creating daily quest", error);
   }
 };
 
@@ -756,15 +756,15 @@ export const getDailyQuests = async (userId: string) => {
       [Query.orderDesc("$createdAt")]
       // [Query.equal("userId", userId), Query.orderDesc("$createdAt")]
     );
-    console.log("desc", dailyQuests);
+    //console.log("desc", dailyQuests);
     const filteredDailyQuests = dailyQuests.documents.filter(
       (quest) => quest.userIds["$id"] === userId
     );
     if (!dailyQuests) throw Error;
-    console.log("dailyQuests", filteredDailyQuests[0]);
+    //console.log("dailyQuests", filteredDailyQuests[0]);
     return filteredDailyQuests;
   } catch (error) {
-    console.log("Error while fetching daily quests", error);
+    //console.log("Error while fetching daily quests", error);
   }
 };
 
@@ -774,7 +774,7 @@ export const createBookmarks = async (
   bookmarks: string[]
 ) => {
   try {
-    console.log("entered the jungle with values=>", userId, postId, bookmarks);
+    //console.log("entered the jungle with values=>", userId, postId, bookmarks);
     const newBookmark = await databases.createDocument(
       appwriteConfig.databaseId,
       appwriteConfig.bookmarksCollectionId,
@@ -785,7 +785,7 @@ export const createBookmarks = async (
       }
     );
     if (!newBookmark) throw Error;
-    console.log("calling save bookmark with id=>", newBookmark.$id);
+    //console.log("calling save bookmark with id=>", newBookmark.$id);
     const saveBookmarktoUser = await saveBookmarktoUserBookmarks(
       postId,
       userId,
@@ -794,7 +794,7 @@ export const createBookmarks = async (
     );
     return saveBookmarktoUser;
   } catch (error) {
-    console.log("Error while creating bookmark", error);
+    //console.log("Error while creating bookmark", error);
   }
 };
 
@@ -805,11 +805,10 @@ export const saveBookmarktoUserBookmarks = async (
   bookmarks: string[]
 ) => {
   try {
-    console.log("entered the saving jungle with values=>", postId, userId, bookmarkId);
-    const newBookmark = {postId: postId, bookmarkId: bookmarkId};
+    const newBookmark = { postId: postId, bookmarkId: bookmarkId };
     const stringifiedBookmarks = JSON.stringify(newBookmark);
     bookmarks.push(stringifiedBookmarks);
-    console.log("bookmarks got stringed", bookmarks);
+    //console.log("bookmarks got stringed", bookmarks);
     const saveBookmarktoUserBookmark = await databases.updateDocument(
       appwriteConfig.databaseId,
       appwriteConfig.userCollectionId,
@@ -820,31 +819,38 @@ export const saveBookmarktoUserBookmarks = async (
     );
     return saveBookmarktoUserBookmark;
   } catch (error) {
-    console.log("Error while saving bookmark to user bookmarks", error);
+    //console.log("Error while saving bookmark to user bookmarks", error);
   }
 };
 
-export const deleteBookmark = async (bookmarkId: string, userbookmarks:string[], userId:string) => {
+export const deleteBookmark = async (
+  bookmarkId: string,
+  userbookmarks: string[],
+  userId: string
+) => {
   try {
-    console.log("entered the jungle with values=>", bookmarkId, userbookmarks, userId);
     const statusCode = await databases.deleteDocument(
       appwriteConfig.databaseId,
       appwriteConfig.bookmarksCollectionId,
       bookmarkId
     );
     if (!statusCode) throw Error;
-    console.log("status code==>", statusCode);
-    const deleteBookmarkUserDb = await deleteBookmarkFromUser(userId, userbookmarks);
+    //console.log("status code==>", statusCode);
+    const deleteBookmarkUserDb = await deleteBookmarkFromUser(
+      userId,
+      userbookmarks
+    );
     return deleteBookmarkUserDb;
     return { status: "Ok" };
   } catch (error) {
-    console.log("Error while deleting bookmark", error);
   }
 };
 
-export const deleteBookmarkFromUser = async (userId: string,bookmarks: string[]) => {
+export const deleteBookmarkFromUser = async (
+  userId: string,
+  bookmarks: string[]
+) => {
   try {
-    console.log("entered the saving deletejungle with values=>", userId, bookmarks);
     const saveBookmarktoUserBookmark = await databases.updateDocument(
       appwriteConfig.databaseId,
       appwriteConfig.userCollectionId,
@@ -853,40 +859,34 @@ export const deleteBookmarkFromUser = async (userId: string,bookmarks: string[])
         bookmarks: bookmarks,
       }
     );
-    console.log("saveBookmarktoUserBookmark==>", saveBookmarktoUserBookmark);
+    //console.log("saveBookmarktoUserBookmark==>", saveBookmarktoUserBookmark);
     return saveBookmarktoUserBookmark;
   } catch (error) {
-    console.log("Error while deleting bookmark from user bookmarks", error);
+    //console.log("Error while deleting bookmark from user bookmarks", error);
   }
-}
-
+};
 
 export const getBookmarks = async (userId: string) => {
   try {
-    const bookmarks = await databases.listDocuments(
+    // Fetch all bookmarks for the given userF
+    console.log("Fetching bookmarks for user:", userId);
+    const bookmarksResponse = await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.bookmarksCollectionId,
-      [Query.orderDesc("$createdAt")]
+      [Query.equal("userId", userId)]
     );
-    const filteredBookmarks = bookmarks.documents.filter(
-      (bookmark) => bookmark.userId["$id"] === userId
+    console.log("bookmarksResponse==>", bookmarksResponse);
+    const bookmarkedPostIds = bookmarksResponse.documents.map(
+      (doc) => doc.postId
     );
-    if (!bookmarks) throw Error;
-    console.log("bookmarks==>", filteredBookmarks);
-    //fetch posts with this postId
-    // const bookmarkedPosts = [];
-    // for (let i = 0; i < filteredBookmarks.length; i++) {
-    //   const post = await databases.getDocument(
-    //     appwriteConfig.databaseId,
-    //     appwriteConfig.postCollectionId,
-    //     filteredBookmarks[i].postId["$id"]
-    //   );
-    //   bookmarkedPosts.push(post);
-    // }
-    // return bookmarkedPosts;
-    return filteredBookmarks;
+    console.log("bookmarkedPostIds==>", bookmarkedPostIds);
+    if (bookmarkedPostIds.length === 0) {
+      throw new Error("No bookmarks found for the user");
+    }
+    return bookmarkedPostIds;
   } catch (error) {
-    console.log("Error while fetching bookmarks", error);
+    //console.error("Error fetching bookmarked posts:", error);
+    throw error;
   }
 };
 
@@ -901,7 +901,7 @@ export const checkUsername = async (username: string) => {
     appwriteConfig.userCollectionId,
     [Query.equal("username", username)]
   );
-  console.log("checkUsernamessss", checkUsernameData.documents);
+  // //console.log("checkUsernamessss", checkUsernameData.documents);
   return checkUsernameData.documents.length === 0;
 };
 
@@ -915,6 +915,6 @@ export const checkPhone = async (phone: string) => {
     appwriteConfig.userCollectionId,
     [Query.equal("phone", phone)]
   );
-  console.log("checkPhone", checkPhoneData.documents);
+  // //console.log("checkPhone", checkPhoneData.documents);
   return checkPhoneData.documents.length === 0;
 };

@@ -30,7 +30,7 @@ const ProfileTimeLine = () => {
   useEffect(() => {
     const checkUser = async () => {
       const user = await getLoggedInUser();
-      console.log("user=", user);
+      // console.log("user=", user);
       if (!user) {
         redirect("/authentication/login");
       }
