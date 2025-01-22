@@ -42,7 +42,7 @@ const UserProFile = () => {
           </div>
         </Link>
         <div className="profile-detail">
-          <Link href="/profile">
+          <Link href="/profile/timeline">
             <h2>
               {user.name}
               <span>❤</span>
