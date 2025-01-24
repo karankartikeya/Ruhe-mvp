@@ -33,7 +33,7 @@ const ShareModal: FC<ShareModalProps> = ({ type, showModal, toggleModal }) => {
       response: response,
     });
     if (!feedDailyQues) {
-      console.log("Error submitting daily quest", feedDailyQues);
+      // console.log("Error submitting daily quest", feedDailyQues);
       toast.error("Error submitting daily quest");
     }
     else{
@@ -43,9 +43,9 @@ const ShareModal: FC<ShareModalProps> = ({ type, showModal, toggleModal }) => {
   useEffect(() => {
     // console.log("user==", user);
     const fetchDailyQuest = async () => {
-      console.log("user==", user);
+      // console.log("user==", user);
       const res = await getDailyQuests(user.$id);
-      console.log("res==", res);
+      // console.log("res==", res);
       res?.map((quest) => {
         setDailyQuest((prev) => [
           ...prev,

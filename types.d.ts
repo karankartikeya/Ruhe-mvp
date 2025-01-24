@@ -45,6 +45,7 @@ export interface Post {
   ImageId?: string;
   user_details?: string[];
   createdAt?: string;
+  bookmarks?: Object[];
 }
 
 export interface INewPost {

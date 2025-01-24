@@ -33,6 +33,7 @@ export interface CommonUserHeadingProps {
 export interface DetailBoxProps {
   postId: string;
   postContent: OutputData;
+  bookmarks?: Object[];
 }
 
 export interface CommentSectionInterFace {

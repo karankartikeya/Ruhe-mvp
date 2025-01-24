@@ -768,11 +768,7 @@ export const getDailyQuests = async (userId: string) => {
   }
 };
 
-export const createBookmarks = async (
-  userId: string,
-  postId: string,
-  bookmarks: string[]
-) => {
+export const createBookmarks = async (userId: string, postId: string) => {
   try {
     //console.log("entered the jungle with values=>", userId, postId, bookmarks);
     const newBookmark = await databases.createDocument(
@@ -786,13 +782,8 @@ export const createBookmarks = async (
     );
     if (!newBookmark) throw Error;
     //console.log("calling save bookmark with id=>", newBookmark.$id);
-    const saveBookmarktoUser = await saveBookmarktoUserBookmarks(
-      postId,
-      userId,
-      newBookmark.$id,
-      bookmarks
-    );
-    return saveBookmarktoUser;
+
+    return newBookmark;
   } catch (error) {
     //console.log("Error while creating bookmark", error);
   }
@@ -823,11 +814,7 @@ export const saveBookmarktoUserBookmarks = async (
   }
 };
 
-export const deleteBookmark = async (
-  bookmarkId: string,
-  userbookmarks: string[],
-  userId: string
-) => {
+export const deleteBookmark = async (bookmarkId: string, userId: string) => {
   try {
     const statusCode = await databases.deleteDocument(
       appwriteConfig.databaseId,
@@ -836,14 +823,8 @@ export const deleteBookmark = async (
     );
     if (!statusCode) throw Error;
     //console.log("status code==>", statusCode);
-    const deleteBookmarkUserDb = await deleteBookmarkFromUser(
-      userId,
-      userbookmarks
-    );
-    return deleteBookmarkUserDb;
     return { status: "Ok" };
-  } catch (error) {
-  }
+  } catch (error) {}
 };
 
 export const deleteBookmarkFromUser = async (
@@ -866,24 +847,34 @@ export const deleteBookmarkFromUser = async (
   }
 };
 
-export const getBookmarks = async (userId: string) => {
+export const getBookmarks = async (userId: string, type?: string) => {
   try {
     // Fetch all bookmarks for the given userF
-    console.log("Fetching bookmarks for user:", userId);
-    const bookmarksResponse = await databases.listDocuments(
-      appwriteConfig.databaseId,
-      appwriteConfig.bookmarksCollectionId,
-      [Query.equal("userId", userId)]
-    );
-    console.log("bookmarksResponse==>", bookmarksResponse);
-    const bookmarkedPostIds = bookmarksResponse.documents.map(
-      (doc) => doc.postId
-    );
-    console.log("bookmarkedPostIds==>", bookmarkedPostIds);
-    if (bookmarkedPostIds.length === 0) {
-      throw new Error("No bookmarks found for the user");
+    if (type === "bookmarks") {
+      console.log("Fetching bookmarks for user:", userId);
+      const bookmarksResponse = await databases.listDocuments(
+        appwriteConfig.databaseId,
+        appwriteConfig.bookmarksCollectionId,
+        [Query.equal("userId", userId)]
+      );
+      console.log("bookmarksResponse==>", bookmarksResponse);
+      const bookmarkedPostIds = bookmarksResponse.documents.map(
+        (doc) => doc.postId
+      );
+      console.log("bookmarkedPostIds==>", bookmarkedPostIds);
+      if (bookmarkedPostIds.length === 0) {
+        throw new Error("No bookmarks found for the user");
+      }
+      return bookmarkedPostIds;
+    } else {
+      console.log("Fetching bookmarks from 2nd for user:", userId);
+      const bookmarksResponse = await databases.listDocuments(
+        appwriteConfig.databaseId,
+        appwriteConfig.bookmarksCollectionId,
+        [Query.equal("userId", userId)]
+      );
+      return bookmarksResponse.documents;
     }
-    return bookmarkedPostIds;
   } catch (error) {
     //console.error("Error fetching bookmarked posts:", error);
     throw error;

@@ -12,26 +12,32 @@ import { Post } from "../../../../../types";
 import PostSection from "./PostSection";
 import { BookmarkInterFace } from "@/Common/CommonInterFace";
 import { useAppSelector } from "@/utils/hooks";
+import { set } from "lodash";
 
 const PostPanel: React.FC<BookmarkInterFace> = ({ type }) => {
   const level = useSelector(
     (state: RootState) => state.ShowMorePostSlice.style1
   );
   const user = useAppSelector((state) => state.userSlice.data);
+  const bookmarks = useAppSelector((state) => state.bookmarksSlice.data);
   const [pageParam, setPageParam] = useState<string | null>(null);
   const [postsData, setPostsData] = useState<any>([]);
+  const [bookmarkArray, setBookmarkArray] = useState<any>([]);
   useEffect(() => {
     const getPosts = async () => {
       if (type !== "bookmarks") {
         const posts = await getInfinitePosts({ pageParam });
-        posts?.documents.map((post) => {
-          // console.log("poste==", post);
-        });
+        const bookmarkedposts = await getBookmarks(user.$id);
+        setBookmarkArray(bookmarkedposts);
+        // console.log("bookmarkedposts in client==", bookmarkedposts);
+        // posts?.documents.map((post) => {
+        //   // console.log("poste==", post);
+        // });
         // console.log("posts==", posts?.documents);
         setPostsData(posts?.documents);
         return;
       } else {
-        const posts = await getBookmarks(user.$id);
+        const posts = await getBookmarks(user.$id, "bookmarks");
         posts?.map((post) => {
           // console.log("bookmarkedpost from clientside==", post);
         });
@@ -56,18 +62,19 @@ const PostPanel: React.FC<BookmarkInterFace> = ({ type }) => {
             content={post.content}
             tags={post.tags}
             createdAt={post.$createdAt}
+            bookmarks={type === "bookmarks" ? null : bookmarkArray}
           />
         ))}
-        <FriendSuggestion />
+        {/* <FriendSuggestion /> */}
         {/* <SufiyaElizaSecondPost userImage={1} />
         <SufiyaElizaThirdPost userImage={1} iframeLink="https://giphy.com/embed/xl2zRzM8sVo3td58kS"/>
         <SufiyaElizaSecondPost userImage={1} />
         {styleOneMoreComponent.map((data, index) => (level.includes(index) ? data : ""))} */}
       </div>
-      <ShowMorePostIcon
+      {/* <ShowMorePostIcon
         dataLength={styleOneMoreComponent.length}
         value="style1"
-      />
+      /> */}
     </>
   );
 };

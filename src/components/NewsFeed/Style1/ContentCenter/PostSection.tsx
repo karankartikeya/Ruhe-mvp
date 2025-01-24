@@ -8,7 +8,7 @@ import { SufiyaElizaSecondPostInterFace } from "../Style1Types";
 import { Post } from "../../../../../types";
 import { formatDistanceToNow } from "date-fns";
 
-const PostSection: FC<Post> = ({$id, userId, user_details, content, tags, createdAt }) => {
+const PostSection: FC<Post> = ({$id, userId, user_details, content, tags, createdAt, bookmarks }) => {
   const getTimeDifference = (date: string) => {
     const postDate = new Date(date);
     return formatDistanceToNow(postDate, { addSuffix: true });
@@ -20,7 +20,7 @@ const PostSection: FC<Post> = ({$id, userId, user_details, content, tags, create
     <div className="post-wrapper col-grid-box section-t-space d-block">
       <CommonUserHeading name={user_details![0]} time={timeAgo} />
       <div className="post-details">
-        <DetailBox postId={$id} postContent={contentFix} />
+        <DetailBox postId={$id} postContent={contentFix} bookmarks={bookmarks}/>
         {/* <CommonLikePanel /> */}
         <CommonPostReact />
       </div>
