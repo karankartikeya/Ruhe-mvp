@@ -19,7 +19,6 @@ const PostPanel: React.FC<BookmarkInterFace> = ({ type }) => {
     (state: RootState) => state.ShowMorePostSlice.style1
   );
   const user = useAppSelector((state) => state.userSlice.data);
-  const bookmarks = useAppSelector((state) => state.bookmarksSlice.data);
   const [pageParam, setPageParam] = useState<string | null>(null);
   const [postsData, setPostsData] = useState<any>([]);
   const [bookmarkArray, setBookmarkArray] = useState<any>([]);
