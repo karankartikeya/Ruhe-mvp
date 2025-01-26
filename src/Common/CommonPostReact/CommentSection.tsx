@@ -3,19 +3,36 @@ import { CommentSectionInterFace } from "../CommonInterFace";
 import DynamicFeatherIcon from "../DynamicFeatherIcon";
 import MainComment from "./MainComment";
 import SubComment from "./SubComment";
-import { LoadMoreReplies } from "../../utils/constant";
+import { LoadMoreReplies, PostComment } from "../../utils/constant";
 import { Input } from "reactstrap";
 import { Href } from "../../utils/constant/index";
 import Picker, { EmojiClickData } from "emoji-picker-react";
+import { createComment } from "@/lib/server/appwrite";
+import { useAppSelector } from "@/utils/hooks";
+import { toast } from "react-toastify";
 
-const CommentSection: FC<CommentSectionInterFace> = ({ showComment }) => {
+const CommentSection: FC<CommentSectionInterFace> = ({
+  showComment,
+  postId,
+}) => {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [messageInput, setMessageInput] = useState("");
+  const user = useAppSelector((state) => state.userSlice.data);
 
-
-  const handleCommentSubmit = () => {
-    console.log("Comment Submitted", messageInput);
-  }
+  const handleCommentSubmit = async () => {
+    const commentSubmit = await createComment({
+      userId: user.$id,
+      postId: postId,
+      comment: messageInput,
+    });
+    if (!commentSubmit) {
+      console.log("Comment not submitted", commentSubmit);
+      toast.error("Something went wrong");
+    } else {
+      setMessageInput("");
+      console.log("Comment Submitted", messageInput);
+    }
+  };
   const toggleEmojiPicker = () => {
     setShowEmojiPicker(!showEmojiPicker);
   };
@@ -58,7 +75,11 @@ const CommentSection: FC<CommentSectionInterFace> = ({ showComment }) => {
             }
           />
           {showEmojiPicker ? <Picker onEmojiClick={addEmoji} /> : null}
-          <a href="#" onClick={handleCommentSubmit} className="post-icon icon-3 ">
+          <a
+            href="#"
+            onClick={handleCommentSubmit}
+            className="post-icon icon-3 "
+          >
             Post
           </a>
           {/* <a href={Href}>

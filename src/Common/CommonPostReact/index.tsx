@@ -6,7 +6,13 @@ import CommentSection from "./CommentSection";
 import ShareModal from "./ShareModal";
 import { reactions } from "@/Data/common";
 
-const CommonPostReact: FC = () => {
+
+type CommonPostReactInterFace = {
+  postId: string;
+}
+
+
+const CommonPostReact: FC<CommonPostReactInterFace> = ({postId}) => {
   const [showReaction, setShowReaction] = useState(false);
   const [showComment, setShowComment] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -43,7 +49,7 @@ const CommonPostReact: FC = () => {
           </li>
         </ul>
       </div>  
-      <CommentSection  showComment={showComment} />
+      <CommentSection  showComment={showComment} postId={postId} />
       <ShareModal type="post" showModal={showModal} toggleModal={toggleModal}/>
     </>
   );

@@ -37,6 +37,7 @@ export interface DetailBoxProps {
 }
 
 export interface CommentSectionInterFace {
+  postId: string;
   showComment: boolean;
 }
 

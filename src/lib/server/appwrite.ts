@@ -19,7 +19,13 @@ import {
   users,
 } from "../appwrite/config";
 import { error } from "console";
-import { DailyQuestResponse, INewPost, Post, UserUpdate } from "../../../types";
+import {
+  DailyQuestResponse,
+  INewPost,
+  Post,
+  UserUpdate,
+  Comment,
+} from "../../../types";
 
 export async function createSessionClient() {
   const client = new Client()
@@ -878,6 +884,60 @@ export const getBookmarks = async (userId: string, type?: string) => {
   } catch (error) {
     //console.error("Error fetching bookmarked posts:", error);
     throw error;
+  }
+};
+
+export const createComment = async (comment: Comment) => {
+  try {
+    console.log("Entered the jungle with values=>", comment);
+    const newComment = await databases.createDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.commentsCollectionId,
+      ID.unique(),
+      {
+        userId: comment.userId,
+        postId: comment.postId,
+        comment: comment.comment,
+      }
+    );
+    if (!newComment) {
+      console.log("comment can't be submitted: newComment", newComment);
+      console.log("comment can't be submitted: comment", Error);
+      return newComment;
+    } else {
+      console.log("comment submitted: newComment", newComment);
+      return newComment;
+    }
+  } catch (error) {
+    //console.log("Error while creating comment", error);
+  }
+};
+
+export const getComments = async (postId: string) => {
+  try {
+    const comments = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.commentsCollectionId,
+      [Query.equal("postId", postId), Query.orderDesc("$createdAt")]
+    );
+    if (!comments) throw Error;
+    return comments;
+  } catch (error) {
+    //console.log("Error while fetching comments", error);
+  }
+};
+
+export const deleteComment = async (commentId: string) => {
+  try {
+    const statusCode = await databases.deleteDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.commentsCollectionId,
+      commentId
+    );
+    if (!statusCode) throw Error;
+    return { status: "Ok" };
+  } catch (error) {
+    //console.log("Error while deleting comment", error);
   }
 };
 

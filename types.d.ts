@@ -56,10 +56,8 @@ export interface INewPost {
 }
 
 export interface Comment {
-  $id: string;
-  $permissions?: string[];
-  postId?: string; // Relationship to Post
-  userId?: string; // Relationship to User
+  userId: string;
+  postId: string;
   comment: string;
 }
 
