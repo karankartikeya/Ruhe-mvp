@@ -295,6 +295,62 @@ header {
                 }
             }
         }
+
+        .quest-btn {
+            padding: 16px 0;
+
+            .user-img {
+                width: 36px;
+                height: 35px;
+                border-radius: $radius-100;
+                position: relative;
+
+                .quest-stats {
+                    position: absolute;
+                    right: -2px;
+                    top: -8px;
+                    width: 12px;
+                    height: 12px;
+                    // background-color: rosybrown;
+                    border-radius: $radius-20;
+                    &.quest-count {
+                        font-weight: 900;
+                        color: #448bdc;
+                        
+                    }
+
+                    &.offline {
+                        background-color: rgba(var(--theme-danger), 1);
+                    }
+                }
+            }
+
+            .media {
+                align-items: center;
+            }
+
+            .media-body {
+                padding-left: 10px;
+                margin-bottom: -3px;
+
+                h4 {
+                    font-family: $font-1;
+                    color: rgba(var(--white), 1);
+                    font-weight: 500;
+                    font-size: $medium-size;
+                    text-transform: capitalize;
+                }
+
+                span {
+                    color: blue($color: #448bdc)!important;
+                    text-transform: capitalize;
+                    font-size: 12px;
+                }
+            }
+        }
+
+
+
     }
 
     .mobile-fix-menu {

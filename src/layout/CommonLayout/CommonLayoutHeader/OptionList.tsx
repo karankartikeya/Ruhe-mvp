@@ -7,6 +7,7 @@ import SearchBox from "./SearchBox";
 import FriendRequest from "./FriendRequest";
 import LeftButtons from "./LeftButtons";
 import AddPost from "./AddPost";
+import DailyQuest from "./DailyQuest";
 
 const OptionList: FC = () => {
   return (
@@ -15,6 +16,7 @@ const OptionList: FC = () => {
       <UserProfile />
       <HeaderMessage />
       <DarkLight />
+      <DailyQuest/>
       {/* <Notification /> */}
       
       

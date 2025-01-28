@@ -75,6 +75,7 @@ export interface MainCommentProps {
   message: string;
   like?: number;
   id:string
+  username?: string;
 }
 
 export interface SubCommentProps {
