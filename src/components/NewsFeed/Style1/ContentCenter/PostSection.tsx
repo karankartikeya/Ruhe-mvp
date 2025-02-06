@@ -10,6 +10,7 @@ import { FC } from "react";
 import { SufiyaElizaSecondPostInterFace } from "../Style1Types";
 import { Post } from "../../../../../types";
 import { formatDistanceToNow } from "date-fns";
+import { getTimeDifference } from "@/utils/validators";
 
 const PostSection: FC<Post> = ({
   $id,
@@ -20,10 +21,6 @@ const PostSection: FC<Post> = ({
   createdAt,
   bookmarks,
 }) => {
-  const getTimeDifference = (date: string) => {
-    const postDate = new Date(date);
-    return formatDistanceToNow(postDate, { addSuffix: true });
-  };
   const contentFix = JSON.parse(content!);
   const timeAgo = getTimeDifference(createdAt!);
   // const profileName =user_details[0];

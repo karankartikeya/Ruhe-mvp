@@ -52,8 +52,9 @@ export interface CreatePostInterface {
 }
 
 export interface ShareModalProps {
-  type: "post" | "dailyQuest";
+  type: "submitted" | "notSubmitted";
   showModal: boolean;
+  question?: string;
   toggleModal: () => void;
 }
 
@@ -76,6 +77,7 @@ export interface MainCommentProps {
   like?: number;
   id:string
   username?: string;
+  timeofComment?: string;
 }
 
 export interface SubCommentProps {

@@ -50,7 +50,7 @@ const CommonPostReact: FC<CommonPostReactInterFace> = ({postId}) => {
         </ul>
       </div>  
       <CommentSection  showComment={showComment} postId={postId} />
-      <ShareModal type="post" showModal={showModal} toggleModal={toggleModal}/>
+      {/* <ShareModal type="submitted" showModal={showModal} toggleModal={toggleModal}/> */}
     </>
   );
 };

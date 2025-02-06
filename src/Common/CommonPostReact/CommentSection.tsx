@@ -20,6 +20,8 @@ const CommentSection: FC<CommentSectionInterFace> = ({
   const user = useAppSelector((state) => state.userSlice.data);
   const [comments, setComments] = useState<any>([]);
 
+
+
   const handleCommentSubmit = async () => {
     const commentSubmit = await createComment({
       userId: user.$id,
@@ -55,7 +57,7 @@ const CommentSection: FC<CommentSectionInterFace> = ({
       <div className={`comments ${showComment ? "d-block" : ""}`}>
         {comments.map((comment: any) => (
           <div key={comment.$id} className="main-comment">
-            <MainComment message={comment.comment} id="fourthComment" />
+            <MainComment message={comment.comment} username={comment.userId["name"]} id="fourthComment" timeofComment={comment.$createdAt} />
             {/* <div className="sub-comment">
              <a href={Href} className="loader">
             <DynamicFeatherIcon iconName="RotateCw" className="iw-15 ih-15" />
