@@ -15,7 +15,7 @@ const SufiyaElizaMultiplePost: FC<SufiyaElizaMultiplePostInterFace> = ({moreImag
         <PostImages moreImage={moreImage} diffrentImage={diffrentImage} main={main }second={second}  third={third} />
         {/* <DetailBox heading={BirthdayHeading} span={BirthdaySpan} /> */}
         <CommonLikePanel />
-        <CommonPostReact />
+        {/* <CommonPostReact /> */}
       </div>
     </div>
   );

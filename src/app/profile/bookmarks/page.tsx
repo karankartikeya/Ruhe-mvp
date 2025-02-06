@@ -1,5 +1,6 @@
 "use client";
 import CreatePost from "@/Common/CreatePost";
+import PostPanel from "@/components/NewsFeed/Style1/ContentCenter/PostPanel";
 import SufiyaElizaFirstPost from "@/components/NewsFeed/Style1/ContentCenter/SufiyaElizaFirstPost";
 import SufiyaElizaSecondPost from "@/components/NewsFeed/Style1/ContentCenter/SufiyaElizaSecondPost";
 import SufiyaElizaThirdPost from "@/components/NewsFeed/Style1/ContentCenter/SufiyaElizaThirdPost";
@@ -30,7 +31,7 @@ const ProfileBookmarks = () => {
   useEffect(() => {
     const checkUser = async () => {
       const user = await getLoggedInUser();
-      console.log("user=", user);
+      // console.log("user=", user);
       if (!user) {
         redirect("/authentication/login");
       }
@@ -72,23 +73,7 @@ const ProfileBookmarks = () => {
             <div className="overlay-bg" />
             {/** build the below UI for users posts */}
             <div className="post-panel infinite-loader-sec section-t-space">
-              <SufiyaElizaFirstPost mainImage={11} userImage={15} />
-              <SufiyaElizaMultiplePost
-                moreImage
-                diffrentImage
-                userImage={14}
-                main={40}
-                second={41}
-                third={42}
-              />
-              <SufiyaElizaSecondPost userImage={10} />
-              <SufiyaElizaThirdPost
-                userImage={1}
-                iframeLink="https://giphy.com/embed/xl2zRzM8sVo3td58kS"
-              />
-              <SufiyaElizaSecondPost userImage={15} />
-              <SufiyaElizaSecondPost userImage={15} />
-              <SufiyaElizaSecondPost userImage={10} />
+              <PostPanel type="bookmarks" />
             </div>
           </div>
 

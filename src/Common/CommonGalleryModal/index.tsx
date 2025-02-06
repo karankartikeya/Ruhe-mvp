@@ -20,7 +20,7 @@ const CommonGalleryModal: FC<CommonGalleryModalInterFace> = ({modal,toggle}) => 
                   <div className="post-wrapper">
                     <div className="post-details">
                       <CommonLikePanel />
-                      <CommonPostReact />
+                      {/* <CommonPostReact /> */}
                     </div>
                   </div>
                 </div>

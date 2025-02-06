@@ -25,7 +25,7 @@ const newsFeedStyle2 = () => {
   const [localloading, setLocalLoading] = useState(false);
   const avatarUrl = avatars.getInitials("karan");
   // const ava = avatarUrl.then((res) => console.log(res));
-  console.log("userava=", avatarUrl);
+  // console.log("userava=", avatarUrl);
 
   useEffect(() => {
     const checkUser = async () => {

@@ -19,7 +19,7 @@ const GemixStore = () => {
         <StoreProducts />
         {/* <DetailBox heading={storeHeading} span={storeSpan} /> */}
         <CommonLikePanel />
-        <CommonPostReact />
+        {/* <CommonPostReact /> */}
       </div>
     </div>
   );

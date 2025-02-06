@@ -12,7 +12,7 @@ const PostDetails: FC<PostDetailInterFace> = ({mainImage}) => {
       {/* <PostImage mainImage={mainImage}  /> */}
       {/* <DetailBox heading={BirthdayHeading} span={BirthdaySpan} /> */}
       <CommonLikePanel />
-      <CommonPostReact />
+      {/* <CommonPostReact /> */}
     </div>
   );
 };

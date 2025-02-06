@@ -35,7 +35,7 @@ const SufiyaElizaTwoPhotoPost:FC<SufiyaElizaTwoPhotoPostInterFace>  = ({diffrent
         </div>
         {/* <DetailBox heading={BirthdayHeading} span={BirthdaySpan} /> */}
         <CommonLikePanel />
-        <CommonPostReact />
+        {/* <CommonPostReact /> */}
       </div>
     </div>
   );

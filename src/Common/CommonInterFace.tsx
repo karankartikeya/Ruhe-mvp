@@ -33,9 +33,11 @@ export interface CommonUserHeadingProps {
 export interface DetailBoxProps {
   postId: string;
   postContent: OutputData;
+  bookmarks?: Object[];
 }
 
 export interface CommentSectionInterFace {
+  postId: string;
   showComment: boolean;
 }
 
@@ -50,8 +52,9 @@ export interface CreatePostInterface {
 }
 
 export interface ShareModalProps {
-  type: "post" | "dailyQuest";
+  type: "submitted" | "notSubmitted";
   showModal: boolean;
+  question?: string;
   toggleModal: () => void;
 }
 
@@ -73,6 +76,8 @@ export interface MainCommentProps {
   message: string;
   like?: number;
   id:string
+  username?: string;
+  timeofComment?: string;
 }
 
 export interface SubCommentProps {
@@ -115,4 +120,8 @@ export interface AlbumInterFace {
 export interface DetailGalleryInterFace {
   showPhotos: boolean;
   setShowPhotos: (value: boolean) => void;
+}
+
+export interface BookmarkInterFace {
+  type?: "allpost" | "bookmarks";
 }

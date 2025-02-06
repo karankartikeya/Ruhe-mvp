@@ -20,7 +20,7 @@ type DailyQuestProps = {
   question: string;
   response: string;
 };
-const ShareModal: FC<ShareModalProps> = ({ type, showModal, toggleModal }) => {
+const ShareModal: FC<ShareModalProps> = ({ type, showModal,question, toggleModal }) => {
   const [dailyQuest, setDailyQuest] = useState<DailyQuestProps[]>([]);
   const [response, setResponse] = useState<string>("");
   const user = useAppSelector((state) => state.userSlice.data);
@@ -33,34 +33,35 @@ const ShareModal: FC<ShareModalProps> = ({ type, showModal, toggleModal }) => {
       response: response,
     });
     if (!feedDailyQues) {
-      console.log("Error submitting daily quest", feedDailyQues);
+      // console.log("Error submitting daily quest", feedDailyQues);
       toast.error("Error submitting daily quest");
-    }
-    else{
+    } else {
       toast.success("Daily quest submitted successfully");
     }
   };
-  useEffect(() => {
-    // console.log("user==", user);
-    const fetchDailyQuest = async () => {
-      console.log("user==", user);
-      const res = await getDailyQuests(user.$id);
-      console.log("res==", res);
-      res?.map((quest) => {
-        setDailyQuest((prev) => [
-          ...prev,
-          {
-            question: quest.question,
-            response: quest.response,
-          },
-        ]);
-      });
-      // const res = await getDailyQuests(user.$id);
-      // console.log("res==", res);
-    };
-    fetchDailyQuest();
-  }, []);
-
+  // useEffect(() => {
+  //   // console.log("user==", user);
+  //   const fetchDailyQuest = async () => {
+  //     // console.log("user==", user);
+  //     const res = await getDailyQuests(user.$id);
+  //     // console.log("res==", res);
+  //     res?.map((quest) => {
+  //       setDailyQuest((prev) => [
+  //         ...prev,
+  //         {
+  //           question: quest.question,
+  //           response: quest.response,
+  //         },
+  //       ]);
+  //     });
+  //     // const res = await getDailyQuests(user.$id);
+  //     // console.log("res==", res);
+  //   };
+  //   fetchDailyQuest();
+  // }, []);
+  console.log("feedDailyQues==", type, showModal);
+  const responseCheck =
+    dailyQuest[0]?.response == null ? "" : dailyQuest[0]?.response;
   return (
     <Modal
       isOpen={showModal}
@@ -85,27 +86,33 @@ const ShareModal: FC<ShareModalProps> = ({ type, showModal, toggleModal }) => {
           </div>
           <div className="post-content">
             <h3>
-              <u>Ques:</u> {dailyQuest[0]?.question}
+              <u>Ques:</u> {question}
             </h3>
             <h5 className="tag">
-              <span>#ourcutepuppy</span>
+              <span></span>
             </h5>
           </div>
         </div>
         <div className="input-section">
-          <Input
-            type="text"
-            className="emojiPicker"
-            value={response}
-            onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              setResponse(event.target.value)
-            }
-            placeholder="write your daily quest.."
-          />
+          {type == "submitted" ? (
+            <h3>Already Submitted</h3>
+          ) : (
+            <Input
+              type="textarea"
+              name="text"
+              id="exampleText"
+              placeholder="Your response here"
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setResponse(e.target.value)
+              }
+            />
+          )}
         </div>
       </ModalBody>
       <ModalFooter>
-        <Button color="solid" onClick={handleSubmission}>Submit</Button>
+        <Button color="solid" onClick={handleSubmission}>
+          Submit
+        </Button>
       </ModalFooter>
     </Modal>
   );

@@ -12,39 +12,25 @@ import {
 import { Post } from "../../types";
 import RenderEditorContent from "@/components/NewsFeed/Style1/ContentCenter/SufiyaElizaFirstPost/PostDetails/RenderEditorContent";
 import { useAppSelector } from "@/utils/hooks";
-import { debounce } from "lodash";  // Import debounce
+import { debounce } from "lodash"; // Import debounce
 
-const DetailBox: FC<DetailBoxProps> = ({ postId, postContent }) => {
-  const [bookMarkActive, setBookMarkActive] = useState(false);
-  const [pageParam, setPageParam] = useState<string | null>(null);
-  const [postsData, setPostsData] = useState<any>([]);
+const DetailBox: FC<DetailBoxProps> = ({ postId, postContent, bookmarks }) => {
+  const [bookMarkActive, setBookMarkActive] = useState(true);
+  // const [pageParam, setPageParam] = useState<string | null>(null);
+  // const [postsData, setPostsData] = useState<any>([]);
   const user = useAppSelector((state) => state.userSlice.data);
   let [bookmarkId, setBookmarkId] = useState<string | null>(null);
-  let [bookmarkArray, setBookmarkArray] = useState<any>([]);
-
-  useEffect(() => {
-    let parsedBookMarks = user?.bookmarks.map((item: any) => JSON.parse(item));
-    setBookmarkArray(parsedBookMarks);
-    let isBookmarked = parsedBookMarks.find(
-      (bookmark: any) => bookmark.postId === postId
-    );
-    if (isBookmarked) {
-      setBookMarkActive(true);
-      setBookmarkId(isBookmarked?.bookmarkId);
-    } else {
-      setBookMarkActive(false);
-    }
-  }, [user, postId]);
+  let [bookmarkArray, setBookmarkArray] = useState(bookmarks);
+  console.log("bookmarkArray==>", bookmarkArray);
 
   const handleSubmitDebounced = debounce(async () => {
     if (bookMarkActive) {
       setBookMarkActive(false);
-      bookmarkArray = bookmarkArray.filter(
+      bookmarkArray = bookmarkArray?.filter(
         (bookmark: any) => bookmark.bookmarkId !== bookmarkId
       );
-      console.log("bookMarkId==>==>", bookmarkId);
-      bookmarkArray = bookmarkArray.map((item: any) => JSON.stringify(item));
-      const deletedBookmark = await deleteBookmark(bookmarkId!, bookmarkArray, user?.$id);
+      // console.log("bookMarkId==>==>", bookmarkId);
+      const deletedBookmark = await deleteBookmark(bookmarkId!, user?.$id);
       if (!deletedBookmark) {
         toast.error("something went wrong");
       }
@@ -55,13 +41,24 @@ const DetailBox: FC<DetailBoxProps> = ({ postId, postContent }) => {
       const bookmark = await createBookmarks(
         user?.$id,
         postId,
-        user?.bookmarks
       );
       if (!bookmark) {
         toast.error("something went wrong");
       }
     }
   }, 500); // 500ms debounce delay
+
+  useEffect(() => {
+    let isBookmarked = bookmarkArray?.find((bookmark: any) => {
+      return bookmark.postId.$id == postId;
+    });
+    console.log("isBookmarked==>", isBookmarked, typeof bookmarkArray);
+    if (isBookmarked) {
+      setBookMarkActive(true);
+    } else {
+      setBookMarkActive(false);
+    }
+  }, [bookmarkArray]);
 
   return (
     <div className="detail-box">
