@@ -14,7 +14,7 @@ const SufiyaElizaMapPost: FC = () => {
         <MapImage />
         {/* <DetailBox heading={MapHeading} span={MapSpan} /> */}
         <CommonLikePanel />
-        <CommonPostReact />
+        {/* <CommonPostReact /> */}
       </div>
     </div>
   );

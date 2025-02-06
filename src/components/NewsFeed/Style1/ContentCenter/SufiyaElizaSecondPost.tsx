@@ -13,7 +13,7 @@ const SufiyaElizaSecondPost: FC<SufiyaElizaSecondPostInterFace> = ({userImage}) 
       <div className="post-details">
         {/* <DetailBox heading={CelebrationNewAlbum} span={CelebrationSpan} /> */}
         <CommonLikePanel />
-        <CommonPostReact />
+        {/* <CommonPostReact /> */}
       </div>
     </div>
   );

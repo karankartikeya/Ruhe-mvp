@@ -36,7 +36,7 @@ const Recommends: FC<RecommendsInterFace> = ({image}) => {
       </div>
       <div className="post-details">
       <CommonLikePanel/>
-      <CommonPostReact/>
+      {/* <CommonPostReact/> */}
       </div>
     </div>
   );

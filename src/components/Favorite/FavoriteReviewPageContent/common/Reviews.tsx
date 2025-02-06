@@ -60,7 +60,7 @@ const Reviews: FC<ReviewsInterFace> = ({ image, details }) => {
           </div>
         </div>
       <CommonLikePanel/>
-      <CommonPostReact/>
+      {/* <CommonPostReact/> */}
       </div>
     </div>
   );

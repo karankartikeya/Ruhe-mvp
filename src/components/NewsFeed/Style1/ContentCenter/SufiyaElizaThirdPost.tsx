@@ -30,7 +30,7 @@ const SufiyaElizaThirdPost: FC<SufiyaElizaThirdPostInterface> = ({fourthPost,use
         </div>
         {/* <DetailBox heading={CelebrationNewAlbum} span={CelebrationSpan} /> */}
         <CommonLikePanel />
-        <CommonPostReact />
+        {/* <CommonPostReact /> */}
       </div>
     </div>
   );
