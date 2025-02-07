@@ -48,7 +48,7 @@ const UserProFile = () => {
               <span>❤</span>
             </h2>
           </Link>
-          <h5>{user.username}</h5>
+          <h5>@{user.username}</h5>
           <div className="description">
             <p>{user.bio}</p>
           </div>
