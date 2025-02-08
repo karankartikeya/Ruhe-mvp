@@ -7,7 +7,7 @@ const ContentCenter: FC = () => {
     <div className="content-center">
       <CreatePost />
       <div className="overlay-bg" />
-      <PostPanel />
+      <PostPanel type="allpost"/>
     </div>
   );
 };
