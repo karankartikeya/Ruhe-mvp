@@ -43,25 +43,14 @@ const PostPanel: React.FC<BookmarkInterFace> = ({ type }) => {
 
   useEffect(() => {
     const getPosts = async () => {
-      if (type === "allpost") {
-        const posts = await getInfinitePosts({ pageParam });
-        const bookmarkedpostIds = await getBookmarks(user.$id);
-        setBookmarkArray(bookmarkedpostIds);
-        // console.log("bookmarkedposts in client==", bookmarkedposts);
-        // posts?.documents.map((post) => {
-        //   // console.log("poste==", post);
-        // });
-        console.log("posts==", posts?.documents);
-        setPostsData(posts?.documents);
-        return;
-      } else {
-        const posts = await getBookmarks(user.$id, "bookmarks");
-        // posts?.map((post) => {
-        //   console.log("bookmarkedpost from clientside==", post);
-        // });
-        setPostsData(posts);
-        return;
-      }
+      const posts = await getInfinitePosts({ pageParam });
+      posts?.documents.map((post) => {
+        console.log("poste==", post);
+      });
+      console.log("posts==", posts?.documents);
+      setPostsData(posts?.documents);
+      const bookmarkedposts = await getBookmarks(user.$id);
+        setBookmarkArray(bookmarkedposts);
     };
     getPosts();
   }, []);
