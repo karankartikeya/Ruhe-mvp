@@ -82,7 +82,6 @@ const PostPanel: React.FC<BookmarkInterFace> = ({ type }) => {
             tags={post.tags}
             createdAt={post.$createdAt}
             bookmarks={type === "bookmarks" ? null : bookmarkArray}
-            updateBookmarksLocally={updateBookmarksLocally}
           />
         ))}
         {/* <FriendSuggestion /> */}

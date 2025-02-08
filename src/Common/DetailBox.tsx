@@ -16,10 +16,8 @@ import { useAppSelector } from "@/utils/hooks";
 import { debounce } from "lodash"; // Import debounce
 
 const DetailBox: FC<
-  DetailBoxProps & {
-    updateBookmarksLocally: (postId: string, isAdding: boolean) => void;
-  }
-> = ({ postId, postContent, bookmarks, updateBookmarksLocally }) => {
+  DetailBoxProps 
+> = ({ postId, postContent, bookmarks }) => {
   const [bookMarkActive, setBookMarkActive] = useState(true);
   // const [pageParam, setPageParam] = useState<string | null>(null);
   // const [postsData, setPostsData] = useState<any>([]);

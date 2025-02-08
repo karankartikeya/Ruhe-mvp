@@ -12,7 +12,7 @@ import { Post } from "../../../../../types";
 import { formatDistanceToNow } from "date-fns";
 import { getTimeDifference } from "@/utils/validators";
 
-const PostSection: FC<Post & { updateBookmarksLocally: (postId: string, isAdding: boolean) => void }> = ({
+const PostSection: FC<Post> = ({
   $id,
   userId,
   user_details,
@@ -20,7 +20,6 @@ const PostSection: FC<Post & { updateBookmarksLocally: (postId: string, isAdding
   tags,
   createdAt,
   bookmarks,
-  updateBookmarksLocally
 }) => {
   const contentFix = JSON.parse(content!);
   const timeAgo = getTimeDifference(createdAt!);
@@ -34,7 +33,6 @@ const PostSection: FC<Post & { updateBookmarksLocally: (postId: string, isAdding
           postId={$id}
           postContent={contentFix}
           bookmarks={bookmarks}
-          updateBookmarksLocally={updateBookmarksLocally}
         />
         {/* <CommonLikePanel /> */}
         <CommonPostReact postId={$id} />
