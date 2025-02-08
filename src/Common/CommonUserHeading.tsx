@@ -33,7 +33,7 @@ const CommonUserHeading: FC<CommonUserHeadingProps> = ({ name, time }) => {
           </a>
           <Media body>
             <h5>{name}</h5>
-            <h6>{time}</h6>
+            <h6>posted {time}</h6>
           </Media>
         </Media>
         {/* <HoverMessage

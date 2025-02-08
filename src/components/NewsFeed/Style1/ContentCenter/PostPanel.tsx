@@ -22,12 +22,31 @@ const PostPanel: React.FC<BookmarkInterFace> = ({ type }) => {
   const [pageParam, setPageParam] = useState<string | null>(null);
   const [postsData, setPostsData] = useState<any>([]);
   const [bookmarkArray, setBookmarkArray] = useState<any>([]);
+
+  const updateBookmarksLocally = (postId: string, isAdding: boolean) => {
+    console.log(`Updating bookmark for postId: ${postId}, isAdding: ${isAdding}`);
+    setBookmarkArray((prevBookmarks: any[]) => {
+      if (isAdding) {
+        return [...prevBookmarks, { postId }]; // Add new bookmark locally
+      } else {
+        console.log("prevBookmarks==>", prevBookmarks);
+        return prevBookmarks.filter((bookmark) => bookmark.postId !== postId); // Remove from UI
+      }
+    });
+    // ✅ Also update postsData to ensure UI re-renders correctly
+    setPostsData((prevPosts: any[]) =>
+      prevPosts.map((post) =>
+        post.$id === postId ? { ...post, isBookmarked: isAdding } : post
+      )
+    );
+  };
+
   useEffect(() => {
     const getPosts = async () => {
       if (type !== "bookmarks") {
         const posts = await getInfinitePosts({ pageParam });
-        const bookmarkedposts = await getBookmarks(user.$id);
-        setBookmarkArray(bookmarkedposts);
+        const bookmarkedpostIds = await getBookmarks(user.$id);
+        setBookmarkArray(bookmarkedpostIds);
         // console.log("bookmarkedposts in client==", bookmarkedposts);
         // posts?.documents.map((post) => {
         //   // console.log("poste==", post);
@@ -37,9 +56,9 @@ const PostPanel: React.FC<BookmarkInterFace> = ({ type }) => {
         return;
       } else {
         const posts = await getBookmarks(user.$id, "bookmarks");
-        posts?.map((post) => {
-          // console.log("bookmarkedpost from clientside==", post);
-        });
+        // posts?.map((post) => {
+        //   console.log("bookmarkedpost from clientside==", post);
+        // });
         setPostsData(posts);
         return;
       }
@@ -48,9 +67,10 @@ const PostPanel: React.FC<BookmarkInterFace> = ({ type }) => {
   }, []);
   const numbers = [1, 2, 3];
   const post = postsData[0] as Post;
-  // console.log("bookpost====>==", post);
+  // console.log("bookpost====>==", postsData, type === "bookmarks");
   return (
     <>
+    {postsData.length === 0 ? <h1 className="">No BookMarks to Show</h1> : ""}
       <div className="post-panel infinite-loader-sec section-t-space">
         {postsData.map((post: any) => (
           <PostSection
@@ -62,6 +82,7 @@ const PostPanel: React.FC<BookmarkInterFace> = ({ type }) => {
             tags={post.tags}
             createdAt={post.$createdAt}
             bookmarks={type === "bookmarks" ? null : bookmarkArray}
+            updateBookmarksLocally={updateBookmarksLocally}
           />
         ))}
         {/* <FriendSuggestion /> */}
