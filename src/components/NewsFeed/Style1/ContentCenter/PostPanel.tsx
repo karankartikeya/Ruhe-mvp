@@ -51,7 +51,7 @@ const PostPanel: React.FC<BookmarkInterFace> = ({ type }) => {
         // posts?.documents.map((post) => {
         //   // console.log("poste==", post);
         // });
-        // console.log("posts==", posts?.documents);
+        console.log("posts==", posts?.documents);
         setPostsData(posts?.documents);
         return;
       } else {
@@ -70,7 +70,7 @@ const PostPanel: React.FC<BookmarkInterFace> = ({ type }) => {
   // console.log("bookpost====>==", postsData, type === "bookmarks");
   return (
     <>
-    {postsData.length === 0 ? <h1 className="">No BookMarks to Show</h1> : ""}
+    {/* {postsData.length === 0 ? <h1 className="">No BookMarks to Show</h1> : ""} */}
       <div className="post-panel infinite-loader-sec section-t-space">
         {postsData.map((post: any) => (
           <PostSection
