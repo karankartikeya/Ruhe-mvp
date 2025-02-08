@@ -833,6 +833,30 @@ export const deleteBookmark = async (bookmarkId: string, userId: string) => {
   } catch (error) {}
 };
 
+
+export const deleteBookmarkUsingPostId = async (postId: string, userId: string) => {
+  try {
+    const bookmarks = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.bookmarksCollectionId,
+      [Query.equal("postId", postId)]
+    );
+    if (!bookmarks) throw Error;
+    const bookmarkId = bookmarks.documents[0].$id;
+    //console.log("bookmarkId==>", bookmarkId);
+    const statusCode = await databases.deleteDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.bookmarksCollectionId,
+      bookmarkId
+    );
+    if (!statusCode) throw Error;
+    //console.log("status code==>", statusCode);
+    return { status: "Ok" };
+  } catch (error) {}
+}
+
+
+
 export const deleteBookmarkFromUser = async (
   userId: string,
   bookmarks: string[]
