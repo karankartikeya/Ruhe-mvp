@@ -75,13 +75,17 @@ const PostPanel: React.FC<BookmarkInterFace> = ({ type }) => {
     const getPosts = async () => {
       if (type === "allpost") {
         const posts = await getInfinitePosts({ pageParam });
-        // const bookmarkedposts = await getBookmarks(user.$id);
-        // setBookmarkArray(bookmarkedposts);
+        if(posts){
+          setPostsData(posts?.documents);
+          const bookmarkedposts = await getBookmarks(user.$id, "allpost");
+          setBookmarkArray(bookmarkedposts);
+        }
+        return;
         // posts?.documents.map((post) => {
         //   console.log("poste==", post);
         // });
         // console.log("posts==", posts?.documents);
-        setPostsData(posts?.documents);
+        
       } else {
         console.log("type==>", type);
       }
