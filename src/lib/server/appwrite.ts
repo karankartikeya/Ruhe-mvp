@@ -471,6 +471,26 @@ export const getInfinitePosts = async ({
   }
 };
 
+export const getLimitedPosts = async (limit?: number) => {
+  const queries: any[] = [Query.orderDesc("$updatedAt")];
+  if (limit) {
+    queries.push(Query.limit(limit));
+  }
+  try {
+    const posts = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      queries
+    );
+    if (!posts) throw Error;
+    return posts;
+  } catch (error) {
+    //console.log("Error while fetching posts", error);
+  }
+};
+
+
+
 {
   /** GET POST BY POST ID */
 }

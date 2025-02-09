@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux-toolkit/store";
 import { styleOneMoreComponent } from "@/Data/NewsFeed";
 import { useEffect, useState } from "react";
-import { getBookmarks, getInfinitePosts } from "@/lib/server/appwrite";
+import { getBookmarks, getInfinitePosts, getLimitedPosts } from "@/lib/server/appwrite";
 import { Post } from "../../../../../types";
 import PostSection from "./PostSection";
 import { BookmarkInterFace } from "@/Common/CommonInterFace";
@@ -84,14 +84,14 @@ const PostPanel: React.FC<BookmarkInterFace> = ({ type }) => {
   
         if (type !== "bookmarks") {
           console.log("Running this one for allposts", type);
-          const posts = await getInfinitePosts({ pageParam });
+          const posts = await getLimitedPosts(4);
           console.log("Fetched posts:", posts);
   
           const bookmarkedposts = await getBookmarks(user.$id);
           console.log("Fetched bookmarked posts:", bookmarkedposts);
   
           setBookmarkArray(bookmarkedposts);
-          setPostsData(posts?.documents || []);
+          setPostsData(posts?.documents);
         } else {
           console.log("Running this one for bookmarks", type);
           const posts = await getBookmarks(user.$id, "bookmarks");
