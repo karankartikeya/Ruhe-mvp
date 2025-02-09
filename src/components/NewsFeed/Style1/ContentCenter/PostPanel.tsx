@@ -83,6 +83,7 @@ const PostPanel: React.FC<BookmarkInterFace> = ({ type }) => {
         console.log("Fetching posts for type:", type);
   
         if (type !== "bookmarks") {
+          console.log("Running this one for allposts", type);
           const posts = await getInfinitePosts({ pageParam });
           console.log("Fetched posts:", posts);
   
@@ -92,6 +93,7 @@ const PostPanel: React.FC<BookmarkInterFace> = ({ type }) => {
           setBookmarkArray(bookmarkedposts);
           setPostsData(posts?.documents || []);
         } else {
+          console.log("Running this one for bookmarks", type);
           const posts = await getBookmarks(user.$id, "bookmarks");
           console.log("Fetched bookmarks:", posts);
           setPostsData(posts || []);
