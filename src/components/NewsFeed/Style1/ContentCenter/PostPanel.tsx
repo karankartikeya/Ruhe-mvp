@@ -7,7 +7,11 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux-toolkit/store";
 import { styleOneMoreComponent } from "@/Data/NewsFeed";
 import { useEffect, useState } from "react";
-import { getBookmarks, getInfinitePosts, getLimitedPosts } from "@/lib/server/appwrite";
+import {
+  getBookmarks,
+  getInfinitePosts,
+  getLimitedPosts,
+} from "@/lib/server/appwrite";
 import { Post } from "../../../../../types";
 import PostSection from "./PostSection";
 import { BookmarkInterFace } from "@/Common/CommonInterFace";
@@ -67,24 +71,25 @@ const PostPanel: React.FC<BookmarkInterFace> = ({ type }) => {
     console.log("type:", type); // Check if type is coming properly
     console.log("user:", user); // Check if user is available
     console.log("user.$id:", user?.$id); // Ensure user.$id is defined
-  
+
     const getPosts = async () => {
-      if(type==="allpost"){
+      if (type === "allpost") {
         const posts = await getInfinitePosts({ pageParam });
-      // posts?.documents.map((post) => {
-      //   console.log("poste==", post);
-      // });
-      // console.log("posts==", posts?.documents);
-      setPostsData(posts?.documents);
-      }
-      else{
+        const bookmarkedposts = await getBookmarks(user.$id);
+        setBookmarkArray(bookmarkedposts);
+        // posts?.documents.map((post) => {
+        //   console.log("poste==", post);
+        // });
+        // console.log("posts==", posts?.documents);
+        setPostsData(posts?.documents);
+      } else {
         console.log("type==>", type);
       }
     };
-  
+
     getPosts();
   }, [user?.$id, type]); // Ensure it updates when props change
-  
+
   const numbers = [1, 2, 3];
   const post = postsData[0] as Post;
   // console.log("bookpost====>==", postsData, type === "bookmarks");
