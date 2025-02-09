@@ -489,8 +489,6 @@ export const getLimitedPosts = async (limit?: number) => {
   }
 };
 
-
-
 {
   /** GET POST BY POST ID */
 }
@@ -853,8 +851,10 @@ export const deleteBookmark = async (bookmarkId: string, userId: string) => {
   } catch (error) {}
 };
 
-
-export const deleteBookmarkUsingPostId = async (postId: string, userId: string) => {
+export const deleteBookmarkUsingPostId = async (
+  postId: string,
+  userId: string
+) => {
   try {
     const bookmarks = await databases.listDocuments(
       appwriteConfig.databaseId,
@@ -873,9 +873,7 @@ export const deleteBookmarkUsingPostId = async (postId: string, userId: string) 
     //console.log("status code==>", statusCode);
     return { status: "Ok" };
   } catch (error) {}
-}
-
-
+};
 
 export const deleteBookmarkFromUser = async (
   userId: string,
@@ -916,8 +914,8 @@ export const getBookmarks = async (userId: string, type?: string) => {
         throw new Error("No bookmarks found for the user");
       }
       return bookmarkedPostIds;
-    } else {
-      console.log("Fetching bookmarks from 2nd for user:", userId);
+    } else if (type === "allpost") {
+      console.log("Fetching bookmarks from 2nd for user:", userId,type);
       const bookmarksResponse = await databases.listDocuments(
         appwriteConfig.databaseId,
         appwriteConfig.bookmarksCollectionId,

@@ -23,11 +23,11 @@ const DetailBox: FC<
   // const [postsData, setPostsData] = useState<any>([]);
   const user = useAppSelector((state) => state.userSlice.data);
   let [bookmarkId, setBookmarkId] = useState<string | null>(null);
-  let [bookmarkArray, setBookmarkArray] = useState(bookmarks);
-  // console.log("bookmarkArray==>", bookmarkArray);
+  let bookmarkArray = bookmarks;
+  console.log("bookmarkArray==>", bookmarks);
 
   const handleSubmitDebounced = debounce(async () => {
-    if (bookmarkArray != null) {
+    if (bookmarks != null) {
       console.log("calling this function 1");
       if (bookMarkActive) {
         console.log("calling this function 1 subfun1");
@@ -85,8 +85,8 @@ const DetailBox: FC<
   }, 500); // 500ms debounce delay
 
   useEffect(() => {
-    if (bookmarkArray) {
-      let isBookmarked = bookmarkArray?.find((bookmark: any) => {
+    if (bookmarks) {
+      let isBookmarked = bookmarks?.find((bookmark: any) => {
         return bookmark.postId.$id == postId;
       });
       console.log("isBookmarked==>", isBookmarked, bookmarkArray, postId);
