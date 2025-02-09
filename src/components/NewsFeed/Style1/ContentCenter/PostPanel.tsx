@@ -87,6 +87,12 @@ const PostPanel: React.FC<BookmarkInterFace> = ({ type }) => {
         // console.log("posts==", posts?.documents);
         
       } else {
+        const posts = await getBookmarks(user.$id, "bookmarks");
+        // posts?.map((post) => {
+        //   // console.log("bookmarkedpost from clientside==", post);
+        // });
+        setPostsData(posts);
+        return;
         console.log("type==>", type);
       }
     };
