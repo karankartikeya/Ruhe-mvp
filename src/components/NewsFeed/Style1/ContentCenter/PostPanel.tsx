@@ -24,7 +24,9 @@ const PostPanel: React.FC<BookmarkInterFace> = ({ type }) => {
   const [bookmarkArray, setBookmarkArray] = useState<any>([]);
 
   const updateBookmarksLocally = (postId: string, isAdding: boolean) => {
-    console.log(`Updating bookmark for postId: ${postId}, isAdding: ${isAdding}`);
+    console.log(
+      `Updating bookmark for postId: ${postId}, isAdding: ${isAdding}`
+    );
     setBookmarkArray((prevBookmarks: any[]) => {
       if (isAdding) {
         return [...prevBookmarks, { postId }]; // Add new bookmark locally
@@ -43,14 +45,23 @@ const PostPanel: React.FC<BookmarkInterFace> = ({ type }) => {
 
   useEffect(() => {
     const getPosts = async () => {
-      const posts = await getInfinitePosts({ pageParam });
-      posts?.documents.map((post) => {
-        console.log("poste==", post);
-      });
-      console.log("posts==", posts?.documents);
-      setPostsData(posts?.documents);
-      const bookmarkedposts = await getBookmarks(user.$id);
-        setBookmarkArray(bookmarkedposts);
+      if (type === "allpost") {
+        const posts = await getInfinitePosts({ pageParam });
+        const bookmarkedpostIds = await getBookmarks(user.$id);
+        setBookmarkArray(bookmarkedpostIds);
+        // console.log("bookmarkedposts in client==", bookmarkedposts);
+        // posts?.documents.map((post) => {
+        //   // console.log("poste==", post);
+        // });
+        console.log("posts==", posts?.documents);
+        setPostsData(posts?.documents);
+      } else {
+        const posts = await getBookmarks(user.$id, "bookmarks");
+        // posts?.map((post) => {
+        //   console.log("bookmarkedpost from clientside==", post);
+        // });
+        setPostsData(posts);
+      }
     };
     getPosts();
   }, []);
@@ -59,7 +70,7 @@ const PostPanel: React.FC<BookmarkInterFace> = ({ type }) => {
   // console.log("bookpost====>==", postsData, type === "bookmarks");
   return (
     <>
-    {/* {postsData.length === 0 ? <h1 className="">No BookMarks to Show</h1> : ""} */}
+      {/* {postsData.length === 0 ? <h1 className="">No BookMarks to Show</h1> : ""} */}
       <div className="post-panel infinite-loader-sec section-t-space">
         {postsData.map((post: any) => (
           <PostSection
