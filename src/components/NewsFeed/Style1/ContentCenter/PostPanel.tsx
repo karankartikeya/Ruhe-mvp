@@ -45,32 +45,30 @@ const PostPanel: React.FC<BookmarkInterFace> = ({ type }) => {
 
   useEffect(() => {
     const getPosts = async () => {
-      if (type === "allpost") {
-        const posts = await getInfinitePosts({ pageParam });
-        const bookmarkedpostIds = await getBookmarks(user.$id);
-        setBookmarkArray(bookmarkedpostIds);
-        // console.log("bookmarkedposts in client==", bookmarkedposts);
-        // posts?.documents.map((post) => {
-        //   // console.log("poste==", post);
-        // });
-        console.log("posts==", posts?.documents);
-        setPostsData(posts?.documents);
-      } else {
-        const posts = await getBookmarks(user.$id, "bookmarks");
-        // posts?.map((post) => {
-        //   console.log("bookmarkedpost from clientside==", post);
-        // });
-        setPostsData(posts);
+      try {
+        if (!user?.$id) return; // Ensure user exists
+        if (type !== "bookmarks") {
+          const posts = await getInfinitePosts({ pageParam });
+          const bookmarkedposts = await getBookmarks(user.$id);
+          setBookmarkArray(bookmarkedposts);
+          setPostsData(posts?.documents || []); // Ensure postsData is always an array
+        } else {
+          const posts = await getBookmarks(user.$id, "bookmarks");
+          setPostsData(posts || []);
+        }
+      } catch (error) {
+        console.error("Error fetching posts:", error);
       }
     };
+
     getPosts();
-  }, []);
+  }, [user?.$id, type]);
   const numbers = [1, 2, 3];
   const post = postsData[0] as Post;
   // console.log("bookpost====>==", postsData, type === "bookmarks");
   return (
     <>
-      {/* {postsData.length === 0 ? <h1 className="">No BookMarks to Show</h1> : ""} */}
+      {postsData.length === 0 ? <h1 className="">No BookMarks to Show</h1> : ""}
       <div className="post-panel infinite-loader-sec section-t-space">
         {postsData.map((post: any) => (
           <PostSection

@@ -123,5 +123,5 @@ export interface DetailGalleryInterFace {
 }
 
 export interface BookmarkInterFace {
-  type?: "allpost" | "bookmarks";
+  type: "allpost" | "bookmarks";
 }
