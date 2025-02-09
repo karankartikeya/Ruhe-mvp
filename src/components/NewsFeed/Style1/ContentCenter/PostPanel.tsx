@@ -43,26 +43,67 @@ const PostPanel: React.FC<BookmarkInterFace> = ({ type }) => {
     );
   };
 
+  // useEffect(() => {
+  //   const getPosts = async () => {
+  //     try {
+  //       if (!user?.$id) return; // Ensure user exists
+  //       if (type !== "bookmarks") {
+  //         const posts = await getInfinitePosts({ pageParam });
+  //         const bookmarkedposts = await getBookmarks(user.$id);
+  //         setBookmarkArray(bookmarkedposts);
+  //         setPostsData(posts?.documents || []); // Ensure postsData is always an array
+  //       } else {
+  //         const posts = await getBookmarks(user.$id, "bookmarks");
+  //         setPostsData(posts || []);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching posts:", error);
+  //     }
+  //   };
+
+  //   getPosts();
+  // }, [user?.$id, type]);
   useEffect(() => {
+    console.log("type:", type); // Check if type is coming properly
+    console.log("user:", user); // Check if user is available
+    console.log("user.$id:", user?.$id); // Ensure user.$id is defined
+  
     const getPosts = async () => {
       try {
-        if (!user?.$id) return; // Ensure user exists
+        if (!user?.$id) {
+          console.log("User not found, skipping API call");
+          return;
+        }
+  
+        if (!type) {
+          console.log("Type is undefined, skipping API call");
+          return;
+        }
+  
+        console.log("Fetching posts for type:", type);
+  
         if (type !== "bookmarks") {
           const posts = await getInfinitePosts({ pageParam });
+          console.log("Fetched posts:", posts);
+  
           const bookmarkedposts = await getBookmarks(user.$id);
+          console.log("Fetched bookmarked posts:", bookmarkedposts);
+  
           setBookmarkArray(bookmarkedposts);
-          setPostsData(posts?.documents || []); // Ensure postsData is always an array
+          setPostsData(posts?.documents || []);
         } else {
           const posts = await getBookmarks(user.$id, "bookmarks");
+          console.log("Fetched bookmarks:", posts);
           setPostsData(posts || []);
         }
       } catch (error) {
         console.error("Error fetching posts:", error);
       }
     };
-
+  
     getPosts();
-  }, [user?.$id, type]);
+  }, [user?.$id, type]); // Ensure it updates when props change
+  
   const numbers = [1, 2, 3];
   const post = postsData[0] as Post;
   // console.log("bookpost====>==", postsData, type === "bookmarks");
