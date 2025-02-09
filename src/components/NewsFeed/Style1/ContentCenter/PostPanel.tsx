@@ -69,12 +69,17 @@ const PostPanel: React.FC<BookmarkInterFace> = ({ type }) => {
     console.log("user.$id:", user?.$id); // Ensure user.$id is defined
   
     const getPosts = async () => {
-      const posts = await getInfinitePosts({ pageParam });
+      if(type==="allpost"){
+        const posts = await getInfinitePosts({ pageParam });
       posts?.documents.map((post) => {
         console.log("poste==", post);
       });
       console.log("posts==", posts?.documents);
       setPostsData(posts?.documents);
+      }
+      else{
+        console.log("type==>", type);
+      }
     };
   
     getPosts();
