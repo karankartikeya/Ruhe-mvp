@@ -63,9 +63,9 @@ const ProfileTimeLine = () => {
             {/* <FriendSuggestion mainClassName="d-xl-block d-none" /> */}
 
             {/** build the below UI for liked */}
-            <div className="sticky-top d-xl-block d-none">
+            {/* <div className="sticky-top d-xl-block d-none">
               <LikePage />
-            </div>
+            </div> */}
           </div>
           <div className="content-center">
             <CreatePost />
