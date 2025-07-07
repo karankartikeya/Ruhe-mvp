@@ -896,9 +896,11 @@ export const deleteBookmarkFromUser = async (
 };
 
 export const getBookmarks = async (userId: string, type?: string) => {
+  console.log("fetchin")
   try {
     // Fetch all bookmarks for the given userF
     if (type === "bookmarks") {
+      console.log("fetching bookmarsk for user:", userId);
       console.log("Fetching bookmarks for user:", userId);
       const bookmarksResponse = await databases.listDocuments(
         appwriteConfig.databaseId,
